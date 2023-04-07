@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
+import { CiLocationOn } from "react-icons/ci";
 import { Envelope, Twitter, Linkedin, Github } from "./icons/";
 import { Behance } from "./icons/behance";
 
@@ -12,17 +12,20 @@ const Sidebar = ({ data }) => {
       <div className="text-white flex flex-col p-10 items-center">
         <Image
           priority
-          width={200}
           height={200}
-          className="rounded-full h-full mb-6"
-          src="/images/julian-wan-WNoLnJo7tS8-unsplash.jpg"
+          width={200}
+          className="rounded-full mb-6"
+          src="/images/itachi.jfif"
           alt="skillz"
-          aria-label="skillz.jpg"
+          aria-label="itachi.jfif"
         />
         <h1 className="mb-2">{name}</h1>
-        <h2 className="mb-8">{role}</h2>
+        <h2 className="mb-2">{role}</h2>
+        <div className="mb-8 flex items-center gap-1">
+          <CiLocationOn size={26} />
+          <h3>Algeria, Tlemcen</h3>
+        </div>
         <p className="mb-2">{education[0]}</p>
-        <p className="mb-2">{education[1]}</p>
         <div className="text-white text-center mb-4 mt-4 sm:mt-8">
           <h3 className="mb-2"> CONTACT ME</h3>
           <div className="flex flex-row justify-center gap-2">

@@ -36,7 +36,7 @@ export const personalData = {
 export const aboutMe = {
   title: "About Me",
   body: [
-    "I am a highly motivated and skilled software engineer with a passion for software development. With a strong addiction to technology, I had developed a keen interest in staying up-to-date with the latest advancements in the field. I am a lifelong learner who is always eager to share my knowledge with others, making me a valuable addition to any team.  where he can utilize my expertise and contribute to the development of cutting-edge technologies.",
+    "I am a highly motivated and skilled software engineer with a passion for software development. With a strong addiction to technology, I had developed a keen interest in staying up-to-date with the latest advancements in the field. I am a lifelong learner who is always eager to share my knowledge with others, making me a valuable addition to any team.  where I can utilize my expertise and contribute to the development of cutting-edge technologies.",
   ],
 };
 

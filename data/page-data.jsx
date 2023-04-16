@@ -77,7 +77,7 @@ export const professionalData = {
       role: "DZHIKERS PROJECT",
       description:
         "A project that helps you to find hikes and product related to this kind of activities, A user interactive website with a map that shows the location of the hikes and a list of hikes with their details. The website is built with  React, Tailwindcss, Mapbox, and NodeJS and EXPRESS, The website is not deployed yet. The project is open source and you can find it on Github.",
-      link: "https://github.com/adnanebnz/vite-mini-project-licence",
+      link: "https://www.dzhikers.live",
       current: true,
     },
 

@@ -74,11 +74,18 @@ export const professionalData = {
   title: "PROJECTS",
   experiences: [
     {
-      role: "DZHIKERS PROJECT",
+      role: "DZHIKERS MOBILE",
       description:
-        "A project that helps you to find hikes and product related to this kind of activities, A user interactive website with a map that shows the location of the hikes and a list of hikes with their details. The website is built with  React, Tailwindcss, Mapbox, and NodeJS and EXPRESS, The website is not deployed yet. The project is open source and you can find it on Github.",
-      link: "https://www.dzhikers.live",
+        "A mobile version of DZHIKERS WEB. Made with REACT NATIVE, The project is open source and you can find it on Github.",
+      link: "https://github.com/adnanebnz/dzhikers-mobile",
       current: true,
+    },
+    {
+      role: "DZHIKERS WEB",
+      description:
+        "A project that helps you to find hikes and product related to this kind of activities, A user interactive website with a map that shows the location of the hikes and a list of hikes with their details. The website is built with  React, Tailwindcss, Mapbox, and NodeJS and EXPRESS, The website is deployed. And you can find it here.",
+      link: "https://www.dzhikers.live",
+      current: false,
     },
 
     {

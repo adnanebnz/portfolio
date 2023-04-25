@@ -83,8 +83,8 @@ export const professionalData = {
     {
       role: "DZHIKERS WEB",
       description:
-        "A project that helps you to find hikes and product related to this kind of activities, A user interactive website with a map that shows the location of the hikes and a list of hikes with their details. The website is built with  React, Tailwindcss, Mapbox, and NodeJS and EXPRESS, The website is deployed. And you can find it here.",
-      link: "https://www.dzhikers.live",
+        "A project that helps you to find hikes and product related to this kind of activities, A user interactive website with a map that shows the location of the hikes and a list of hikes with their details. The website is built with  React, Tailwindcss, Mapbox, and NodeJS and EXPRESS, The project is open source . And you can find it on GitHub.",
+      link: "https://github.com/adnanebnz/dzhikers-web",
       current: false,
     },
 

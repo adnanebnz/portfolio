@@ -4,20 +4,32 @@ import { GrGroup } from "react-icons/gr";
 import { GrUserWorker } from "react-icons/gr";
 import { BiTimeFive } from "react-icons/bi";
 import {
+  SiAdobeillustrator,
+  SiAdobephotoshop,
+  SiAngularjs,
+  SiChakraui,
+  SiDart,
   SiExpress,
+  SiFigma,
+  SiFirebase,
+  SiFlutter,
+  SiGo,
+  SiJavascript,
   SiLaravel,
   SiMongodb,
   SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
   SiPostgresql,
+  SiReact,
+  SiSass,
   SiStrapi,
+  SiSupabase,
   SiTailwindcss,
   SiThealgorithms,
   SiTypescript,
 } from "react-icons/si";
-import { TbBrandReactNative as TbR } from "react-icons/tb";
-import { FaFigma, FaJava, FaNodeJs, FaPhp, FaReact } from "react-icons/fa";
-import { DiIllustrator as DiAdobeillustrator } from "react-icons/di";
-import { DiPhotoshop as DiAdobePhotoshop } from "react-icons/di";
+import { FaJava, FaUikit } from "react-icons/fa";
 export const personalData = {
   name: "Benzerdjeb MOHAMED Adnane",
   role: "Software Engineer",
@@ -50,23 +62,31 @@ export const skills = {
     { icon: <BiTimeFive />, text: "Time management" },
   ],
   hard: [
+    { icon: <SiJavascript />, text: "JavaScript" },
     { icon: <SiTypescript />, text: "TypeScript" },
     { icon: <SiNextdotjs />, text: "NextJS" },
-    { icon: <FaReact />, text: "React" },
-    { icon: <TbR />, text: "React Native" },
+    { icon: <SiReact />, text: "React" },
+    { icon: <SiReact />, text: "React Native" },
+    { icon: <SiSass />, text: "Sass" },
     { icon: <SiTailwindcss />, text: "Tailwindcss" },
-    { icon: <FaNodeJs />, text: "NodeJS" },
+    { icon: <FaUikit />, text: "Material UI" },
+    { icon: <SiChakraui />, text: "Chakra UI" },
+    { icon: <SiDart />, text: "Dart" },
+    { icon: <SiFlutter />, text: "Flutter" },
+    { icon: <SiNodedotjs />, text: "NodeJS" },
     { icon: <SiExpress />, text: "Express" },
     { icon: <SiStrapi />, text: "Strapi" },
-    { icon: <FaPhp />, text: "PHP" },
+    { icon: <SiFirebase />, text: "Firebase" },
+    { icon: <SiSupabase />, text: "Supabase" },
+    { icon: <SiPhp />, text: "PHP" },
     { icon: <SiLaravel />, text: "Laravel" },
     { icon: <SiPostgresql />, text: "SQL" },
     { icon: <SiMongodb />, text: "noSQL" },
     { icon: <FaJava />, text: "Java" },
     { icon: <SiThealgorithms />, text: "Data Structures and Algorithms" },
-    { icon: <FaFigma />, text: "Figma" },
-    { icon: <DiAdobeillustrator />, text: "Adobe Illustrator" },
-    { icon: <DiAdobePhotoshop />, text: "Adobe Photoshop" },
+    { icon: <SiFigma />, text: "Figma" },
+    { icon: <SiAdobeillustrator />, text: "Adobe Illustrator" },
+    { icon: <SiAdobephotoshop />, text: "Adobe Photoshop" },
   ],
 };
 

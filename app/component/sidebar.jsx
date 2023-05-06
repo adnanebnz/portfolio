@@ -30,35 +30,35 @@ const Sidebar = ({ data }) => {
           <h3 className="mb-2"> CONTACT ME</h3>
           <div className="flex flex-row justify-center gap-2">
             <a
-              className="icons-contactme"
+              className="icons-contactme hover:-translate-y-[0.2rem] transition-all duration-300 hover:bg-gray-500"
               href={contactLinks?.[0]}
               aria-label={"email link"}
             >
               <Envelope />
             </a>
             <a
-              className="icons-contactme"
+              className="icons-contactme hover:-translate-y-[0.2rem] transition-all duration-300 hover:bg-gray-500"
               href={contactLinks?.[1]}
               aria-label={"twitter link"}
             >
               <Twitter />
             </a>
             <a
-              className="icons-contactme"
+              className="icons-contactme hover:-translate-y-[0.2rem] transition-all duration-300 hover:bg-gray-500"
               href={contactLinks?.[2]}
               aria-label={"linkedin link"}
             >
               <Linkedin />
             </a>
             <a
-              className="icons-contactme "
+              className="icons-contactme hover:-translate-y-[0.2rem] transition-all duration-300 hover:bg-gray-500"
               href={contactLinks?.[3]}
               aria-label={"github link"}
             >
               <Github />
             </a>
             <a
-              className="icons-contactme"
+              className="icons-contactme hover:-translate-y-[0.2rem] transition-all duration-300 hover:bg-gray-500"
               href={contactLinks?.[4]}
               aria-label={"email link"}
             >

@@ -6,7 +6,6 @@ import { BiTimeFive } from "react-icons/bi";
 import {
   SiAdobeillustrator,
   SiAdobephotoshop,
-  SiAngularjs,
   SiChakraui,
   SiDart,
   SiExpress,

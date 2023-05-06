@@ -13,7 +13,6 @@ import {
   SiFigma,
   SiFirebase,
   SiFlutter,
-  SiGo,
   SiJavascript,
   SiLaravel,
   SiMongodb,

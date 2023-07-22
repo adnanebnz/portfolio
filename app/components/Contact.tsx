@@ -1,6 +1,9 @@
 const Contact = () => {
   return (
-    <section id="#contact">
+    <section
+      id="contact"
+      className="max-w-containerSmall mx-auto py-4flex flex-col gap-8"
+    >
       <div className="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0">
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">

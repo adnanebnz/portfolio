@@ -1,3 +1,5 @@
+import Image from "next/image";
+import image from "../assets/image.jpg";
 import SectionTitle from "./SectionTitle";
 import {
   SiPython,
@@ -34,26 +36,43 @@ const About = () => {
           <p className="">
             Here are some tech stacks I Have been working with recently:
           </p>
-          <div className="grid grid-cols-4 grid-rows-3 items-center place-content-center text-3xl gap-3">
-            <SiHtml5 />
-            <SiCss3 />
-            <SiJavascript />
-            <SiTypescript />
-            <SiPython />
-            <SiReact />
-            <SiNextdotjs />
-            <SiTailwindcss />
-            <SiDocker />
-            <SiDjango />
-            <SiLaravel />
-            <SiMongodb />
-            <SiPostgresql />
-            <SiNodedotjs />
-            <SiExpress />
-            <SiFlutter />
+          <div className="flex flex-col text-3xl gap-4 items-center justify-center">
+            <div className="flex mdl:gap-7 gap-2 items-center">
+              <SiHtml5 />
+              <SiCss3 />
+              <SiJavascript />
+              <SiTypescript />
+              <SiPython />
+              <SiReact />
+              <SiNextdotjs />
+              <SiTailwindcss />
+            </div>
+            <div className="flex mdl:gap-7 gap-2 items-center">
+              <SiDocker />
+              <SiDjango />
+              <SiLaravel />
+              <SiMongodb />
+              <SiPostgresql />
+              <SiNodedotjs />
+              <SiExpress />
+              <SiFlutter />
+            </div>
           </div>
         </div>
-        <div></div>
+        <div className="w-full lgl:w-1/3 h-80 relative group">
+          <div className="absolute w-full h-80 -left-6 -top-6 rounded-lg">
+            <div className="w-full h-full relative z-20 flex pl-6 lgl:pl-0">
+              <Image
+                src={image}
+                alt="Adnane Benzerdjeb"
+                layout="fill"
+                className="rounded-lg"
+              />
+              <div className="hidden lgl:inline-block absolute w-full h-80 bg-textGreen/10 rounded-md top-0 left-0 group-hover:bg-transparent duration-300"></div>
+            </div>
+          </div>
+          <div className="hidden lgl:inline-flex w-full h-80 border-2 border-textGreen rounded-md group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-300"></div>
+        </div>
       </div>
     </section>
   );

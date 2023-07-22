@@ -1,5 +1,6 @@
 import About from "./components/About";
 import Banner from "./components/Banner";
+import Experience from "./components/Experience";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       {/* About */}
       <About />
       {/* Experience */}
+      <Experience />
       {/* Projects */}
       {/* Archive */}
       {/* Contact */}

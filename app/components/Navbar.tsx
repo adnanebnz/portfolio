@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 function Navbar() {
   return (
-    <div className="px-4 w-full shadow-navbarShadow h-20 lg:h-[12vh] sticky top-0 z-50 bg-bodyColor">
+    <div className="px-4 w-full shadow-navbarShadow h-20 lg:h-[12vh] fixed top-0 z-50 bg-bodyColor">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
         <div></div>
         <motion.div

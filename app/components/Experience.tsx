@@ -10,15 +10,17 @@ const Experience = () => {
   return (
     <section
       id="experiences"
-      className="max-w-containerSmall mx-auto py-10 lgl:py-28 flex flex-col gap-8"
+      className="max-w-containerSmall mx-auto lgl:px-20 py-24 flex flex-col gap-8"
     >
       <SectionTitle title="Experience" titleNo="02" />
       <div className="w-full mt-10 flex flex-col md:flex-row gap-16">
         <ul className="md:w-32 flex flex-col">
           <li
             className={`border-l-2 ${
-              activeGdg ? "border-l-textGreen" : "border-l-textDark"
-            } text-textDark bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
+              activeGdg
+                ? "border-l-textGreen text-textGreen"
+                : "border-l-textDark text-textDark"
+            } bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
             onClick={() => {
               setActiveGdg(true);
               setActiveGdsc(false);
@@ -28,8 +30,10 @@ const Experience = () => {
           </li>
           <li
             className={`border-l-2 ${
-              activeGdsc ? "border-l-textGreen" : "border-l-textDark"
-            } text-textDark bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
+              activeGdsc
+                ? "border-l-textGreen text-textGreen"
+                : "border-l-textDark text-textDark"
+            } bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
             onClick={() => {
               setActiveGdg(false);
               setActiveGdsc(true);

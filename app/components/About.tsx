@@ -23,7 +23,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="max-w-containerSmall mx-auto py-10 lgl:py-32 flex flex-col gap-8"
+      className="max-w-containerSmall mx-auto lgl:px-20 py-24 flex flex-col gap-8"
     >
       <SectionTitle title="About Me" titleNo="01" />
       <div className="flex flex-col lgl:flex-row gap-16">
@@ -61,7 +61,7 @@ const About = () => {
         </div>
         <div className="w-full lgl:w-1/3 h-80 relative group">
           <div className="absolute w-full h-80 -left-6 -top-6 rounded-lg">
-            <div className="w-full h-full relative z-20 flex pl-6 lgl:pl-0">
+            <div className="w-full h-full relative z-20 flex pl-6 items-center justify-center lgl:pl-0">
               <Image
                 src={image}
                 alt="Adnane Benzerdjeb"

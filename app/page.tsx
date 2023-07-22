@@ -1,16 +1,15 @@
 import About from "./components/About";
 import Banner from "./components/Banner";
 import Experience from "./components/Experience";
+import Projects from "./components/Projects";
 
 export default function Home() {
   return (
     <main>
       <Banner />
-      {/* About */}
       <About />
-      {/* Experience */}
       <Experience />
-      {/* Projects */}
+      <Projects />
       {/* Archive */}
       {/* Contact */}
     </main>

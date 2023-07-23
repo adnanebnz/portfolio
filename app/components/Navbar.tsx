@@ -2,9 +2,26 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React from "react";
-
+import { MdOutlineClose } from "react-icons/md";
 function Navbar() {
   const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
+  const ref = React.useRef<string | any>("");
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*\#/, "");
+    const elm = document.getElementById(targetId);
+    elm?.scrollIntoView({
+      behavior: "smooth",
+    });
+    const links = document.querySelectorAll(".nav-link");
+    links.forEach((link) => {
+      link.classList.remove("active");
+    });
+    e.currentTarget.classList.add("active");
+  };
+  const handleClick = () => {};
   return (
     <div className="px-4 w-full shadow-navbarShadow h-20 lg:h-[12vh] fixed top-0 z-50 bg-bodyColor">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
@@ -19,6 +36,7 @@ function Navbar() {
             <Link
               href="#home"
               className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300 nav-link"
+              onClick={handleScroll}
             >
               <motion.li
                 initial={{
@@ -37,6 +55,7 @@ function Navbar() {
             <Link
               href="#about"
               className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300 nav-link"
+              onClick={handleScroll}
             >
               <motion.li
                 initial={{
@@ -56,6 +75,7 @@ function Navbar() {
             <Link
               href="#experiences"
               className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300 nav-link"
+              onClick={handleScroll}
             >
               <motion.li
                 initial={{
@@ -75,6 +95,7 @@ function Navbar() {
             <Link
               href="#projects"
               className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300 nav-link"
+              onClick={handleScroll}
             >
               <motion.li
                 initial={{
@@ -95,6 +116,7 @@ function Navbar() {
             <Link
               href="#contact"
               className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300 nav-link"
+              onClick={handleScroll}
             >
               <motion.li
                 initial={{
@@ -146,6 +168,89 @@ function Navbar() {
           ></span>
           <span className="w-full h-[2px] bg-textGreen inline-flex transform translate-x-1 group-hover:translate-x-3 transition-all ease-in-out duration-300"></span>
         </div>
+        {isMobileNavOpen && (
+          <div
+            ref={(node) => (ref.current = node)}
+            onClick={handleClick}
+            className="absolute mdl:hidden top-0 right-0 w-full h-screen bg-black bg-opacity-50 flex flex-col items-end"
+          >
+            <motion.div
+              initial={{
+                x: 20,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              transition={{ duration: 0.1 }}
+              className="w-[80%] h-full overflow-y-scroll scrollbarhide bg-[#112240] flex flex-col items-center px-4 py-10 relative"
+            >
+              <MdOutlineClose
+                onClick={() => {
+                  setIsMobileNavOpen(false);
+                }}
+                className="text-3xl text-textGreen cursor-pointer hover:text-red-500 absolute top-4 right-4"
+              />
+              <div>
+                <ul className="flex flex-col text-base gap-7">
+                  <li>
+                    <Link
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                      }}
+                      href={"#home"}
+                      className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300"
+                    >
+                      <span className="text-textGreen">01.</span>About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                      }}
+                      href={"#about"}
+                      className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300"
+                    >
+                      <span className="text-textGreen">02.</span>Experience
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                      }}
+                      href={"#projects"}
+                      className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300"
+                    >
+                      <span className="text-textGreen">03.</span>Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={"#contact"}
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                      }}
+                      className="flex items-center gap-1 font-medium text-textDark hover:text-textGreen cursor-pointer duration-300"
+                    >
+                      <span className="text-textGreen">04.</span>Contact
+                    </Link>
+                  </li>
+                </ul>
+                <a
+                  href="https://drive.google.com/file/d/1vF95vOb07LYNiQQyIVlzIxYlcwLLCikw/view?usp=sharing"
+                  target="_blank"
+                >
+                  <button className="px-5 py-3 rounded-md text-textGreen text-[17px] border border-textGreen hover:bg-hoverColor duration-300 mt-10">
+                    Resume
+                  </button>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   );

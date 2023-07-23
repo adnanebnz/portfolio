@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import React from "react";
+
 function Navbar() {
+  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
   return (
     <div className="px-4 w-full shadow-navbarShadow h-20 lg:h-[12vh] fixed top-0 z-50 bg-bodyColor">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
@@ -130,7 +133,12 @@ function Navbar() {
           </a>
         </motion.div>
         {/* mobile nav */}
-        <div className="w-6 h-5 flex flex-col justify-between items-center mdl:hidden text-4xl text-textGreen cursor-pointer overflow-hidden group">
+        <div
+          className="w-6 h-5 flex flex-col justify-between items-center mdl:hidden text-4xl text-textGreen cursor-pointer overflow-hidden group"
+          onClick={() => {
+            setIsMobileNavOpen((state) => !state);
+          }}
+        >
           <span className="w-full h-[2px] bg-textGreen inline-flex transform group-hover:translate-x-2 transition-all ease-in-out duration-300"></span>
           <span
             className="w-full h-[2px] bg-textGreen inline-flex transform 

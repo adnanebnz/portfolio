@@ -6,6 +6,7 @@ import { TbBrandGithub } from "react-icons/tb";
 
 const Projects = () => {
   return (
+    // TODO ADD PROJECTS
     <section
       id="projects"
       className="max-w-containerSmall mx-auto lgl:px-10 py-24 flex flex-col gap-8"

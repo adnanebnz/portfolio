@@ -20,9 +20,11 @@ const Banner = () => {
         React Native and Flutter. I am also a big fan of UI/UX design and I am a
         self-taught designer.
       </p>
-      <button className="w-52 h-14 text-sm font-titleFont border border-textBlue rounded-md text-textBlue tracking-wide hover:bg-hoverColor duration-300">
-        Check out my Projects!
-      </button>
+      <a href="#projects">
+        <button className="w-52 h-14 text-sm font-titleFont border border-textBlue rounded-md text-textBlue tracking-wide hover:bg-hoverColor duration-300">
+          Check out my Projects!
+        </button>
+      </a>
     </section>
   );
 };

@@ -17,7 +17,7 @@ const Gdsc = () => {
     >
       <h3 className="flex gap-2 font-medium text-xl font-titleFont">
         Core Team Member & Organizer{" "}
-        <span className="text-textGreen tracking-wide">
+        <span className="text-textBlue tracking-wide">
           @GoogleDevelopersStudentClub
         </span>
       </h3>
@@ -26,7 +26,7 @@ const Gdsc = () => {
       </p>
       <ul className="mt-6 flex flex-col gap-3">
         <li className="text-base flex gap-2 text-textDark">
-          <span className="text-textGreen mt-1">
+          <span className="text-textBlue mt-1">
             <TiArrowForward />
           </span>
           Hackathons and all

@@ -1,10 +1,8 @@
-"use client";
 import LeftSide from "./components/LeftSide";
 import Navbar from "./components/Navbar";
 import RightSide from "./components/RightSide";
 import "./globals.css";
 import type { Metadata } from "next";
-import { motion } from "framer-motion";
 export const metadata: Metadata = {
   title: "BENZERDJEB Adnane",
   description: "Benzerdjeb mohamed adnane's portfolio",
@@ -28,30 +26,15 @@ export default function RootLayout({
       <body className="font-bodyFont w-full h-screen bg-bodyColor text-textLight overflow-x-hidden overflow-y-scroll scrollbar scrollbar-track-textDark/20 scrollbar-thumb-textDark/60">
         <Navbar />
         <div className="w-full h-[88vh] xl:flex items-center gap-20 justify-between">
-          <motion.div
-            className="hidden  xl:inline-flex w-32 h-full fixed left-0 bottom-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-          >
+          <div className="hidden  xl:inline-flex w-32 h-full fixed left-0 bottom-0">
             <LeftSide />
-          </motion.div>
-          <motion.main
-            className="h-[88vh] w-full mx-auto mdl:px-40 px-11  py-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
+          </div>
+          <main className="h-[88vh] w-full mx-auto mdl:px-40 px-11  py-4">
             {children}
-          </motion.main>
-          <motion.div
-            className="hidden xl:inline-flex w-32 h-full fixed right-0 bottom-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-          >
+          </main>
+          <div className="hidden xl:inline-flex w-32 h-full fixed right-0 bottom-0">
             <RightSide />
-          </motion.div>
+          </div>
         </div>
       </body>
       {/* Footer */}

@@ -18,7 +18,7 @@ const Experience = () => {
           <li
             className={`border-l-2 ${
               activeGdg
-                ? "border-l-textGreen text-textGreen"
+                ? "border-l-textBlue text-textBlue"
                 : "border-l-textDark text-textDark"
             } bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
             onClick={() => {
@@ -31,7 +31,7 @@ const Experience = () => {
           <li
             className={`border-l-2 ${
               activeGdsc
-                ? "border-l-textGreen text-textGreen"
+                ? "border-l-textBlue text-textBlue"
                 : "border-l-textDark text-textDark"
             } bg-transparent hover:bg-[#112240] py-3 text-sm cursor-pointer duration-300 px-8 font-medium`}
             onClick={() => {

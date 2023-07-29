@@ -6,7 +6,7 @@ interface SectionTitleProps {
 const SectionTitle = ({ title, titleNo }: SectionTitleProps) => {
   return (
     <h2 className="font-titleFont text-2xl font-semibold flex items-center">
-      <span className="text-base md:text-lg text-textGreen mr-2">
+      <span className="text-base md:text-lg text-textBlue mr-2">
         {titleNo}.
       </span>{" "}
       {title}

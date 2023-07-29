@@ -1,7 +1,8 @@
 import React from "react";
 import SectionTitle from "./SectionTitle";
 import Image from "next/image";
-import project from "./../assets/image.jpg";
+import dzhikers from "./../assets/DZHIKERS.png";
+import mypatient from "./../assets/MyPatient.png";
 import { TbBrandGithub } from "react-icons/tb";
 
 const Projects = () => {
@@ -23,7 +24,7 @@ const Projects = () => {
             >
               <div>
                 <Image
-                  src={project}
+                  src={dzhikers}
                   alt="project"
                   className="w-full h-full object-contain"
                 />
@@ -31,30 +32,29 @@ const Projects = () => {
             </a>
             <div className="w-full xl:w-1/2 flex flex-col gap-6 lgl:justify-between items-end text-right xl:-ml-16 z-10">
               <div>
-                <p className="font-titleFont text-textGreen text-sm tracking-wide">
+                <p className="font-titleFont text-textBlue text-sm tracking-wide">
                   Featured Project
                 </p>
-                <h3 className="text-2xl font-bold">Amazon Clone</h3>
+                <h3 className="text-2xl font-bold">DZHIKERS</h3>
               </div>
               <p className="bg-[#112240] text-sm md:text-base p-2 md:p-6 roundeed-md">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                dolores enim, quam asperiores earum ipsum expedita quo delectus
-                mollitia, sapiente odit. Quas in porro exercitationem aut neque
-                magni fuga blanditiis?
+                Dynamic platform made using MERN STACK and React Native for
+                hikers in Algeria, offering captivating hikes and a shop selling
+                specialty products.
               </p>
               <ul className="text-xs md:text-sm font-titleFont tracking-wide flex gap-2 md:gap-3 justify-between text-textDark">
                 <li>React</li>
                 <li>NodeJS</li>
                 <li>ExpressJS</li>
                 <li>MongoDB</li>
-                <li>SocketIO</li>
+                <li>React Native</li>
               </ul>
               <div className="flex gap-3 items-center text-3xl">
                 <a
                   href="https://github.com/adnanebnz/dzikers-web"
                   target="_blank"
                 >
-                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textGreen cursor-pointer transition-all duration-300" />
+                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300" />
                 </a>
               </div>
             </div>
@@ -70,7 +70,7 @@ const Projects = () => {
             >
               <div>
                 <Image
-                  src={project}
+                  src={mypatient}
                   alt="project"
                   className="w-full h-full object-contain"
                 />
@@ -78,30 +78,28 @@ const Projects = () => {
             </a>
             <div className="w-full xl:w-1/2 flex flex-col gap-6 lgl:justify-between items-end text-right z-10">
               <div>
-                <p className="font-titleFont text-textGreen text-sm tracking-wide">
+                <p className="font-titleFont text-textBlue text-sm tracking-wide">
                   Featured Project
                 </p>
-                <h3 className="text-2xl font-bold">Amazon Clone</h3>
+                <h3 className="text-2xl font-bold">MyPatient</h3>
               </div>
               <p className="bg-[#112240] text-sm md:text-base xl:-mr-16  p-2 md:p-6 roundeed-md">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                dolores enim, quam asperiores earum ipsum expedita quo delectus
-                mollitia, sapiente odit. Quas in porro exercitationem aut neque
-                magni fuga blanditiis?
+                A mobile application developed with Flutter and SQLite,
+                dedicated to the management of patients in rehabilitation. It
+                offers acomprehensive rehabilitation exercise tracking system
+                for each patient.
               </p>
               <ul className="text-xs md:text-sm font-titleFont tracking-wide flex gap-2 md:gap-3 justify-between text-textDark">
-                <li>React</li>
-                <li>NodeJS</li>
-                <li>ExpressJS</li>
-                <li>MongoDB</li>
-                <li>SocketIO</li>
+                <li>Flutter</li>
+                <li>SQLite</li>
+                <li>GetX</li>
               </ul>
               <div className="flex gap-3 items-center text-3xl">
                 <a
                   href="https://github.com/adnanebnz/dzikers-web"
                   target="_blank"
                 >
-                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textGreen cursor-pointer transition-all duration-300" />
+                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300" />
                 </a>
               </div>
             </div>

@@ -29,7 +29,7 @@ const Gdsc = () => {
           <span className="text-textBlue mt-1">
             <TiArrowForward />
           </span>
-          Hackathons and all
+          Participating in online/offline events and workshops
         </li>
       </ul>
     </motion.div>

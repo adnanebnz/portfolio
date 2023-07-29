@@ -1,8 +1,7 @@
-import React from "react";
 import SectionTitle from "./SectionTitle";
 import Image from "next/image";
-import dzhikers from "./../assets/DZHIKERS.png";
-import mypatient from "./../assets/MyPatient.png";
+import dzhikers from "./../assets/DZHIKERS.jpg";
+import mypatient from "./../assets/MyPatient.jpg";
 import { TbBrandGithub } from "react-icons/tb";
 
 const Projects = () => {

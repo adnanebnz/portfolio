@@ -40,7 +40,7 @@ const Contact = () => {
                     />
                   </svg>
                   <div className="ml-4 text-md tracking-wide font-semibold w-40">
-                    Acme Inc, Street, State, Postal Code
+                    Tlemcen, 13016, Algeria
                   </div>
                 </div>
 
@@ -62,7 +62,7 @@ const Contact = () => {
                     />
                   </svg>
                   <div className="ml-4 text-md tracking-wide font-semibold w-40">
-                    +44 1234567890
+                    +213 5606900167
                   </div>
                 </div>
 
@@ -84,7 +84,7 @@ const Contact = () => {
                     />
                   </svg>
                   <div className="ml-4 text-md tracking-wide font-semibold w-40">
-                    info@acme.org
+                    skillzdev@hotmail.com
                   </div>
                 </div>
               </div>

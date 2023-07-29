@@ -1,18 +1,15 @@
 const Contact = () => {
   return (
-    <section
-      id="contact"
-      className="max-w-containerSmall mx-auto py-4flex flex-col gap-8"
-    >
-      <div className="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0">
-        <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+    <section id="contact" className="max-w-full mx-auto flex flex-col gap-8">
+      <div className="relative flex items-top justify-center min-h-screen sml:items-center sml:pt-0">
+        <div className="max-w-full mx-auto sml:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-6 mr-2 bg-gray-100 dark:bg-gray-800 sm:rounded-lg">
-                <h1 className="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight font-titleFont">
+            <div className="grid grid-cols-1 mdl:grid-cols-2">
+              <div className="p-6 mr-2 bg-gray-100 dark:bg-gray-800 sml:rounded-lg">
+                <h1 className="text-4xl sml:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight font-titleFont">
                   Get in touch
                 </h1>
-                <p className="text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
+                <p className="text-normal text-md sml:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
                   Fill in the form to start a conversation
                 </p>
 
@@ -39,7 +36,7 @@ const Contact = () => {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <div className="ml-4 text-md tracking-wide font-semibold w-40">
+                  <div className="ml-4 text-sm sml:text-md tracking-wide font-semibold w-40">
                     Tlemcen, 13016, Algeria
                   </div>
                 </div>
@@ -83,7 +80,7 @@ const Contact = () => {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <div className="ml-4 text-md tracking-wide font-semibold w-40">
+                  <div className="ml-4 text-sm sml:text-md tracking-wide font-semibold w-full">
                     skillzdev@hotmail.com
                   </div>
                 </div>
@@ -123,7 +120,7 @@ const Contact = () => {
                     name="phone"
                     id="phone"
                     placeholder="Telephone Number"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="w-full mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
                   />
                 </div>
                 <div className="flex flex-col mt-2">
@@ -132,13 +129,13 @@ const Contact = () => {
                     name="message"
                     placeholder="Message"
                     rows={6}
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-hoverColor focus:outline-none text-white"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="md:w-32 font-titleFont border border-textBlue rounded-md text-textBlue tracking-wide hover:bg-hoverColor duration-300  py-3 px-6 mt-3"
+                  className="mdl:w-32 font-titleFont border border-textBlue rounded-md text-textBlue tracking-wide hover:bg-hoverColor duration-300 py-3 px-6 mt-3"
                 >
                   Send
                 </button>

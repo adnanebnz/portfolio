@@ -14,22 +14,25 @@ const LeftSide = () => {
             <TbBrandGithub />
           </span>
         </a>
-        <a href="https://github.com/adnanebnz" target="_blank">
+        <a
+          href="https://www.linkedin.com/in/adnane-benzerdjeb/"
+          target="_blank"
+        >
           <span className="w-10 h-10 text-xl bg-hoverColor rounded-full inline-flex items-center justify-center hover:text-textBlue cursor-pointer hover:translate-y-2 transition-all duration-300">
             <SlSocialLinkedin />
           </span>
         </a>
-        <a href="https://github.com/adnanebnz" target="_blank">
+        <a href="https://www.behance.net/SKILLZDZN" target="_blank">
           <span className="w-10 h-10 text-xl bg-hoverColor rounded-full inline-flex items-center justify-center hover:text-textBlue cursor-pointer hover:translate-y-2 transition-all duration-300">
             <SlSocialBehance />
           </span>
         </a>
-        <a href="https://github.com/adnanebnz" target="_blank">
+        <a href="https://www.facebook.com/ski.llz.908/" target="_blank">
           <span className="w-10 h-10 text-xl bg-hoverColor rounded-full inline-flex items-center justify-center hover:text-textBlue cursor-pointer hover:translate-y-2 transition-all duration-300">
             <SlSocialFacebook />
           </span>
         </a>
-        <a href="https://github.com/adnanebnz" target="_blank">
+        <a href="https://www.instagram.com/adnane_benzerdjeb/" target="_blank">
           <span className="w-10 h-10 text-xl bg-hoverColor rounded-full inline-flex items-center justify-center hover:text-textBlue cursor-pointer hover:translate-y-2 transition-all duration-300">
             <SlSocialInstagram />
           </span>

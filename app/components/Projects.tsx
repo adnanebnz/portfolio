@@ -95,7 +95,7 @@ const Projects = () => {
               </ul>
               <div className="flex gap-3 items-center text-3xl">
                 <a
-                  href="https://github.com/adnanebnz/dzikers-web"
+                  href="https://github.com/adnanebnz/my_pattient"
                   target="_blank"
                 >
                   <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300" />

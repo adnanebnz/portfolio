@@ -78,7 +78,7 @@ function Navbar() {
           </ul>
           <a
             href={
-              "https://drive.google.com/file/d/1DX1MENkb6kCsxzObJDtg_2QK_WE0DVNp/view?usp=sharing"
+              "https://drive.google.com/file/d/1r25YaSIWhaUp9yH5u8NRplg8Appycdhu/view?usp=sharing"
             }
             target="_blank"
           >
@@ -162,7 +162,7 @@ function Navbar() {
                   </li>
                 </ul>
                 <a
-                  href="https://drive.google.com/file/d/1DX1MENkb6kCsxzObJDtg_2QK_WE0DVNp/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1r25YaSIWhaUp9yH5u8NRplg8Appycdhu/view?usp=sharing"
                   target="_blank"
                 >
                   <button className="px-5 py-3 rounded-md text-textBlue text-[17px] border border-textBlue hover:bg-hoverColor duration-300 mt-10">

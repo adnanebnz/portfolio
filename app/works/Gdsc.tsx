@@ -34,19 +34,19 @@ const Gdsc = () => {
           <span className="text-textBlue mt-1">
             <TiArrowForward />
           </span>
-          Organizing events and presenting concepts to the community
+          Organizing events.
         </li>
         <li className="text-base flex gap-2 text-textDark">
           <span className="text-textBlue mt-1">
             <TiArrowForward />
           </span>
-          Participating in online/offline events and workshops
+          Participating in online/offline events and workshops.
         </li>
         <li className="text-base flex gap-2 text-textDark">
           <span className="text-textBlue mt-1">
             <TiArrowForward />
           </span>
-          Sharing knowledge and helping students to learn new technologies
+          Sharing knowledge and helping students to learn new technologies.
         </li>
       </ul>
     </motion.div>

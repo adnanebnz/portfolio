@@ -121,7 +121,7 @@ function Navbar() {
                       onClick={() => {
                         setIsMobileNavOpen(false);
                       }}
-                      href={"#home"}
+                      href={"#about"}
                       className="flex items-center gap-1 font-medium text-textDark hover:text-textBlue cursor-pointer duration-300"
                     >
                       <span className="text-textBlue">01.</span>About
@@ -132,7 +132,7 @@ function Navbar() {
                       onClick={() => {
                         setIsMobileNavOpen(false);
                       }}
-                      href={"#about"}
+                      href={"#experiences"}
                       className="flex items-center gap-1 font-medium text-textDark hover:text-textBlue cursor-pointer duration-300"
                     >
                       <span className="text-textBlue">02.</span>Experience

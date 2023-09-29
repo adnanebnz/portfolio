@@ -24,7 +24,9 @@ function Navbar() {
   return (
     <div className="px-4 w-full shadow-navbarShadow h-20 lg:h-[12vh] fixed top-0 z-50 bg-bodyColor">
       <div className="max-w-container h-full mx-auto py-1 font-titleFont flex items-center justify-between">
-        <div></div>
+        <div>
+          <img src="skillz-white-hq.png" className="md:w-[190px] w-[150px]" />
+        </div>
         <div className="hidden mdl:inline-flex items-center gap-7">
           <ul className="flex flex-row gap-7 items-center text-[14px]">
             <Link

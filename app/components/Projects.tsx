@@ -1,8 +1,10 @@
 import SectionTitle from "./SectionTitle";
 import Image from "next/image";
 import dzhikers from "./../assets/DZHIKERS.jpg";
+import TrendyStore from "../assets/TrendyStore.png";
 import mypatient from "./../assets/MyPatient.jpg";
 import { TbBrandGithub } from "react-icons/tb";
+import { BsGlobe } from "react-icons/bs";
 
 const Projects = () => {
   return (
@@ -12,9 +14,9 @@ const Projects = () => {
       className="max-w-containerSmall mx-auto lgl:px-10 py-24 flex flex-col gap-8"
     >
       <SectionTitle title="Built Projects" titleNo="03" />
-      <div className="w-full flex flex-col items-center justify-center gap-28 mt-10">
+      <div className="w-full flex flex-col items-center justify-center md:gap-28 gap-14 md:mt-10">
         {/* Project One */}
-        <div className="w-full flex flex-col items-center justif-center gap-28 mt-10">
+        <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
           <div className="flex flex-col xl:flex-row gap-6">
             <a
               href="https://github.com/adnanebnz/dzhikers-web"
@@ -60,7 +62,7 @@ const Projects = () => {
           </div>
         </div>
         {/* Project Two */}
-        <div className="w-full flex flex-col items-center justif-center gap-28 mt-10">
+        <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
           <div className="flex flex-col xl:flex-row-reverse gap-6">
             <a
               href="https://github.com/adnanebnz/dzhikers-web"
@@ -105,6 +107,53 @@ const Projects = () => {
           </div>
         </div>
         {/* Project Three */}
+        <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
+          <div className="flex flex-col xl:flex-row gap-6">
+            <a
+              href="https://trendy-store.fly.dev/"
+              target="_blank"
+              className="w-full xl:w-1/2 h-auto relative group"
+            >
+              <div>
+                <Image
+                  src={TrendyStore}
+                  alt="project"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </a>
+            <div className="w-full xl:w-1/2 flex flex-col gap-6 lgl:justify-between items-end text-right xl:-ml-16 z-10">
+              <div>
+                <p className="font-titleFont text-textBlue text-sm tracking-wide">
+                  Featured Project
+                </p>
+                <h3 className="text-2xl font-bold">TrendyStore</h3>
+              </div>
+              <p className="bg-[#112240] text-sm md:text-base p-2 md:p-6 roundeed-md">
+                An E-Commerce Website made for a client using the TALL STACK
+              </p>
+              <ul className="text-xs md:text-sm font-titleFont tracking-wide flex gap-2 md:gap-3 justify-between text-textDark">
+                <li>TailwindCSS</li>
+                <li>AlpineJS</li>
+                <li>Laravel</li>
+                <li>Livewire</li>
+                <li>MySQL</li>
+              </ul>
+              <div className="flex gap-3 items-center text-3xl">
+                <a
+                  href="https://trendy-store.fly.dev/"
+                  target="_blank"
+                  className="flex items-center gap-1 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300"
+                >
+                  <p className="font-medium text-[16px] font-titleFont">
+                    Live demo
+                  </p>
+                  <BsGlobe className="w-8 h-8" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Project Four */}
         {/* Project Five */}
         {/* Project Six */}

@@ -15,10 +15,12 @@ const Gdsc = () => {
       }}
       className="w-full"
     >
-      <h3 className="flex gap-2 font-medium text-xl font-titleFont">
-        Core Team Member & Organizer{" "}
-        <span className="text-textBlue tracking-wide">@GoogleDevelopers</span>
-      </h3>
+      <div className="flex flex-col gap-1">
+        <p className="font-medium text-xl font-titleFont">
+          Core Team Member & Design department manager
+        </p>
+        <p className="text-textBlue tracking-wide text-md">@GoogleDevelopers</p>
+      </div>
       <p className="text-sm mt-1 font-medium text-textDark">
         Oct. 2022 - Present
       </p>
@@ -47,6 +49,18 @@ const Gdsc = () => {
             <TiArrowForward />
           </span>
           Sharing knowledge and helping students to learn new technologies.
+        </li>
+        <li className="text-base flex gap-2 text-textDark">
+          <span className="text-textBlue mt-1">
+            <TiArrowForward />
+          </span>
+          Creating Design for events and social media.
+        </li>
+        <li className="text-base flex gap-2 text-textDark">
+          <span className="text-textBlue mt-1">
+            <TiArrowForward />
+          </span>
+          Leading the Design department.
         </li>
       </ul>
     </motion.div>

@@ -2,22 +2,17 @@ import Image from "next/image";
 import image from "../assets/image.jpg";
 import SectionTitle from "./SectionTitle";
 import {
-  SiPython,
   SiTailwindcss,
-  SiJavascript,
-  SiTypescript,
   SiReact,
-  SiNextdotjs,
-  SiDocker,
-  SiDjango,
   SiLaravel,
   SiMongodb,
-  SiPostgresql,
-  SiHtml5,
-  SiCss3,
   SiNodedotjs,
   SiExpress,
   SiFlutter,
+  SiAlpinedotjs,
+  SiLivewire,
+  SiFirebase,
+  SiSupabase,
 } from "react-icons/si";
 const About = () => {
   return (
@@ -36,26 +31,49 @@ const About = () => {
           <p className="">
             Here are some tech stacks I Have been working with recently:
           </p>
-          <div className="flex flex-col text-3xl gap-4 items-center justify-center">
-            <div className="flex mdl:gap-7 gap-2 items-center">
-              <SiHtml5 />
-              <SiCss3 />
-              <SiJavascript />
-              <SiTypescript />
-              <SiPython />
-              <SiReact />
-              <SiNextdotjs />
-              <SiTailwindcss />
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-transpaernt border-[1px] rounded-lg p-3 shadow-md border-blue-500">
+              <p className="font-semibold text-gray-300">MERN Stack</p>
+              <p className="mt-2">
+                Building APIs using NodeJS and Express, and using ReactJS for
+                the frontend.
+              </p>
+              <div className="mt-2 flex flex-row gap-1 items-center justify-center">
+                <SiMongodb className="text-textBlue text-2xl" />
+                <SiExpress className="text-textBlue text-2xl" />
+                <SiReact className="text-textBlue text-2xl" />
+                <SiNodedotjs className="text-textBlue text-2xl" />
+              </div>
             </div>
-            <div className="flex mdl:gap-7 gap-2 items-center">
-              <SiDocker />
-              <SiDjango />
-              <SiLaravel />
-              <SiMongodb />
-              <SiPostgresql />
-              <SiNodedotjs />
-              <SiExpress />
-              <SiFlutter />
+
+            <div className="bg-transpaernt border-[1px] border-blue-500 rounded-lg p-3 shadow-md">
+              <p className="font-semibold text-gray-300">TALL Stack</p>
+              <p className="mt-2">
+                Building web apps using TailwindCSS, AlpineJS, Laravel and
+                Livewire.
+              </p>
+              <div className="mt-2 flex flex-row gap-1 items-center justify-center">
+                <SiTailwindcss className="text-textBlue text-2xl" />
+                <SiAlpinedotjs className="text-textBlue text-2xl" />
+                <SiLaravel className="text-textBlue text-2xl" />
+                <SiLivewire className="text-textBlue text-2xl" />
+              </div>
+            </div>
+
+            <div className="bg-transpaernt border-[1px] rounded-lg p-3 shadow-md border-blue-500">
+              <p className="font-semibold text-gray-300">
+                Mobile Apps Developement
+              </p>
+              <p className="mt-2">
+                Building mobile apps using Flutter, React Native and BaaS.
+              </p>
+              <div className="mt-2 flex flex-row gap-1 items-center justify-center">
+                <SiReact className="text-textBlue text-2xl" />
+                <SiFlutter className="text-textBlue text-2xl" />
+                <SiFirebase className="text-textBlue text-2xl" />
+                <SiSupabase className="text-textBlue text-2xl" />
+              </div>
             </div>
           </div>
         </div>

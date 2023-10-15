@@ -66,7 +66,7 @@ const Projects = () => {
         <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
           <div className="flex flex-col xl:flex-row-reverse gap-6">
             <a
-              href="https://github.com/adnanebnz/dzhikers-web"
+              href="https://github.com/adnanebnz/my_pattient"
               target="_blank"
               className="w-full xl:w-1/2 h-auto relative group"
             >

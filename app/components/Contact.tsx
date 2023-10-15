@@ -5,15 +5,15 @@ const Contact = () => {
         <div className="max-w-full mx-auto sml:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 mdl:grid-cols-2">
-              <div className="p-6 mr-2 bg-gray-100 dark:bg-gray-800 sml:rounded-lg">
-                <h1 className="text-4xl sml:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight font-titleFont">
+              <div className="p-6 mr-2 bg-gray-800 sml:rounded-lg">
+                <h1 className="text-4xl sml:text-5xl text-white font-extrabold tracking-tight font-titleFont">
                   Get in touch
                 </h1>
-                <p className="text-normal text-md sml:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
+                <p className="text-normal text-md sml:text-2xl font-medium text-gray-400 mt-2">
                   Fill in the form to start a conversation
                 </p>
 
-                <div className="flex items-center mt-8 text-gray-600 dark:text-gray-400">
+                <div className="flex items-center mt-8 text-gray-400">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -41,7 +41,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center mt-4 text-gray-600 dark:text-gray-400">
+                <div className="flex items-center mt-4 text-gray-400">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -63,7 +63,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center mt-2 text-gray-600 dark:text-gray-400">
+                <div className="flex items-center mt-2 text-gray-400">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -98,7 +98,7 @@ const Contact = () => {
                     name="name"
                     id="name"
                     placeholder="Full Name"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700  font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
                   />
                 </div>
 
@@ -109,7 +109,7 @@ const Contact = () => {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700  font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
                   />
                 </div>
 
@@ -120,7 +120,7 @@ const Contact = () => {
                     name="phone"
                     id="phone"
                     placeholder="Telephone Number"
-                    className="w-full mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="w-full mt-2 py-3 px-3 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
                   />
                 </div>
                 <div className="flex flex-col mt-2">
@@ -129,7 +129,7 @@ const Contact = () => {
                     name="message"
                     placeholder="Message"
                     rows={6}
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 font-semibold focus:border-hoverColor focus:outline-none text-white"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-hoverColor focus:outline-none text-white"
                   />
                 </div>
 

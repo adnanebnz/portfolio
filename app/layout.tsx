@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import RightSide from "./components/RightSide";
 import "./globals.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
   title: "BENZERDJEB Adnane",
   description: "Benzerdjeb mohamed adnane's portfolio",
@@ -43,6 +44,7 @@ export default function RootLayout({
           </div>
           <main className="h-[88vh] w-full mx-auto mdl:px-40 px-11  py-4">
             {children}
+            <Analytics />
           </main>
           <div className="hidden xl:inline-flex w-32 h-full fixed right-0 bottom-0">
             <RightSide />

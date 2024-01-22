@@ -78,16 +78,11 @@ function Navbar() {
               </li>
             </Link>
           </ul>
-          <a
-            href={
-              "https://drive.google.com/file/d/1KRtm4D77kURRaWtnpTYpvg3HzdwbTx7R/view?usp=sharing"
-            }
-            target="_blank"
-          >
+          <Link href={"CV_skillzdev.pdf"} target="_blank">
             <button className="px-4 py-2 rounded-md text-textBlue text-[14px] border border-textBlue hover:bg-hoverColor duration-300">
               Resume
             </button>
-          </a>
+          </Link>
         </div>
         {/* mobile nav */}
         <div
@@ -163,14 +158,11 @@ function Navbar() {
                     </Link>
                   </li>
                 </ul>
-                <a
-                  href="https://drive.google.com/file/d/1KRtm4D77kURRaWtnpTYpvg3HzdwbTx7R/view?usp=sharing"
-                  target="_blank"
-                >
+                <Link href={"CV_skillzdev.pdf"} target="_blank">
                   <button className="px-5 py-3 rounded-md text-textBlue text-[17px] border border-textBlue hover:bg-hoverColor duration-300 mt-10">
                     Resume
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

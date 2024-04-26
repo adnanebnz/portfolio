@@ -38,13 +38,6 @@ const Contact = () => {
       newErrors.email = "";
     }
 
-    if (formData.phone.trim()) {
-      newErrors.phone = "Valid phone number is required";
-      valid = false;
-    } else {
-      newErrors.phone = "";
-    }
-
     // Validate Message
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
@@ -76,16 +69,16 @@ const Contact = () => {
     }
   };
   return (
-    <section id="contact" className="max-w-full mx-auto flex flex-col gap-8">
-      <div className="relative flex items-top justify-center min-h-screen sml:items-center sml:pt-0">
+    <section id="contact" className="flex flex-col max-w-full gap-8 mx-auto">
+      <div className="relative flex justify-center min-h-screen items-top sml:items-center sml:pt-0">
         <div className="max-w-full mx-auto sml:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 mdl:grid-cols-2">
               <div className="p-6 mr-2 bg-gray-800 sml:rounded-lg">
-                <h1 className="text-4xl sml:text-5xl text-white font-extrabold tracking-tight font-titleFont">
+                <h1 className="text-4xl font-extrabold tracking-tight text-white sml:text-5xl font-titleFont">
                   Get in touch
                 </h1>
-                <p className="text-normal text-md sml:text-2xl font-medium text-gray-400 mt-2">
+                <p className="mt-2 font-medium text-gray-400 text-normal text-md sml:text-2xl">
                   Fill in the form to start a conversation
                 </p>
 
@@ -112,7 +105,7 @@ const Contact = () => {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <div className="ml-4 text-sm sml:text-md tracking-wide font-semibold w-40">
+                  <div className="w-40 ml-4 text-sm font-semibold tracking-wide sml:text-md">
                     Tlemcen, 13016, Algeria
                   </div>
                 </div>
@@ -134,7 +127,7 @@ const Contact = () => {
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  <div className="ml-4 text-md tracking-wide font-semibold w-40">
+                  <div className="w-40 ml-4 font-semibold tracking-wide text-md">
                     +213 5606900167
                   </div>
                 </div>
@@ -156,14 +149,14 @@ const Contact = () => {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <div className="ml-4 text-sm sml:text-md tracking-wide font-semibold w-full">
+                  <div className="w-full ml-4 text-sm font-semibold tracking-wide sml:text-md">
                     skillzdev@hotmail.com
                   </div>
                 </div>
               </div>
 
               <form
-                className="p-6 flex flex-col justify-center"
+                className="flex flex-col justify-center p-6"
                 onSubmit={handleSubmit}
               >
                 <div className="flex flex-col">
@@ -174,10 +167,10 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Full Name"
-                    className="w-100 mt-2 py-3 px-3 mb-1 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="px-3 py-3 mt-2 mb-1 font-semibold text-white bg-gray-800 border border-gray-700 rounded-lg w-100 focus:border-indigo-500 focus:outline-none"
                   />
                   {formErrors.name && (
-                    <span className="text-red-500 text-sm">
+                    <span className="text-sm text-red-500">
                       {formErrors.name}
                     </span>
                   )}
@@ -191,28 +184,11 @@ const Contact = () => {
                     onChange={handleInputChange}
                     placeholder="Email"
                     required
-                    className="w-100 mt-2 py-3 px-3 mb-1 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
+                    className="px-3 py-3 mt-2 mb-1 font-semibold text-white bg-gray-800 border border-gray-700 rounded-lg w-100 focus:border-indigo-500 focus:outline-none"
                   />
                   {formErrors.email && (
-                    <span className="text-red-500 text-sm">
+                    <span className="text-sm text-red-500">
                       {formErrors.email}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex flex-col mt-2">
-                  <label className="hidden">Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Telephone Number"
-                    className="w-full mt-2 py-3 px-3 mb-1 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-indigo-500 focus:outline-none text-white"
-                  />
-                  {formErrors.phone && (
-                    <span className="text-red-500 text-sm">
-                      {formErrors.phone}
                     </span>
                   )}
                 </div>
@@ -224,10 +200,10 @@ const Contact = () => {
                     onChange={handleInputChange}
                     rows={6}
                     required
-                    className="w-100 mt-2 py-3 px-3 mb-1 rounded-lg bg-gray-800 border border-gray-700 font-semibold focus:border-hoverColor focus:outline-none text-white"
+                    className="px-3 py-3 mt-2 mb-1 font-semibold text-white bg-gray-800 border border-gray-700 rounded-lg w-100 focus:border-hoverColor focus:outline-none"
                   />
                   {formErrors.message && (
-                    <span className="text-red-500 text-sm">
+                    <span className="text-sm text-red-500">
                       {formErrors.message}
                     </span>
                   )}
@@ -235,7 +211,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="mdl:w-32 font-titleFont border border-textBlue rounded-md text-textBlue tracking-wide hover:bg-hoverColor duration-300 py-3 px-6 mt-3"
+                  className="px-6 py-3 mt-3 tracking-wide duration-300 border rounded-md mdl:w-32 font-titleFont border-textBlue text-textBlue hover:bg-hoverColor"
                 >
                   Send
                 </button>

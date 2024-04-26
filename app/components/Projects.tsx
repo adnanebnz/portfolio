@@ -15,7 +15,7 @@ const Projects = () => {
       <SectionTitle title="Built Projects" titleNo="03" />
       <div className="flex flex-col items-center justify-center w-full md:gap-28 gap-14 md:mt-10">
         {/* Project One */}
-        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+        <div className="flex flex-col items-center w-full gap-4 justif-center md:mt-10">
           <div className="flex flex-col gap-6 xl:flex-row">
             <a
               href="https://github.com/adnanebnz/dzhikers-web"
@@ -61,7 +61,7 @@ const Projects = () => {
           </div>
         </div>
         {/* Project Two */}
-        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+        <div className="flex flex-col items-center w-full gap-4 justif-center md:mt-10">
           <div className="flex flex-col gap-6 xl:flex-row-reverse">
             <a
               href="https://github.com/adnanebnz/algeria-eats"
@@ -111,7 +111,7 @@ const Projects = () => {
           </div>
         </div>
         {/* Project Three */}
-        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+        <div className="flex flex-col items-center w-full gap-4 justif-center md:mt-10">
           <div className="flex flex-col gap-6 xl:flex-row">
             <a
               href="https://github.com/adnanebnz/dzhikers-web"
@@ -157,7 +157,7 @@ const Projects = () => {
           </div>
         </div>
         {/* Project Four */}
-        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+        <div className="flex flex-col items-center w-full gap-4 justif-center md:mt-10">
           <div className="flex flex-col gap-6 xl:flex-row-reverse">
             <a
               href="https://github.com/adnanebnz/multi-vendor-project"

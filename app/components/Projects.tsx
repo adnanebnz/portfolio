@@ -1,11 +1,10 @@
-import AlgeriaEatsWeb from "@/app/assets/AlgeriaEats.png";
+import MultiVendor from "@/app/assets/multi-vendor.png";
 import AlgeriaEatsMobile from "@/app/assets/AlgeriaEatsMobile.png";
 import MoviesApp from "@/app/assets/MoviesApp.png";
 import dzhikers from "@/app/assets/DZHIKERS.jpg";
 import Image from "next/image";
 import { TbBrandGithub } from "react-icons/tb";
 import SectionTitle from "./SectionTitle";
-import ProjectCard from "./ProjectCard";
 
 const Projects = () => {
   return (
@@ -149,6 +148,52 @@ const Projects = () => {
               <div className="flex items-center gap-3 text-3xl">
                 <a
                   href="https://github.com/adnanebnz/clean_architecture_movies_app"
+                  target="_blank"
+                >
+                  <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Project Four */}
+        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+          <div className="flex flex-col gap-6 xl:flex-row-reverse">
+            <a
+              href="https://github.com/adnanebnz/algeria-eats"
+              target="_blank"
+              className="relative w-full h-auto xl:w-1/2 group"
+            >
+              <div>
+                <Image
+                  src={MultiVendor}
+                  alt="project"
+                  className="object-contain w-full h-full rounded-sm"
+                />
+              </div>
+            </a>
+            <div className="z-10 flex flex-col items-end w-full gap-6 text-right xl:w-1/2 lgl:justify-between">
+              <div>
+                <p className="text-sm tracking-wide font-titleFont text-textBlue">
+                  Featured Project
+                </p>
+                <h3 className="text-2xl font-bold">Multi Vendor Web App</h3>
+              </div>
+              <p className="bg-[#112240] text-sm md:text-base p-2 md:p-6 roundeed-md">
+                This is a multi-vendor web app that allows vendors to register
+                and sell their products online with the possibility to chat with
+                customers and receive payments online.
+              </p>
+              <ul className="flex justify-between gap-2 text-xs tracking-wide md:text-sm font-titleFont md:gap-3 text-textDark">
+                <li>Node.js</li>
+                <li>Express</li>
+                <li>MongoDB</li>
+                <li>SocketIO</li>
+                <li>React</li>
+              </ul>
+              <div className="flex items-center gap-3 text-3xl">
+                <a
+                  href="https://github.com/adnanebnz/multi-vendor-project"
                   target="_blank"
                 >
                   <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />

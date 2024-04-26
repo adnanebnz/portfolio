@@ -160,7 +160,7 @@ const Projects = () => {
         <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
           <div className="flex flex-col gap-6 xl:flex-row-reverse">
             <a
-              href="https://github.com/adnanebnz/algeria-eats"
+              href="https://github.com/adnanebnz/multi-vendor-project"
               target="_blank"
               className="relative w-full h-auto xl:w-1/2 group"
             >

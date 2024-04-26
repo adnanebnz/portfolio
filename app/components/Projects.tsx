@@ -1,5 +1,6 @@
 import AlgeriaEatsWeb from "@/app/assets/AlgeriaEats.png";
 import AlgeriaEatsMobile from "@/app/assets/AlgeriaEatsMobile.png";
+import MoviesApp from "@/app/assets/MoviesApp.png";
 import dzhikers from "@/app/assets/DZHIKERS.jpg";
 import Image from "next/image";
 import { TbBrandGithub } from "react-icons/tb";
@@ -10,29 +11,29 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="max-w-containerSmall mx-auto lgl:px-10 py-24 flex flex-col gap-8"
+      className="flex flex-col gap-8 py-24 mx-auto max-w-containerSmall lgl:px-10"
     >
       <SectionTitle title="Built Projects" titleNo="03" />
-      <div className="w-full flex flex-col items-center justify-center md:gap-28 gap-14 md:mt-10">
+      <div className="flex flex-col items-center justify-center w-full md:gap-28 gap-14 md:mt-10">
         {/* Project One */}
-        <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
-          <div className="flex flex-col xl:flex-row gap-6">
+        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+          <div className="flex flex-col gap-6 xl:flex-row">
             <a
               href="https://github.com/adnanebnz/dzhikers-web"
               target="_blank"
-              className="w-full xl:w-1/2 h-auto relative group"
+              className="relative w-full h-auto xl:w-1/2 group"
             >
               <div>
                 <Image
                   src={dzhikers}
                   alt="project"
-                  className="w-full h-full object-contain rounded-sm"
+                  className="object-contain w-full h-full rounded-sm"
                 />
               </div>
             </a>
-            <div className="w-full xl:w-1/2 flex flex-col gap-6 lgl:justify-between items-end text-right xl:-ml-16 z-10">
+            <div className="z-10 flex flex-col items-end w-full gap-6 text-right xl:w-1/2 lgl:justify-between xl:-ml-16">
               <div>
-                <p className="font-titleFont text-textBlue text-sm tracking-wide">
+                <p className="text-sm tracking-wide font-titleFont text-textBlue">
                   Featured Project
                 </p>
                 <h3 className="text-2xl font-bold">DZHIKERS</h3>
@@ -42,43 +43,43 @@ const Projects = () => {
                 hikers in Algeria, offering captivating hikes and a shop selling
                 specialty products.
               </p>
-              <ul className="text-xs md:text-sm font-titleFont tracking-wide flex gap-2 md:gap-3 justify-between text-textDark">
+              <ul className="flex justify-between gap-2 text-xs tracking-wide md:text-sm font-titleFont md:gap-3 text-textDark">
                 <li>React</li>
                 <li>NodeJS</li>
                 <li>ExpressJS</li>
                 <li>MongoDB</li>
                 <li>React Native</li>
               </ul>
-              <div className="flex gap-3 items-center text-3xl">
+              <div className="flex items-center gap-3 text-3xl">
                 <a
                   href="https://github.com/adnanebnz/dzikers-web"
                   target="_blank"
                 >
-                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300" />
+                  <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />
                 </a>
               </div>
             </div>
           </div>
         </div>
         {/* Project Two */}
-        <div className="w-full flex flex-col items-center justif-center gap-28 md:mt-10">
-          <div className="flex flex-col xl:flex-row-reverse gap-6">
+        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+          <div className="flex flex-col gap-6 xl:flex-row-reverse">
             <a
               href="https://github.com/adnanebnz/algeria-eats"
               target="_blank"
-              className="w-full xl:w-1/2 h-auto relative group"
+              className="relative w-full h-auto xl:w-1/2 group"
             >
               <div>
                 <Image
-                  src={AlgeriaEatsWeb}
+                  src={AlgeriaEatsMobile}
                   alt="project"
-                  className="w-full h-full object-contain rounded-sm"
+                  className="object-contain w-full h-full rounded-sm"
                 />
               </div>
             </a>
-            <div className="w-full xl:w-1/2 flex flex-col gap-6 lgl:justify-between items-end text-right z-10">
+            <div className="z-10 flex flex-col items-end w-full gap-6 text-right xl:w-1/2 lgl:justify-between">
               <div>
-                <p className="font-titleFont text-textBlue text-sm tracking-wide">
+                <p className="text-sm tracking-wide font-titleFont text-textBlue">
                   Featured Project
                 </p>
                 <h3 className="text-2xl font-bold">Algeria Eats</h3>
@@ -90,7 +91,7 @@ const Projects = () => {
                 website seamlessly connects customers with a diverse culinary
                 experience.
               </p>
-              <ul className="text-xs md:text-sm font-titleFont tracking-wide flex gap-2 md:gap-3 justify-between text-textDark">
+              <ul className="flex justify-between gap-2 text-xs tracking-wide md:text-sm font-titleFont md:gap-3 text-textDark">
                 <li>TailwindCSS</li>
                 <li>AlpineJS</li>
                 <li>Laravel</li>
@@ -99,12 +100,58 @@ const Projects = () => {
                 <li>Flutter</li>
                 <li>GetX</li>
               </ul>
-              <div className="flex gap-3 items-center text-3xl">
+              <div className="flex items-center gap-3 text-3xl">
                 <a
                   href="https://github.com/adnanebnz/algeria-eats"
                   target="_blank"
                 >
-                  <TbBrandGithub className="w-8 h-8 text-textDark hover:text-textBlue cursor-pointer transition-all duration-300" />
+                  <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Project Three */}
+        <div className="flex flex-col items-center w-full justif-center gap-28 md:mt-10">
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <a
+              href="https://github.com/adnanebnz/dzhikers-web"
+              target="_blank"
+              className="relative w-full h-auto xl:w-1/2 group"
+            >
+              <div>
+                <Image
+                  src={MoviesApp}
+                  alt="project"
+                  className="object-contain w-full h-full rounded-sm"
+                />
+              </div>
+            </a>
+            <div className="z-10 flex flex-col items-end w-full gap-6 text-right xl:w-1/2 lgl:justify-between xl:-ml-16">
+              <div>
+                <p className="text-sm tracking-wide font-titleFont text-textBlue">
+                  Featured Project
+                </p>
+                <h3 className="text-2xl font-bold">Movies App</h3>
+              </div>
+              <p className="bg-[#112240] text-sm md:text-base p-2 md:p-6 roundeed-md">
+                I developed a movies app using Flutter and BLoC architecture,
+                integrating with The Movie Database (TMDB) API. The app
+                streamlines the movie search process, providing users with a
+                seamless and intuitive interface to discover and explore a wide
+                range of movies.
+              </p>
+              <ul className="flex justify-between gap-2 text-xs tracking-wide md:text-sm font-titleFont md:gap-3 text-textDark">
+                <li>Flutter</li>
+                <li>BLoC</li>
+                <li>Hive</li>
+              </ul>
+              <div className="flex items-center gap-3 text-3xl">
+                <a
+                  href="https://github.com/adnanebnz/clean_architecture_movies_app"
+                  target="_blank"
+                >
+                  <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />
                 </a>
               </div>
             </div>

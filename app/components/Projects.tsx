@@ -2,6 +2,7 @@ import MultiVendor from "@/app/assets/multi-vendor.png";
 import AlgeriaEatsMobile from "@/app/assets/AlgeriaEatsMobile.png";
 import MoviesApp from "@/app/assets/MoviesApp.png";
 import dzhikers from "@/app/assets/DZHIKERS.jpg";
+import waffir from "@/app/assets/waffir.png";
 import Image from "next/image";
 import { TbBrandGithub } from "react-icons/tb";
 import SectionTitle from "./SectionTitle";
@@ -199,6 +200,43 @@ const Projects = () => {
                   <TbBrandGithub className="w-8 h-8 transition-all duration-300 cursor-pointer text-textDark hover:text-textBlue" />
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+        {/* Project Five */}
+        <div className="flex flex-col items-center w-full gap-4 justif-center md:mt-10">
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <div className="relative w-full h-auto xl:w-1/2 group">
+              <div>
+                <Image
+                  src={waffir}
+                  alt="project"
+                  className="object-contain w-full h-full rounded-sm"
+                />
+              </div>
+            </div>
+            <div className="z-10 flex flex-col items-end w-full gap-6 text-right xl:w-1/2 lgl:justify-between xl:-ml-16">
+              <div>
+                <p className="text-sm tracking-wide font-titleFont text-textBlue">
+                  Featured Project
+                </p>
+                <h3 className="text-2xl font-bold">Waffir</h3>
+              </div>
+              <p className="bg-[#112240] text-sm md:text-base p-2 md:p-6 roundeed-md">
+                Waffir is a freelance project for a food delivery app developed
+                using Firebase and Flutter. The app enables buyers to browse
+                food options, place orders, and track them, while sellers can
+                create listings, manage orders, and process payments. Google
+                Maps is integrated for location services, and GetX is utilized
+                for state management, ensuring a smooth and responsive user
+                experience.
+              </p>
+              <ul className="flex justify-between gap-2 text-xs tracking-wide md:text-sm font-titleFont md:gap-3 text-textDark">
+                <li>Flutter</li>
+                <li>GetX</li>
+                <li>Firebase</li>
+                <li>Google Maps</li>
+              </ul>
             </div>
           </div>
         </div>

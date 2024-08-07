@@ -139,7 +139,7 @@ export default function Page() {
   };
 
   return (
-    <main className="flex flex-col space-y-10 py-12 sm:py-24 px-6">
+    <main className="flex flex-col space-y-10 py-12 sm:py-24 px-2.5">
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -169,7 +169,7 @@ export default function Page() {
           </Markdown>
         </BlurFade>
       </section>
-      <section id="work" className="max-w-2xl mx-auto">
+      <section id="work" className="md:max-w-2xl max-w-full mx-auto">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Work Experience</h2>
@@ -281,7 +281,7 @@ export default function Page() {
         </div>
       </section>
       <section id="contact" className="max-w-2xl mx-auto">
-        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
+        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full pt-12 pb-4">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">

@@ -65,7 +65,8 @@ export default function ContactFormComponent() {
                     </CardTitle>
                     <CardDescription>
                       Have a question or want to work together? Fill out the
-                      form below and we'll get back to you as soon as possible.
+                      form below and we&apos;ll get back to you as soon as
+                      possible.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

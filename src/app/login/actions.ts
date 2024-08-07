@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
+import { uuid } from "uuidv4";
 import { createClient } from "@/utils/supabase/server";
 import { z } from "zod";
 
@@ -49,6 +49,22 @@ export async function loginWithGoogle() {
       },
     },
   });
+
+  const userId = uuid();
+  const { error: insertError } = await supabase.from("roles").insert([
+    {
+      uuid: userId,
+      isAdmin: false,
+      created_at: new Date().toISOString(),
+    },
+  ]);
+
+  if (insertError) {
+    console.log(insertError);
+    return {
+      errors: [{ message: insertError.message }],
+    };
+  }
   if (error) {
     return {
       errors: [{ message: error.message }],

@@ -35,8 +35,8 @@ const RegisterForm = () => {
   };
 
   useEffect(() => {
-    if (state.errors) {
-      state.errors.forEach((error) => {
+    if (state?.errors) {
+      state.errors.forEach((error: any) => {
         if (error.message?.includes("Name")) {
           setNameError(error.message);
         } else if (error.message?.includes("email")) {
@@ -48,7 +48,7 @@ const RegisterForm = () => {
         }
       });
     }
-  }, [state.errors]);
+  }, [state?.errors]);
 
   return (
     <form method="POST" className="space-y-4">

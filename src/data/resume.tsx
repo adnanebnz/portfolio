@@ -172,7 +172,7 @@ export const DATA = {
       description:
         "Waffir is a freelance project for a food delivery app developed using Firebase and Flutter. The app enables buyers to browse food options, place orders, and track them, while sellers can create listings, manage orders, and process payments. Google Maps is integrated for location services, and GetX is utilized for state management, ensuring a smooth and responsive user experience.",
       technologies: ["Flutter", "GetX", "Firebase", "Google Maps"],
-      image: "/Waffir.png",
+      image: "/waffir.png",
     },
   ],
   // TODO ADD WAMMIDH PROJECT and netflix clone maybe other projects too

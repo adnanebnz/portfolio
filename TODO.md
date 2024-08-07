@@ -1,0 +1,12 @@
+- [ ] make rdv timetable
+- [ ] make contact form and page
+- [ ] make admin dashboard to post projects and blog posts
+- [ ] make projects page
+- [ ] enhance blog page
+- [ ] import logo to website
+- [ ] import projects to website
+- [ ] write about dart thing
+- [ ] use react query and supabase for the back
+- [ ] fix the dock add contact table see how to implement login and register throught next auth or supabase auth
+- [ ] separate the sections into components
+- [ ] use timeline for jobs

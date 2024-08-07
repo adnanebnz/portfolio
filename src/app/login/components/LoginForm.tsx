@@ -54,7 +54,7 @@ const LoginForm = () => {
           Sign in
         </Button>
       </form>
-      <p className="text-center text-sm text-muted-foreground">OR</p>
+      {/* <p className="text-center text-sm text-muted-foreground">OR</p>
       <Button
         variant="outline"
         className="w-full"
@@ -62,7 +62,7 @@ const LoginForm = () => {
       >
         <ChromeIcon className="mr-2 h-4 w-4" />
         Sign in with Google
-      </Button>
+      </Button> */}
       <p className="text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
         <Link

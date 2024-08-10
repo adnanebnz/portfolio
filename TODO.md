@@ -1,5 +1,5 @@
 - [ ] make rdv timetable
-- [ ] make contact form and page
+- [ ] make contact page
 - [ ] make admin dashboard to post projects and blog posts
 - [ ] make projects page
 - [ ] enhance blog page
@@ -10,3 +10,5 @@
 - [ ] fix the dock add contact table see how to implement login and register throught next auth or supabase auth
 - [ ] separate the sections into components
 - [ ] use timeline for jobs
+- [ ] fix projects links
+- [ ] fix dashboard

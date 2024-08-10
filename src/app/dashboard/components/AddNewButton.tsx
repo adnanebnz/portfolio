@@ -44,7 +44,7 @@ const AddNewProjectButton = () => {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <form className="space-y-4">
+        <form className="space-y-4 pt-5" method="POST">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="projectName" className="text-right">
               Project Name

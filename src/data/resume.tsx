@@ -38,7 +38,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
-    { href: "#projects", icon: CodeIcon, label: "Projects" },
+    { href: "/projects", icon: CodeIcon, label: "Projects" },
   ],
   contact: {
     email: "skillzdev@hotmail.com",
@@ -83,7 +83,7 @@ export const DATA = {
         "During my internship at Eurequat Algérie, I developed a robust XML to ZPL conversion package integrated into their WinForms project. Utilizing C# and Microsoft SQL Server, I created a solution that converts XML-based label templates into ZPL (Zebra Programming Language) for seamless label printing. This package allows for predefined label designs to be efficiently translated into ZPL code, ensuring consistent and high-quality label outputs.",
     },
   ],
-  projects: [
+  featuredProjects: [
     {
       title: "DZHIKERS",
       href: "https://github.com/adnanebnz/dzhikers-web",

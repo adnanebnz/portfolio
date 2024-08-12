@@ -36,6 +36,7 @@ export default function ProjectView({ project }: { project: any }) {
                 {project.mobileAppImages.map((image: string, index: number) => (
                   <ImageZoom
                     src={image}
+                    key={index}
                     alt={project.title}
                     className="rounded-lg object-cover w-full h-auto"
                   />
@@ -51,7 +52,10 @@ export default function ProjectView({ project }: { project: any }) {
               <Carousel className="w-11/12 flex items-center justify-center mx-auto">
                 <CarouselContent>
                   {project.webAppImages.map((image: string, index: number) => (
-                    <CarouselItem className="flex items-center justify-center mx-auto">
+                    <CarouselItem
+                      className="flex items-center justify-center mx-auto"
+                      key={index}
+                    >
                       <img
                         src={image}
                         height={650}

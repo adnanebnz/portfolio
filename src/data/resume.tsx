@@ -84,15 +84,15 @@ export const DATA = {
     },
     {
       company: "TechWay",
-      href: "https://www.eurequat-algerie.com/",
+      href: "#",
       badges: [],
       location: "Tlemcen, Algeria",
       title: "Software Engineer Internship",
-      logoUrl: "/logo-eurequat.png",
+      logoUrl: "/azimut.png",
       start: "July 2024",
       end: "Present",
       description:
-        "During my internship at Eurequat Algérie, I developed a robust XML to ZPL conversion package integrated into their WinForms project. Utilizing C# and Microsoft SQL Server, I created a solution that converts XML-based label templates into ZPL (Zebra Programming Language) for seamless label printing. This package allows for predefined label designs to be efficiently translated into ZPL code, ensuring consistent and high-quality label outputs.",
+        "Development of a REST API at TechWay \n During my internship at TechWay, I developed and deployed a REST API using Node.js, Express.js, and MySQL to manage reservations, check-ins, and check-outs for the Hydra Hotel in Algiers. This solution, now in production, is actively used by the company",
     },
   ],
   featuredProjects: [

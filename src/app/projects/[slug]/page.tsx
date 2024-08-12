@@ -1,15 +1,20 @@
-import { getProjectBySlug } from "../logic/logic";
+import { DATA } from "@/data/resume";
+import ProjectView from "./components/project-view";
 
-const ProjectPage = async ({ params }: { params: { slug: string } }) => {
-  const project = await getProjectBySlug(params.slug);
-  if (project.error) {
+const ProjectPage = ({ params }: { params: { slug: string } }) => {
+  const selectedProject = DATA.featuredProjects.find(
+    (proj) => proj.slug === params.slug
+  );
+
+  if (!selectedProject) {
     return (
       <div className="flex items-center justify-center h-screen">
         Project not found
       </div>
-      // TODO ERROR 404 PAGE and do it in the action
     );
   }
+
+  return <ProjectView project={selectedProject} />;
 };
 
 export default ProjectPage;

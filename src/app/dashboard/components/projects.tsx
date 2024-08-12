@@ -19,9 +19,12 @@ import Link from "next/link";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { getAllProjects } from "@/app/projects/logic/logic";
 import AddNewProjectButton from "./AddNewButton";
+import DeleteProjectButton from "./DeleteProjectButton";
+import { StoreIcon } from "lucide-react";
 
 export default async function ProjectsView() {
   const projects = await getAllProjects();
+
   return (
     <div className="flex min-h-screen w-full">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -65,7 +68,9 @@ export default async function ProjectsView() {
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>View</DropdownMenuItem>
                             <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem>
+                              <DeleteProjectButton project={project} />
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </div>
@@ -79,7 +84,7 @@ export default async function ProjectsView() {
                       <div className="mb-4">
                         <div className="mb-2 text-sm font-medium">Tools</div>
                         <div className="flex flex-wrap gap-2">
-                          {project.tools?.map((tool, index) => (
+                          {project.tools?.map((tool: string, index: number) => (
                             <Badge key={index} variant="outline">
                               {tool}
                             </Badge>
@@ -90,17 +95,39 @@ export default async function ProjectsView() {
                         <div>
                           <div className="mb-2 text-sm font-medium">Links</div>
                           <div className="space-y-2">
-                            {project.links?.map((link, index) => (
+                            {project.ghlink && (
                               <Link
                                 key={index}
-                                href="#"
+                                href={project.ghlink}
                                 className="flex items-center gap-2 text-sm"
                                 prefetch={false}
                               >
-                                <GitlabIcon className="h-4 w-4" />
-                                {link.href}
+                                <GithubIcon className="h-4 w-4" />
+                                {project.ghlink}
                               </Link>
-                            ))}
+                            )}
+                            {project.storelink && (
+                              <Link
+                                key={index}
+                                href={project.storelink}
+                                className="flex items-center gap-2 text-sm"
+                                prefetch={false}
+                              >
+                                <StoreIcon className="h-4 w-4" />
+                                {project.storelink}
+                              </Link>
+                            )}
+                            {project.demolink && (
+                              <Link
+                                key={index}
+                                href={project.demolink}
+                                className="flex items-center gap-2 text-sm"
+                                prefetch={false}
+                              >
+                                <GlobeIcon className="h-4 w-4" />
+                                {project.demolink}
+                              </Link>
+                            )}
                           </div>
                         </div>
                         <div>
@@ -138,7 +165,7 @@ export default async function ProjectsView() {
   );
 }
 
-function GithubIcon(props) {
+function GithubIcon(props: any) {
   return (
     <svg
       {...props}
@@ -158,7 +185,7 @@ function GithubIcon(props) {
   );
 }
 
-function GitlabIcon(props) {
+function GitlabIcon(props: any) {
   return (
     <svg
       {...props}
@@ -177,7 +204,7 @@ function GitlabIcon(props) {
   );
 }
 
-function GlobeIcon(props) {
+function GlobeIcon(props: any) {
   return (
     <svg
       {...props}
@@ -198,7 +225,7 @@ function GlobeIcon(props) {
   );
 }
 
-function MoveHorizontalIcon(props) {
+function MoveHorizontalIcon(props: any) {
   return (
     <svg
       {...props}
@@ -219,7 +246,7 @@ function MoveHorizontalIcon(props) {
   );
 }
 
-function PlayIcon(props) {
+function PlayIcon(props: any) {
   return (
     <svg
       {...props}
@@ -238,7 +265,7 @@ function PlayIcon(props) {
   );
 }
 
-function PlusIcon(props) {
+function PlusIcon(props: any) {
   return (
     <svg
       {...props}

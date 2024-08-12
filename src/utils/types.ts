@@ -17,9 +17,11 @@ export type projectType = {
   description: string;
   slug: string | null | undefined;
   images: string[] | null | undefined;
-  links: linkType[] | null | undefined;
+  ghlink: string | null | undefined;
+  storelink: string | null | undefined;
+  demolink: string | null | undefined;
   href: string | null | undefined;
-  tools: string[];
+  tools: string;
   dates: string | null | undefined;
   created_at: string | null | undefined;
 };

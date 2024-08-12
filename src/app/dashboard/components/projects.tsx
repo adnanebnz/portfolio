@@ -83,13 +83,13 @@ export default async function ProjectsView() {
                       </div>
                       <div className="mb-4">
                         <div className="mb-2 text-sm font-medium">Tools</div>
-                        <div className="flex flex-wrap gap-2">
+                        {/* <div className="flex flex-wrap gap-2">
                           {project.tools?.map((tool: string, index: number) => (
                             <Badge key={index} variant="outline">
                               {tool}
                             </Badge>
                           ))}
-                        </div>
+                        </div> */}
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>

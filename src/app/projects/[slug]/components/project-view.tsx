@@ -8,7 +8,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Link from "next/link";
-import ImageZoom from "react-image-zooom";
 export default function ProjectView({ project }: { project: any }) {
   const BLUR_FADE_DELAY = 0.04;
   return (
@@ -34,7 +33,7 @@ export default function ProjectView({ project }: { project: any }) {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-gray-200 dark:bg-muted py-4 px-3 rounded-md shadow-sm">
                 {project.mobileAppImages.map((image: string, index: number) => (
-                  <ImageZoom
+                  <img
                     src={image}
                     key={index}
                     alt={project.title}

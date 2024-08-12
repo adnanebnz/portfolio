@@ -89,8 +89,8 @@ export const DATA = {
       location: "Tlemcen, Algeria",
       title: "Software Engineer Internship",
       logoUrl: "/azimut.png",
-      start: "July 2024",
-      end: "Present",
+      start: "June 2024",
+      end: "July 2024",
       description:
         "Development of a REST API at TechWay \n During my internship at TechWay, I developed and deployed a REST API using Node.js, Express.js, and MySQL to manage reservations, check-ins, and check-outs for the Hydra Hotel in Algiers. This solution, now in production, is actively used by the company",
     },

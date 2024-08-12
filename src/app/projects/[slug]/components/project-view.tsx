@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Link from "next/link";
+import { ReactNode } from "react";
 export default function ProjectView({ project }: { project: any }) {
   const BLUR_FADE_DELAY = 0.04;
   return (
@@ -155,7 +156,9 @@ export default function ProjectView({ project }: { project: any }) {
                     <li key={key}>
                       <div className="grid gap-1">
                         <h3 className="text-xl font-bold">{key}</h3>
-                        <p className="text-muted-foreground">{value}</p>
+                        <p className="text-muted-foreground">
+                          {value as ReactNode}
+                        </p>
                       </div>
                     </li>
                   ))}

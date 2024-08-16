@@ -1,0 +1,79 @@
+---
+title: "What is a Webhook 🎣"
+publishedAt: "2024-08-09"
+summary: "A webhook is a way for an app to provide other applications with real-time information."
+---
+
+A webhook is a way for an app to provide other applications with real-time information. Webhooks are a way for one application to send real-time information to another application. They are used to notify other applications when a specific event occurs. For example, when a new user signs up for your app, you can send a webhook to another application to notify them of the new user.
+
+Webhooks are commonly used in web development to automate tasks and integrate different applications. They are often used to send notifications, update data, and trigger actions in other applications. Webhooks are commonly used in web development to automate tasks and integrate different applications. They are often used to send notifications, update data, and trigger actions in other applications.
+
+### Example: Webhook for New Order Notification
+
+E-commerce Website: When a new order is placed, the website sends a webhook to the inventory management system.
+Inventory Management System: Receives the webhook and updates the inventory accordingly.
+
+#### Step-by-Step Implementation :
+
+1. **Setting Up the Webhook Endpoint**
+
+First, you need to create an endpoint in your inventory management system to receive the webhook.
+Here's an example using Node.js and Express:
+
+```javascript
+// inventory-webhook.js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.post("/webhook", (req, res) => {
+  const order = req.body;
+  console.log("New order received:", order);
+
+  // Update inventory logic here
+
+  res.status(200).send("Webhook received");
+});
+
+app.listen(port, () => {
+  console.log(
+    `Inventory management system listening at http://localhost:${port}`
+  );
+});
+```
+
+2. **Sending the Webhook from the E-commerce Website**
+
+When a new order is placed, the e-commerce website sends a POST request to the webhook endpoint. Here's an example using Node.js and the **axios** library:
+
+```javascript
+// send-webhook.js
+const axios = require("axios");
+
+const newOrder = {
+  orderId: "12345",
+  items: [
+    { productId: "abc", quantity: 2 },
+    { productId: "def", quantity: 1 },
+  ],
+  total: 100.0,
+};
+
+axios
+  .post("http://localhost:3000/webhook", newOrder)
+  .then((response) => {
+    console.log("Webhook sent successfully:", response.data);
+  })
+  .catch((error) => {
+    console.error("Error sending webhook:", error);
+  });
+```
+
+### Explanation
+
+****Webhook Endpoint****: The inventory management system sets up an endpoint/webhook **to receive POST requests**. When a new order is received, it logs the order and updates the inventory.
+
+**Sending the Webhook**: The e-commerce website **sends** a POST request to the webhook endpoint with the new order details.
+This example demonstrates how webhooks can be used to integrate different applications and automate tasks in web development.

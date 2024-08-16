@@ -8,6 +8,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -78,7 +79,7 @@ export default function RootLayout({
               )}
             />
             {children}
-
+            <Analytics />
             <Navbar />
           </TooltipProvider>
           <Toaster closeButton={true} />

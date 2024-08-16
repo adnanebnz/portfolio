@@ -127,12 +127,12 @@ export const DATA = {
       webAppImages: [],
       links: [
         {
-          type: "Source Code (Web App)",
+          type: "Source Code (Web)",
           href: "https://github.com/adnanebnz/dzhikers-web",
           icon: <Icons.github className="size-3" />,
         },
         {
-          type: "Source Code (Mobile App)",
+          type: "Source Code (Mobile)",
           href: "https://github.com/adnanebnz/dzhikers-mobile",
           icon: <Icons.github className="size-3" />,
         },

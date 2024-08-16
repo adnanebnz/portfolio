@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
 export default function ProjectView({ project }: { project: any }) {
@@ -34,7 +35,9 @@ export default function ProjectView({ project }: { project: any }) {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-gray-200 dark:bg-muted py-4 px-3 rounded-md shadow-sm">
                 {project.mobileAppImages.map((image: string, index: number) => (
-                  <img
+                  <Image
+                    fetchPriority="high"
+                    priority
                     src={image}
                     key={index}
                     alt={project.title}
@@ -56,7 +59,9 @@ export default function ProjectView({ project }: { project: any }) {
                       className="flex items-center justify-center mx-auto"
                       key={index}
                     >
-                      <img
+                      <Image
+                        priority
+                        fetchPriority="high"
                         src={image}
                         height={650}
                         width={650}
@@ -164,7 +169,9 @@ export default function ProjectView({ project }: { project: any }) {
                   ))}
                 </ul>
               </div>
-              <img
+              <Image
+                priority
+                fetchPriority="high"
                 src={project.image}
                 width={300}
                 height={300}

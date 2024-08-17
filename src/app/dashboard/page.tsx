@@ -31,6 +31,7 @@ import {
 } from "./logic/logic";
 
 import { redirect } from "next/navigation";
+import ProjectsView from "./components/projects";
 
 export default async function Dashboard() {
   const userCount = await getUserCount();
@@ -45,7 +46,7 @@ export default async function Dashboard() {
 
   return (
     <div className="flex h-screen w-full  rounded-md shadow-sm z-50">
-      <aside className=" border-r w-14 sm:w-60 flex flex-col items-center sm:items-start py-6 px-2 sm:px-4 gap-4">
+      {/* <aside className=" border-r w-14 sm:w-60 flex flex-col items-center sm:items-start py-6 px-2 sm:px-4 gap-4">
         <Link
           href="#"
           className="flex items-center gap-2 sm:justify-start"
@@ -417,7 +418,8 @@ export default async function Dashboard() {
             </TabsContent>
           </Tabs>
         </div>
-      </div>
+      </div> */}
+      <ProjectsView />
     </div>
   );
 }

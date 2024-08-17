@@ -1,0 +1,37 @@
+---
+title: "Dart Extensions 🚀"
+publishedAt: "2024-08-16"
+summary: "Creating and using Dart extensions to add functionality to existing libraries and classes."
+---
+
+Dart extensions allow you to add functionality to existing libraries and classes without modifying them. Extensions are a powerful feature, especially when you want to add methods to types you don't own. With extensions, you can create custom methods that feel like they're part of the original type.
+
+Example: Logging Object Values with devtools.log
+In this example, we’ll create an extension on the Object class to log any object’s value using the devtools.log method. This can be especially useful for debugging.
+
+let's create the extension:
+
+```dart
+import 'package:devtools/devtools.dart' as devtools;
+
+extension Log on Object {
+void log() => devtools.log(toString());
+}
+```
+
+Now you can call **log()** on any object to log its value:
+
+```dart
+void main() {
+String greeting = "Hello World";
+greeting.log(); // Logs: "Hello World"
+
+
+int number = 42;
+number.log(); // Logs: "42"
+}
+```
+
+This extension leverages Dart's powerful extension methods to make logging more convenient and less intrusive in your codebase.
+
+This would make a good addition to your blog post and help readers understand how to create and use Dart extensions effectively.

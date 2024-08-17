@@ -164,13 +164,13 @@ export const DATA = {
       subtitle:
         "Plateform to learn arabic by interacting with a mobile application",
       keyFeatures: {
-        messaging: "Students can text each other and teachers.",
-        games:
+        Messaging: "Students can text each other and teachers.",
+        Games:
           "Includes games to learn Arabic, such as listening, writing, and arranging words, Choosing and selecting the right animal/object based on visual images.",
-        adminControls:
+        "Adminn Controls":
           "Admins can ban users and control the entire application.",
-        teacherFeatures: "Teachers can upload courses.",
-        progressTracking:
+        "Teacher Featres": "Teachers can upload courses.",
+        "Progress Tracking":
           "Users can track their progress and receive feedback.",
       },
       href: "https://play.google.com/store/apps/details?id=com.mhamidi.el_makaniz",

@@ -35,12 +35,8 @@ export default function ProjectView({ project }: { project: any }) {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-gray-200 dark:bg-muted py-4 px-3 rounded-md shadow-sm">
                 {project.mobileAppImages.map((image: string, index: number) => (
-                  <Image
-                    fetchPriority="high"
-                    priority
+                  <img
                     src={image}
-                    width={250}
-                    height={500}
                     key={index}
                     alt={project.title}
                     className="rounded-lg object-cover w-full h-auto"

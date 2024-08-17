@@ -163,7 +163,16 @@ export const DATA = {
       slug: "wamidh",
       subtitle:
         "Plateform to learn arabic by interacting with a mobile application",
-      keyFeatures: {},
+      keyFeatures: {
+        messaging: "Students can text each other and teachers.",
+        games:
+          "Includes games to learn Arabic, such as listening, writing, and arranging words, Choosing and selecting the right animal/object based on visual images.",
+        adminControls:
+          "Admins can ban users and control the entire application.",
+        teacherFeatures: "Teachers can upload courses.",
+        progressTracking:
+          "Users can track their progress and receive feedback.",
+      },
       href: "https://play.google.com/store/apps/details?id=com.mhamidi.el_makaniz",
       dates: "June 2024 - June 2024",
       active: true,

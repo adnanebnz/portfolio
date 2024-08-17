@@ -167,9 +167,9 @@ export const DATA = {
         Messaging: "Students can text each other and teachers.",
         Games:
           "Includes games to learn Arabic, such as listening, writing, and arranging words, Choosing and selecting the right animal/object based on visual images.",
-        "Adminn Controls":
+        "Admin Controls":
           "Admins can ban users and control the entire application.",
-        "Teacher Featres": "Teachers can upload courses.",
+        "Teacher Features": "Teachers can upload courses.",
         "Progress Tracking":
           "Users can track their progress and receive feedback.",
       },
@@ -259,7 +259,12 @@ export const DATA = {
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891468/dzhikers/mobile-order-1.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891468/dzhikers/mobile-order-2.jpg",
       ],
-      webAppImages: [],
+      webAppImages: [
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918640/dzhikers/home.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918628/dzhikers/randos.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918627/dzhikers/creating-rando.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918645/dzhikers/rando.png",
+      ],
       links: [
         {
           type: "Source Code (Web)",

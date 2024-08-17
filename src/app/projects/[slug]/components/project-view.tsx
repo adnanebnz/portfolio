@@ -52,7 +52,7 @@ export default function ProjectView({ project }: { project: any }) {
               <h1 className="text-xl font-bold tracking-tighter sm:text-2xl">
                 Web application images:
               </h1>
-              <Carousel className="w-11/12 flex items-center justify-center mx-auto">
+              <Carousel className="w-11/12 flex items-center justify-center mx-auto px-2 md:px-0">
                 <CarouselContent>
                   {project.webAppImages.map((image: string, index: number) => (
                     <CarouselItem

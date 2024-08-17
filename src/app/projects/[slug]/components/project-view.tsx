@@ -36,8 +36,8 @@ export default function ProjectView({ project }: { project: any }) {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-gray-200 dark:bg-muted py-4 px-3 rounded-md shadow-sm">
                 {project.mobileAppImages.map((image: string, index: number) => (
                   <Image
-                    width={1280}
-                    height={720}
+                    width={720}
+                    height={1280}
                     src={image}
                     key={index}
                     alt={project.title}
@@ -61,8 +61,8 @@ export default function ProjectView({ project }: { project: any }) {
                     >
                       <Image
                         src={image}
-                        height={650}
-                        width={650}
+                        height={720}
+                        width={1280}
                         alt={project.title}
                         className="rounded-lg object-cover mx-auto"
                       />
@@ -91,21 +91,23 @@ export default function ProjectView({ project }: { project: any }) {
                   <p>{project.description}</p>
                 </div>
                 <div className="flex gap-4">
-                  {project.links?.map((link: any) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`inline-flex h-9 items-center justify-center rounded-md ${
-                        link.type === "Live Demo"
-                          ? "bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                          : "border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                      }`}
-                      prefetch={false}
-                    >
-                      {link.icon}
-                      <span className="ml-2">{link.type}</span>
-                    </Link>
-                  ))}
+                  <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
+                    {project.links?.map((link: any) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`inline-flex h-9 items-center justify-center rounded-md ${
+                          link.type === "Live Demo"
+                            ? "bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                            : "border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                        }`}
+                        prefetch={false}
+                      >
+                        {link.icon}
+                        <span className="ml-2">{link.type}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="space-y-4">
@@ -171,8 +173,8 @@ export default function ProjectView({ project }: { project: any }) {
                 priority
                 fetchPriority="high"
                 src={project.image}
-                width={300}
-                height={300}
+                width={720}
+                height={1280}
                 alt={project.title}
                 className="mx-auto object-cover overflow-hidden rounded-xl object-center sm:w-full lg:order-last"
               />

@@ -39,6 +39,8 @@ export default function ProjectView({ project }: { project: any }) {
                     fetchPriority="high"
                     priority
                     src={image}
+                    width={250}
+                    height={500}
                     key={index}
                     alt={project.title}
                     className="rounded-lg object-cover w-full h-auto"

@@ -97,48 +97,6 @@ export const DATA = {
   ],
   featuredProjects: [
     {
-      title: "DZHIKERS",
-      slug: "dzhikers",
-      subtitle: "Dynamic platform for hikers in Algeria",
-      keyFeatures: {
-        Hikes: "Discover captivating hikes in Algeria",
-        Shop: "Shop specialty products",
-        Community: "Connect with other hikers",
-        Connect: "Join a community of passionate hikers",
-      },
-      href: "https://github.com/adnanebnz/dzhikers-web",
-      dates: "Jan 2023 - June 2023",
-      active: true,
-      description:
-        "Dynamic platform made using MERN STACK and React Native for hikers in Algeria, offering captivating hikes and a shop selling specialty products.",
-      technologies: ["React", "NodeJS", "ExpressJS", "MongoDB", "React Native"],
-      image: "/DZHIKERS.jpg",
-      images: ["/DZHIKERS.jpg", "/DZHIKERS2.jpg", "/DZHIKERS3.jpg"],
-      mobileAppImages: [
-        "/dzhikersauth.jpg",
-        "/dzhikersstore.jpg",
-        "/dzhikersmap.jpg",
-        "/dzhikersrandi.jpg",
-        "/dzhikersnotif2.jpg",
-        "/dzhikersprofile.jpg",
-        "/dzhikersorder1.jpg",
-        "/dzhikersorder2.jpg",
-      ],
-      webAppImages: [],
-      links: [
-        {
-          type: "Source Code (Web)",
-          href: "https://github.com/adnanebnz/dzhikers-web",
-          icon: <Icons.github className="size-3" />,
-        },
-        {
-          type: "Source Code (Mobile)",
-          href: "https://github.com/adnanebnz/dzhikers-mobile",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-    },
-    {
       title: "Algeria Eats",
       slug: "algeria-eats",
       subtitle: "Online platform for ordering sweet and savory food",
@@ -177,10 +135,15 @@ export const DATA = {
       image: "/AlgeriaEatsMobile.png",
       mobileAppImages: [
         "/algeriaEats1.jpg",
+        "/algeriaEats11.jpg",
         "/algeriaEats2.jpg",
         "/algeriaEats3.jpg",
         "/algeriaEats4.jpg",
         "/algeriaEats5.jpg",
+        "/algeriaEats6.jpg",
+        "/algeriaEats7.jpg",
+        "/algeriaEats8.jpg",
+        "/algeriaEats9.jpg",
       ],
       webAppImages: [
         "/vendorScreen.jpg",
@@ -191,6 +154,47 @@ export const DATA = {
         "/authImage.jpg",
         "/faqImage.jpg",
         "/contactImage.jpg",
+      ],
+    },
+    {
+      title: "DZHIKERS",
+      slug: "dzhikers",
+      subtitle: "Dynamic platform for hikers in Algeria",
+      keyFeatures: {
+        Hikes: "Discover captivating hikes in Algeria",
+        Shop: "Shop specialty products",
+        Community: "Connect with other hikers",
+        Connect: "Join a community of passionate hikers",
+      },
+      href: "https://github.com/adnanebnz/dzhikers-web",
+      dates: "Jan 2023 - June 2023",
+      active: true,
+      description:
+        "Dynamic platform made using MERN STACK and React Native for hikers in Algeria, offering captivating hikes and a shop selling specialty products.",
+      technologies: ["React", "NodeJS", "ExpressJS", "MongoDB", "React Native"],
+      image: "/DZHIKERS.jpg",
+      images: ["/DZHIKERS.jpg", "/DZHIKERS2.jpg", "/DZHIKERS3.jpg"],
+      mobileAppImages: [
+        "/dzhikersstore.jpg",
+        "/dzhikersmap.jpg",
+        "/dzhikersrandi.jpg",
+        "/dzhikersnotif2.jpg",
+        "/dzhikersprofile.jpg",
+        "/dzhikersorder1.jpg",
+        "/dzhikersorder2.jpg",
+      ],
+      webAppImages: [],
+      links: [
+        {
+          type: "Source Code (Web)",
+          href: "https://github.com/adnanebnz/dzhikers-web",
+          icon: <Icons.github className="size-3" />,
+        },
+        {
+          type: "Source Code (Mobile)",
+          href: "https://github.com/adnanebnz/dzhikers-mobile",
+          icon: <Icons.github className="size-3" />,
+        },
       ],
     },
     {

@@ -35,7 +35,9 @@ export default function ProjectView({ project }: { project: any }) {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 bg-gray-200 dark:bg-muted py-4 px-3 rounded-md shadow-sm">
                 {project.mobileAppImages.map((image: string, index: number) => (
-                  <img
+                  <Image
+                    width={1280}
+                    height={720}
                     src={image}
                     key={index}
                     alt={project.title}
@@ -58,8 +60,6 @@ export default function ProjectView({ project }: { project: any }) {
                       key={index}
                     >
                       <Image
-                        priority
-                        fetchPriority="high"
                         src={image}
                         height={650}
                         width={650}

@@ -120,18 +120,7 @@ export const DATA = {
         "Flutter",
         "GetX",
       ],
-      links: [
-        {
-          type: "Source Code (Web)",
-          href: "https://github.com/adnanebnz/algeria-eats",
-          icon: <Icons.github className="size-3" />,
-        },
-        {
-          type: "Source Code (Mobile)",
-          href: "https://github.com/adnanebnz/algeria-eats-mobile",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
+      links: [],
       image:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891211/algeria-eats/poster.png",
       mobileAppImages: [

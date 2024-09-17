@@ -194,7 +194,7 @@ export const DATA = {
       ],
     },
     {
-      title: "Waffir (freelance project)",
+      title: "Waffir",
       slug: "waffir",
       subtitle: "Food delivery app",
       keyFeatures: {
@@ -216,7 +216,6 @@ export const DATA = {
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/making-order.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891363/waffir/order-success.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/dashboard.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891361/waffir/profile.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891376/waffir/map.jpg",
       ],
     },

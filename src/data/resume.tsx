@@ -120,18 +120,7 @@ export const DATA = {
         "Flutter",
         "GetX",
       ],
-      links: [
-        {
-          type: "Source Code (Web)",
-          href: "https://github.com/adnanebnz/algeria-eats",
-          icon: <Icons.github className="size-3" />,
-        },
-        {
-          type: "Source Code (Mobile)",
-          href: "https://github.com/adnanebnz/algeria-eats-mobile",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
+      links: [],
       image:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891211/algeria-eats/poster.png",
       mobileAppImages: [
@@ -156,6 +145,78 @@ export const DATA = {
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891209/algeria-eats/products-view-dashboard-artisan.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891217/algeria-eats/order-dashboard-web.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891289/algeria-eats/admin-dashboard.jpg",
+      ],
+    },
+    {
+      title: "Wamidh",
+      slug: "wamidh",
+      subtitle:
+        "Plateform to learn arabic by interacting with a mobile application",
+      keyFeatures: {
+        Messaging: "Students can text each other and teachers.",
+        Games:
+          "Includes games to learn Arabic, such as listening, writing, and arranging words, Choosing and selecting the right animal/object based on visual images.",
+        "Admin Controls":
+          "Admins can ban users and control the entire application.",
+        "Teacher Features": "Teachers can upload courses.",
+        "Progress Tracking":
+          "Users can track their progress and receive feedback.",
+      },
+      href: "https://play.google.com/store/apps/details?id=com.mhamidi.el_makaniz",
+      dates: "June 2024 - June 2024",
+      active: true,
+      description:
+        "Wamidh is a mobile application that helps users learn Arabic by interacting with the app. The app provides a range of features to facilitate learning, including quizzes, games, and interactive exercises. Users can track their progress and receive feedback to improve their language skills.",
+      technologies: ["FLutter", "Firebase"],
+      image:
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723897373/wamidh/poster.png",
+      mobileAppImages: [
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896314/wamidh/home.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896311/wamidh/drawer.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896306/wamidh/listening.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896295/wamidh/writing.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896300/wamidh/arranging.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896311/wamidh/about.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896305/wamidh/profile.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896296/wamidh/messages.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896302/wamidh/chat.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896303/wamidh/admin-users.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896294/wamidh/stats.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723896296/wamidh/login.jpg",
+      ],
+      webAppImages: [],
+      links: [
+        {
+          type: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.mhamidi.el_makaniz",
+          icon: <Icons.playStore className="size-3" />,
+        },
+      ],
+    },
+    {
+      title: "Waffir",
+      slug: "waffir",
+      subtitle: "Food delivery app",
+      keyFeatures: {
+        Browse: "Browse food options and place orders",
+        Track: "Track orders in real-time",
+        Manage: "Sellers can create listings and manage orders",
+      },
+      dates: "June 2024 - June 2024",
+      active: true,
+      description:
+        "Waffir is a freelance project for a food delivery app developed using Firebase and Flutter. The app enables buyers to browse food options, place orders, and track them, while sellers can create listings, manage orders, and process payments. Google Maps is integrated for location services, and GetX is utilized for state management, ensuring a smooth and responsive user experience.",
+      technologies: ["Flutter", "GetX", "Firebase", "Google Maps"],
+      image:
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891394/waffir/poster.png",
+      mobileAppImages: [
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891379/waffir/home.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891360/waffir/product-detail.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891365/waffir/cart.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/making-order.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891363/waffir/order-success.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/dashboard.jpg",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723891376/waffir/map.jpg",
       ],
     },
     {
@@ -186,7 +247,12 @@ export const DATA = {
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891468/dzhikers/mobile-order-1.jpg",
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891468/dzhikers/mobile-order-2.jpg",
       ],
-      webAppImages: [],
+      webAppImages: [
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918640/dzhikers/home.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918628/dzhikers/randos.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918627/dzhikers/creating-rando.png",
+        "https://res.cloudinary.com/drajcqail/image/upload/v1723918645/dzhikers/rando.png",
+      ],
       links: [
         {
           type: "Source Code (Web)",
@@ -231,33 +297,6 @@ export const DATA = {
         "https://res.cloudinary.com/drajcqail/image/upload/v1723892696/movies-app/search.jpg",
       ],
       webAppImages: [],
-    },
-    {
-      title: "Waffir (freelance project)",
-      slug: "waffir",
-      subtitle: "Food delivery app",
-      keyFeatures: {
-        Browse: "Browse food options and place orders",
-        Track: "Track orders in real-time",
-        Manage: "Sellers can create listings and manage orders",
-      },
-      dates: "June 2024 - June 2024",
-      active: true,
-      description:
-        "Waffir is a freelance project for a food delivery app developed using Firebase and Flutter. The app enables buyers to browse food options, place orders, and track them, while sellers can create listings, manage orders, and process payments. Google Maps is integrated for location services, and GetX is utilized for state management, ensuring a smooth and responsive user experience.",
-      technologies: ["Flutter", "GetX", "Firebase", "Google Maps"],
-      image:
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891394/waffir/poster.png",
-      mobileAppImages: [
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891379/waffir/home.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891360/waffir/product-detail.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891365/waffir/cart.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/making-order.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891363/waffir/order-success.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891362/waffir/dashboard.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891361/waffir/profile.jpg",
-        "https://res.cloudinary.com/drajcqail/image/upload/v1723891376/waffir/map.jpg",
-      ],
     },
   ],
   // TODO ADD WAMMIDH PROJECT and netflix clone maybe other projects too

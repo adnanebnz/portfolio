@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactFormComponent from "./components/contact-form";
+import ShinyButton from "@/components/ui/shiny-button";
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
@@ -168,10 +169,21 @@ export default function Page() {
             {DATA.summary}
           </Markdown>
         </BlurFade>
+        <BlurFade delay={BLUR_FADE_DELAY * 5} className="flex justify-center">
+          <a
+            href="/pdf/CV-ADNANE-BENZERDJEB.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ShinyButton className="mt-6 mb-2 border-solid border-black/15 dark:border-white/15 border">
+              Download Resume
+            </ShinyButton>
+          </a>
+        </BlurFade>
       </section>
       <section id="work" className="md:max-w-2xl max-w-full mx-auto">
         <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="text-xl font-bold">Work Experience</h2>
           </BlurFade>
           {DATA.work.map((work, id) => (
@@ -220,8 +232,6 @@ export default function Page() {
             "express",
             "adonisjs",
             "nestjs",
-            "csharp",
-            "dotnet",
             "mongodb",
             "postgresql",
             "mysql",

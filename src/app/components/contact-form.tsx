@@ -51,6 +51,7 @@ export default function ContactFormComponent() {
                   <div className="grid gap-2">
                     <Label htmlFor="name">Name</Label>
                     <Input
+                      required
                       id="name"
                       placeholder="John Doe"
                       value={formData.name}
@@ -60,6 +61,7 @@ export default function ContactFormComponent() {
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
+                      required
                       id="email"
                       type="email"
                       placeholder="john@example.com"
@@ -71,6 +73,7 @@ export default function ContactFormComponent() {
                 <div className="grid gap-2">
                   <Label htmlFor="message">Message</Label>
                   <Textarea
+                    required
                     id="message"
                     rows={5}
                     placeholder="How can we help you?"

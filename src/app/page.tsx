@@ -7,9 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactFormComponent from "./components/contact-form";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import ShimmerButton from "@/components/ui/shimmer-button";
 import ShinyButton from "@/components/ui/shiny-button";
 const BLUR_FADE_DELAY = 0.04;
 
@@ -235,8 +232,6 @@ export default function Page() {
             "express",
             "adonisjs",
             "nestjs",
-            "csharp",
-            "dotnet",
             "mongodb",
             "postgresql",
             "mysql",

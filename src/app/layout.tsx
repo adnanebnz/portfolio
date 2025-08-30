@@ -9,6 +9,8 @@ import "./globals.css";
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
+import { LocaleProvider } from "@/components/locale-provider";
+import { LanguageIndicator } from "@/components/language-indicator";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -69,20 +71,22 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="light">
-          <TooltipProvider delayDuration={0}>
-            <GridPattern
-              width={60}
-              height={60}
-              maxOpacity={0.05}
-              className={cn(
-                "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
-              )}
-            />
-            {children}
-            <Analytics />
-            <Navbar />
-          </TooltipProvider>
-          <Toaster closeButton={true} />
+          <LocaleProvider>
+            <TooltipProvider delayDuration={0}>
+              <GridPattern
+                width={60}
+                height={60}
+                maxOpacity={0.05}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
+                )}
+              />
+              {children}
+              <Analytics />
+              <Navbar />
+            </TooltipProvider>
+            <Toaster closeButton={true} />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

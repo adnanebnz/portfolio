@@ -15,16 +15,28 @@
     "summary": "I am a highly motivated and skilled software engineer with a passion for software development. With a strong addiction to technology, I specialize in web development using ReactJS and NodeJS and mobile development using React Native and Flutter. I am also a big fan of UI/UX design and I am a self-taught designer.",
     "location": "Tlemcen, Algeria",
     "downloadCV": "Download CV",
-    "contact": "Contact"
+    "downloadResume": "Download Resume",
+    "contact": "Contact",
+    "letsConnect": "Let's Connect",
+    "scrollToExplore": "Scroll to explore"
   },
   "about": {
     "title": "About Me",
-    "experience": "Work Experience",
+    "experience": "Work Experience", 
     "skills": "Skills & Technologies",
-    "education": "Education"
+    "education": "Education",
+    "craftingDigitalExperiences": "Crafting Digital Experiences",
+    "passionateDeveloper": "Passionate developer with a love for creating beautiful, functional, and user-centered digital experiences.",
+    "experienceYears": "Experience",
+    "experienceValue": "2+ Years",
+    "projectsCount": "Projects",
+    "technologiesCount": "Technologies", 
+    "coffeeCups": "Coffee Cups",
+    "coffeeCupsValue": "∞"
   },
   "work": {
     "current": "Present",
+    "professionalJourney": "Professional Journey",
     "tawsilStar": {
       "company": "Tawsil Star",
       "title": "Software Engineer",
@@ -32,7 +44,7 @@
     },
     "eurequat": {
       "company": "Eurequat Algérie",
-      "title": "Software Engineer Internship",
+      "title": "Software Engineer Internship", 
       "description": "During my internship at Eurequat Algérie, I developed a robust XML to ZPL conversion package integrated into their WinForms project. Utilizing C# and Microsoft SQL Server, I created a solution that converts XML-based label templates into ZPL (Zebra Programming Language) for seamless label printing. This package allows for predefined label designs to be efficiently translated into ZPL code, ensuring consistent and high-quality label outputs."
     },
     "techway": {
@@ -47,17 +59,24 @@
     "viewProject": "View Project",
     "keyFeatures": "Key Features",
     "technologies": "Technologies Used",
+    "technologiesAndTools": "Technologies & Tools",
     "links": "Links",
     "sourceCode": "Source Code",
     "liveDemo": "Live Demo",
     "playStore": "Play Store",
     "webApp": "Web App",
-    "mobileApp": "Mobile App"
+    "mobileApp": "Mobile App",
+    "featuredWork": "Featured Work",
+    "myLatestProjects": "My Latest Projects", 
+    "projectsDescription": "I've worked on a variety of projects, from simple websites to complex applications. Here are some of my favorites that showcase my skills and passion for development."
   },
   "contact": {
     "title": "Get In Touch",
     "subtitle": "Let's Start a Conversation",
     "description": "Fill out the form below and I'll get back to you as soon as possible.",
+    "getInTouch": "Get in Touch",
+    "letsConnect": "Let's Connect", 
+    "contactDescription": "Have a project in mind or just want to chat? I'd love to hear from you. Let's create something amazing together!",
     "form": {
       "name": "Full Name",
       "namePlaceholder": "Enter your full name",
@@ -74,8 +93,13 @@
       "linkedin": "LinkedIn"
     }
   },
+  "skills": {
+    "title": "Skills",
+    "technologiesAndTools": "Technologies & Tools"
+  },
   "blog": {
-    "title": "Latest Blog Posts",
+    "title": "Blog",
+    "description": "My thoughts on software development, life, and everything in between. Sharing knowledge and experiences from my journey.",
     "readingTime": "min read",
     "readMore": "Read More",
     "backToHome": "Back to Home",

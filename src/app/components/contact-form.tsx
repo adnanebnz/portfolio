@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Modal from "./modal";
+import { useTranslations } from "@/hooks/use-translations";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,6 +43,7 @@ const itemVariants = {
 };
 
 export default function ContactFormComponent() {
+  const t = useTranslations("contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -102,13 +104,8 @@ export default function ContactFormComponent() {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mx-auto">
                   <MessageSquare className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold">
-                  Let's Start a Conversation
-                </h3>
-                <p className="text-muted-foreground">
-                  Fill out the form below and I'll get back to you as soon as
-                  possible.
-                </p>
+                <h3 className="text-2xl font-bold">{t("subtitle")}</h3>
+                <p className="text-muted-foreground">{t("description")}</p>
               </motion.div>
 
               {/* Form Fields */}
@@ -120,7 +117,7 @@ export default function ContactFormComponent() {
                     className="flex items-center space-x-2 text-sm font-medium"
                   >
                     <User className="w-4 h-4" />
-                    <span>Full Name</span>
+                    <span>{t("form.name")}</span>
                   </Label>
                   <motion.div
                     whileFocus={{ scale: 1.02 }}
@@ -129,7 +126,7 @@ export default function ContactFormComponent() {
                     <Input
                       id="name"
                       type="text"
-                      placeholder="Enter your full name"
+                      placeholder={t("form.namePlaceholder")}
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -145,7 +142,7 @@ export default function ContactFormComponent() {
                     className="flex items-center space-x-2 text-sm font-medium"
                   >
                     <Mail className="w-4 h-4" />
-                    <span>Email Address</span>
+                    <span>{t("form.email")}</span>
                   </Label>
                   <motion.div
                     whileFocus={{ scale: 1.02 }}
@@ -154,7 +151,7 @@ export default function ContactFormComponent() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="Enter your email address"
+                      placeholder={t("form.emailPlaceholder")}
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -171,7 +168,7 @@ export default function ContactFormComponent() {
                   className="flex items-center space-x-2 text-sm font-medium"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Your Message</span>
+                  <span>{t("form.message")}</span>
                 </Label>
                 <motion.div
                   whileFocus={{ scale: 1.02 }}
@@ -179,7 +176,7 @@ export default function ContactFormComponent() {
                 >
                   <Textarea
                     id="message"
-                    placeholder="Tell me about your project or just say hello..."
+                    placeholder={t("form.messagePlaceholder")}
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
@@ -216,12 +213,12 @@ export default function ContactFormComponent() {
                             }}
                             className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                           />
-                          <span>Sending...</span>
+                          <span>{t("form.sending")}</span>
                         </>
                       ) : (
                         <>
                           <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                          <span>Send Message</span>
+                          <span>{t("form.submit")}</span>
                           <Sparkles className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                         </>
                       )}
@@ -234,7 +231,7 @@ export default function ContactFormComponent() {
                   variants={itemVariants}
                   className="text-sm text-muted-foreground mt-4"
                 >
-                  I'll get back to you within 24 hours. Promise! ✨
+                  {t("form.successDescription")}
                 </motion.p>
               </motion.div>
 
@@ -244,7 +241,7 @@ export default function ContactFormComponent() {
                 className="text-center space-y-4 pt-8 border-t border-border/40"
               >
                 <p className="text-sm text-muted-foreground">
-                  Prefer a different way to connect?
+                  {t("form.alternativeContact")}
                 </p>
                 <div className="flex justify-center space-x-4">
                   <motion.a
@@ -254,7 +251,7 @@ export default function ContactFormComponent() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Mail className="w-4 h-4" />
-                    <span className="text-sm">Email</span>
+                    <span className="text-sm">{t("form.emailLink")}</span>
                   </motion.a>
 
                   <motion.a
@@ -272,7 +269,7 @@ export default function ContactFormComponent() {
                     >
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
-                    <span className="text-sm">LinkedIn</span>
+                    <span className="text-sm">{t("form.linkedin")}</span>
                   </motion.a>
                 </div>
               </motion.div>

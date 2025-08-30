@@ -15,16 +15,28 @@
     "summary": "Je suis un ingénieur logiciel hautement motivé et compétent avec une passion pour le développement logiciel. Avec une forte addiction à la technologie, je me spécialise dans le développement web utilisant ReactJS et NodeJS et le développement mobile utilisant React Native et Flutter. Je suis aussi un grand fan de conception UI/UX et je suis autodidacte en design.",
     "location": "Tlemcen, Algérie",
     "downloadCV": "Télécharger CV",
-    "contact": "Contact"
+    "downloadResume": "Télécharger CV",
+    "contact": "Contact",
+    "letsConnect": "Connectons-nous",
+    "scrollToExplore": "Faites défiler pour explorer"
   },
   "about": {
     "title": "À Propos de Moi",
     "experience": "Expérience Professionnelle",
     "skills": "Compétences & Technologies",
-    "education": "Éducation"
+    "education": "Éducation",
+    "craftingDigitalExperiences": "Création d'Expériences Numériques",
+    "passionateDeveloper": "Développeur passionné avec un amour pour la création d'expériences numériques belles, fonctionnelles et centrées sur l'utilisateur.",
+    "experienceYears": "Expérience",
+    "experienceValue": "2+ Années",
+    "projectsCount": "Projets",
+    "technologiesCount": "Technologies",
+    "coffeeCups": "Tasses de Café",
+    "coffeeCupsValue": "∞"
   },
   "work": {
     "current": "Présent",
+    "professionalJourney": "Parcours Professionnel",
     "tawsilStar": {
       "company": "Tawsil Star",
       "title": "Ingénieur Logiciel",
@@ -47,17 +59,28 @@
     "viewProject": "Voir le Projet",
     "keyFeatures": "Fonctionnalités Clés",
     "technologies": "Technologies Utilisées",
+    "technologiesAndTools": "Technologies et Outils",
     "links": "Liens",
     "sourceCode": "Code Source",
     "liveDemo": "Démo en Direct",
     "playStore": "Play Store",
     "webApp": "Application Web",
-    "mobileApp": "Application Mobile"
+    "mobileApp": "Application Mobile",
+    "featuredWork": "Travaux Phares",
+    "myLatestProjects": "Mes Derniers Projets",
+    "projectsDescription": "J'ai travaillé sur une variété de projets, des sites web simples aux applications complexes. Voici quelques-uns de mes favoris qui mettent en valeur mes compétences et ma passion pour le développement."
+  },
+  "skills": {
+    "title": "Compétences",
+    "technologiesAndTools": "Technologies et Outils"
   },
   "contact": {
     "title": "Entrons en Contact",
     "subtitle": "Commençons une Conversation",
     "description": "Remplissez le formulaire ci-dessous et je vous répondrai dès que possible.",
+    "getInTouch": "Entrons en Contact",
+    "letsConnect": "Connectons-nous",
+    "contactDescription": "Vous avez un projet en tête ou voulez simplement discuter ? J'aimerais vous entendre. Créons quelque chose d'incroyable ensemble !",
     "form": {
       "name": "Nom Complet",
       "namePlaceholder": "Entrez votre nom complet",
@@ -75,7 +98,8 @@
     }
   },
   "blog": {
-    "title": "Derniers Articles de Blog",
+    "title": "Blog",
+    "description": "Mes réflexions sur le développement logiciel, la vie et tout ce qui se trouve entre les deux. Partage de connaissances et d'expériences de mon parcours.",
     "readingTime": "min de lecture",
     "readMore": "Lire Plus",
     "backToHome": "Retour à l'Accueil",

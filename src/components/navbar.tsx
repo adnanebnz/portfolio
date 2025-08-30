@@ -3,6 +3,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
+import {
+  LanguageSwitcher,
+  LanguageSwitcherMobile,
+} from "@/components/language-switcher";
+import { useTranslations } from "@/hooks/use-translations";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import { Menu, X, Sparkles } from "lucide-react";
@@ -10,6 +15,7 @@ import { Menu, X, Sparkles } from "lucide-react";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const t = useTranslations("hero");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,9 +34,9 @@ export default function Navbar() {
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const itemVariants = {
@@ -41,16 +47,16 @@ export default function Navbar() {
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const mobileMenuVariants = {
     hidden: {
       opacity: 0,
       scale: 0.95,
-      y: -10
+      y: -10,
     },
     visible: {
       opacity: 1,
@@ -59,17 +65,17 @@ export default function Navbar() {
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 20
-      }
+        damping: 20,
+      },
     },
     exit: {
       opacity: 0,
       scale: 0.95,
       y: -10,
       transition: {
-        duration: 0.2
-      }
-    }
+        duration: 0.2,
+      },
+    },
   };
 
   return (
@@ -79,8 +85,8 @@ export default function Navbar() {
         initial="hidden"
         animate="visible"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled 
-            ? "glass-card backdrop-blur-xl bg-background/80 border-b border-border/40 shadow-lg" 
+          scrolled
+            ? "glass-card backdrop-blur-xl bg-background/80 border-b border-border/40 shadow-lg"
             : "bg-transparent"
         }`}
       >
@@ -158,8 +164,11 @@ export default function Navbar() {
                   ))}
               </div>
 
-              {/* Theme Toggle */}
-              <ModeToggle />
+              {/* Language Switcher & Theme Toggle */}
+              <div className="hidden md:flex items-center space-x-2">
+                <LanguageSwitcher />
+                <ModeToggle />
+              </div>
 
               {/* Mobile Menu Button */}
               <motion.button
@@ -239,6 +248,9 @@ export default function Navbar() {
                   ))}
                 </div>
 
+                {/* Language Switcher Mobile */}
+                <LanguageSwitcherMobile />
+
                 {/* Divider */}
                 <div className="border-t border-border/40" />
 
@@ -276,7 +288,7 @@ export default function Navbar() {
                     className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <span>Let's Connect</span>
+                    <span>{t("letsConnect")}</span>
                     <Sparkles className="w-4 h-4" />
                   </a>
                 </motion.div>

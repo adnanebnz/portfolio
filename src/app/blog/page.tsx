@@ -1,7 +1,11 @@
+"use client";
+
 import BlurFade from "@/components/magicui/blur-fade";
 import { getBlogPosts } from "@/data/blog";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { useTranslations } from "@/hooks/use-translations";
+import { useEffect, useState } from "react";
 
 export const metadata = {
   title: "Blog",
@@ -10,8 +14,17 @@ export const metadata = {
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts();
+export default function BlogPage() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const t = useTranslations("blog");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const blogPosts = await getBlogPosts();
+      setPosts(blogPosts);
+    };
+    fetchPosts();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -21,11 +34,10 @@ export default async function BlogPage() {
           <BlurFade delay={BLUR_FADE_DELAY}>
             <div className="text-center mb-16">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-                Blog
+                {t("title")}
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                My thoughts on software development, life, and everything in
-                between. Sharing knowledge and experiences from my journey.
+                {t("description")}
               </p>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-primary/60 mx-auto mt-8 rounded-full"></div>
             </div>

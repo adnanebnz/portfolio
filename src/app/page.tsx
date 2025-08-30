@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactFormComponent from "./components/contact-form";
+import { useTranslations } from "@/hooks/use-translations";
 import {
   Download,
   Briefcase,
@@ -109,6 +110,12 @@ const GradientOrb = ({ className }: { className?: string }) => (
 export default function Page() {
   const [mounted, setMounted] = useState(false);
   const { scrollYProgress } = useScroll();
+  const t = useTranslations("hero");
+  const tAbout = useTranslations("about");
+  const tWork = useTranslations("work");
+  const tProjects = useTranslations("projects");
+  const tSkills = useTranslations("skills");
+  const tContact = useTranslations("contact");
 
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
 
@@ -153,7 +160,7 @@ export default function Page() {
                   }}
                 >
                   <span className="block bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-gradient-shift">
-                    Hi, I'm {DATA.name.split(" ")[0]}
+                    {t("greeting")} {DATA.name.split(" ")[0]}
                   </span>
                   <motion.span
                     className="block text-4xl md:text-6xl lg:text-7xl mt-4 text-muted-foreground"
@@ -178,7 +185,7 @@ export default function Page() {
                 variants={itemVariants}
                 className="text-xl md:text-3xl lg:text-4xl max-w-4xl mx-auto leading-relaxed text-muted-foreground font-light"
               >
-                {DATA.description}
+                {t("description")}
               </motion.p>
 
               <motion.div
@@ -196,7 +203,7 @@ export default function Page() {
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
                   <div className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300">
                     <Download className="w-5 h-5" />
-                    Download Resume
+                    {t("downloadResume")}
                     <Rocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </motion.a>
@@ -208,7 +215,7 @@ export default function Page() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Zap className="w-5 h-5 group-hover:text-yellow-400 transition-colors" />
-                  Let's Connect
+                  {t("letsConnect")}
                 </motion.a>
               </motion.div>
 
@@ -244,7 +251,7 @@ export default function Page() {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <div className="flex flex-col items-center gap-2 text-muted-foreground">
-              <span className="text-sm">Scroll to explore</span>
+              <span className="text-sm">{t("scrollToExplore")}</span>
               <ArrowDown className="w-5 h-5" />
             </div>
           </motion.div>
@@ -263,14 +270,15 @@ export default function Page() {
               <motion.div variants={itemVariants} className="text-center mb-16">
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 mb-6">
                   <User className="w-5 h-5 text-primary" />
-                  <span className="text-primary font-medium">About Me</span>
+                  <span className="text-primary font-medium">
+                    {tAbout("title")}
+                  </span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Crafting Digital Experiences
+                  {tAbout("craftingDigitalExperiences")}
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  Passionate developer with a love for creating beautiful,
-                  functional, and user-centered digital experiences.
+                  {tAbout("passionateDeveloper")}
                 </p>
               </motion.div>
 
@@ -287,21 +295,25 @@ export default function Page() {
                     <div className="grid grid-cols-2 gap-8">
                       {[
                         {
-                          label: "Experience",
-                          value: `${2}+ Years`,
+                          label: tAbout("experienceYears"),
+                          value: tAbout("experienceValue"),
                           icon: Award,
                         },
                         {
-                          label: "Projects",
+                          label: tAbout("projectsCount"),
                           value: `${DATA.featuredProjects.length}+`,
                           icon: Code,
                         },
                         {
-                          label: "Technologies",
+                          label: tAbout("technologiesCount"),
                           value: `${DATA.skills.length}+`,
                           icon: Zap,
                         },
-                        { label: "Coffee Cups", value: "∞", icon: Sparkles },
+                        {
+                          label: tAbout("coffeeCups"),
+                          value: tAbout("coffeeCupsValue"),
+                          icon: Sparkles,
+                        },
                       ].map((stat, index) => (
                         <motion.div
                           key={index}
@@ -340,10 +352,12 @@ export default function Page() {
               <motion.div variants={itemVariants} className="text-center mb-16">
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 mb-6">
                   <Briefcase className="w-5 h-5 text-primary" />
-                  <span className="text-primary font-medium">Experience</span>
+                  <span className="text-primary font-medium">
+                    {tAbout("experience")}
+                  </span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Professional Journey
+                  {tWork("professionalJourney")}
                 </h2>
               </motion.div>
 
@@ -364,7 +378,9 @@ export default function Page() {
                         subtitle={work.title}
                         href={work.href}
                         badges={work.badges}
-                        period={`${work.start} - ${work.end ?? "Present"}`}
+                        period={`${work.start} - ${
+                          work.end ?? tWork("current")
+                        }`}
                         description={work.description}
                       />
                     </div>
@@ -388,10 +404,12 @@ export default function Page() {
               <motion.div variants={itemVariants} className="text-center mb-16">
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 mb-6">
                   <Code className="w-5 h-5 text-primary" />
-                  <span className="text-primary font-medium">Skills</span>
+                  <span className="text-primary font-medium">
+                    {tSkills("title")}
+                  </span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Technologies & Tools
+                  {tProjects("technologiesAndTools")}
                 </h2>
               </motion.div>
 
@@ -477,16 +495,14 @@ export default function Page() {
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 mb-6">
                   <Star className="w-5 h-5 text-primary" />
                   <span className="text-primary font-medium">
-                    Featured Work
+                    {tProjects("featuredWork")}
                   </span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  My Latest Projects
+                  {tProjects("myLatestProjects")}
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  I&apos;ve worked on a variety of projects, from simple
-                  websites to complex applications. Here are some of my
-                  favorites that showcase my skills and passion for development.
+                  {tProjects("projectsDescription")}
                 </p>
               </motion.div>
 
@@ -534,15 +550,14 @@ export default function Page() {
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 mb-6">
                   <Mail className="w-5 h-5 text-primary" />
                   <span className="text-primary font-medium">
-                    Let's Connect
+                    {tContact("letsConnect")}
                   </span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Get in Touch
+                  {tContact("getInTouch")}
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  Have a project in mind or just want to chat? I&apos;d love to
-                  hear from you. Let&apos;s create something amazing together!
+                  {tContact("contactDescription")}
                 </p>
               </motion.div>
 

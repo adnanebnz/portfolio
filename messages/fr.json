@@ -1,0 +1,127 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "projects": "Projets",
+    "login": "Connexion",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil"
+  },
+  "hero": {
+    "greeting": "Salut, je suis",
+    "name": "Adnane BENZERDJEB",
+    "title": "Ingénieur Logiciel Passionné",
+    "description": "J'adore créer des choses et aider les gens.",
+    "summary": "Je suis un ingénieur logiciel hautement motivé et compétent avec une passion pour le développement logiciel. Avec une forte addiction à la technologie, je me spécialise dans le développement web utilisant ReactJS et NodeJS et le développement mobile utilisant React Native et Flutter. Je suis aussi un grand fan de conception UI/UX et je suis autodidacte en design.",
+    "location": "Tlemcen, Algérie",
+    "downloadCV": "Télécharger CV",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "À Propos de Moi",
+    "experience": "Expérience Professionnelle",
+    "skills": "Compétences & Technologies",
+    "education": "Éducation"
+  },
+  "work": {
+    "current": "Présent",
+    "tawsilStar": {
+      "company": "Tawsil Star",
+      "title": "Ingénieur Logiciel",
+      "description": "Développé et maintenu une application mobile multiplateforme utilisant Flutter, intégrant la livraison de nourriture, les services de courrier de colis et VTC. Contribué au développement backend utilisant Django, incluant la création d'API, la gestion des utilisateurs et les modèles de base de données. Implémenté des fonctionnalités en temps réel pour le suivi des commandes en direct et la gestion des demandes de trajets utilisant WebSockets. Mis en place des pipelines CI/CD pour automatiser les builds, les tests et le déploiement, assurant des releases plus rapides et plus fiables. Intégré Crashlytics pour le rapport de crash en temps réel et la surveillance, améliorant la stabilité et les performances de l'app. Collaboré avec les équipes de design et backend pour livrer une expérience utilisateur fluide et réactive sur Android et iOS. Participé au débogage, à l'optimisation des performances et à la publication des mises à jour sur les app stores."
+    },
+    "eurequat": {
+      "company": "Eurequat Algérie",
+      "title": "Stage Ingénieur Logiciel",
+      "description": "Pendant mon stage chez Eurequat Algérie, j'ai développé un package robuste de conversion XML vers ZPL intégré dans leur projet WinForms. Utilisant C# et Microsoft SQL Server, j'ai créé une solution qui convertit les modèles d'étiquettes basés sur XML en ZPL (Zebra Programming Language) pour une impression d'étiquettes transparente. Ce package permet aux designs d'étiquettes prédéfinis d'être efficacement traduits en code ZPL, assurant des sorties d'étiquettes cohérentes et de haute qualité."
+    },
+    "techway": {
+      "company": "TechWay",
+      "title": "Stage Ingénieur Logiciel",
+      "description": "Développement d'une API REST chez TechWay. Pendant mon stage chez TechWay, j'ai développé et déployé une API REST utilisant Node.js, Express.js et MySQL pour gérer les réservations, les check-ins et les check-outs pour l'Hôtel Hydra à Alger. Cette solution, maintenant en production, est activement utilisée par l'entreprise."
+    }
+  },
+  "projects": {
+    "title": "Projets Phares",
+    "viewAll": "Voir Tous les Projets",
+    "viewProject": "Voir le Projet",
+    "keyFeatures": "Fonctionnalités Clés",
+    "technologies": "Technologies Utilisées",
+    "links": "Liens",
+    "sourceCode": "Code Source",
+    "liveDemo": "Démo en Direct",
+    "playStore": "Play Store",
+    "webApp": "Application Web",
+    "mobileApp": "Application Mobile"
+  },
+  "contact": {
+    "title": "Entrons en Contact",
+    "subtitle": "Commençons une Conversation",
+    "description": "Remplissez le formulaire ci-dessous et je vous répondrai dès que possible.",
+    "form": {
+      "name": "Nom Complet",
+      "namePlaceholder": "Entrez votre nom complet",
+      "email": "Adresse Email",
+      "emailPlaceholder": "Entrez votre adresse email",
+      "message": "Votre Message",
+      "messagePlaceholder": "Parlez-moi de votre projet ou dites simplement bonjour...",
+      "submit": "Envoyer le Message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès !",
+      "successDescription": "Je vous répondrai dans les 24 heures. Promis ! ✨",
+      "alternativeContact": "Préférez-vous une autre façon de vous connecter ?",
+      "emailLink": "Email",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "blog": {
+    "title": "Derniers Articles de Blog",
+    "readingTime": "min de lecture",
+    "readMore": "Lire Plus",
+    "backToHome": "Retour à l'Accueil",
+    "noPostsFound": "Aucun article de blog trouvé.",
+    "publishedOn": "Publié le"
+  },
+  "common": {
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "view": "Voir",
+    "download": "Télécharger",
+    "share": "Partager",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "clear": "Effacer",
+    "apply": "Appliquer",
+    "reset": "Réinitialiser"
+  },
+  "footer": {
+    "allRightsReserved": "Tous droits réservés.",
+    "builtWith": "Construit avec",
+    "and": "et"
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "toggleTheme": "Changer de thème"
+  },
+  "language": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "selectLanguage": "Sélectionner la Langue"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "navigation": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Projects",
+    "login": "Login",
+    "dashboard": "Dashboard",
+    "profile": "Profile"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Adnane BENZERDJEB",
+    "title": "Passionate Software Engineer",
+    "description": "I love building things and helping people.",
+    "summary": "I am a highly motivated and skilled software engineer with a passion for software development. With a strong addiction to technology, I specialize in web development using ReactJS and NodeJS and mobile development using React Native and Flutter. I am also a big fan of UI/UX design and I am a self-taught designer.",
+    "location": "Tlemcen, Algeria",
+    "downloadCV": "Download CV",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About Me",
+    "experience": "Work Experience",
+    "skills": "Skills & Technologies",
+    "education": "Education"
+  },
+  "work": {
+    "current": "Present",
+    "tawsilStar": {
+      "company": "Tawsil Star",
+      "title": "Software Engineer",
+      "description": "Developed and maintained a cross-platform mobile app using Flutter, integrating food delivery, package courier, and VTC services. Contributed to backend development using Django, including API creation, user management, and database models. Implemented real-time features for live order tracking and ride request handling using WebSockets. Set up CI/CD pipelines to automate builds, testing, and deployment, ensuring faster and more reliable releases. Integrated Crashlytics for real-time crash reporting and monitoring, improving app stability and performance. Collaborated with the design and backend teams to deliver a smooth and responsive user experience across Android and iOS. Participated in debugging, performance optimization, and publishing updates to app stores."
+    },
+    "eurequat": {
+      "company": "Eurequat Algérie",
+      "title": "Software Engineer Internship",
+      "description": "During my internship at Eurequat Algérie, I developed a robust XML to ZPL conversion package integrated into their WinForms project. Utilizing C# and Microsoft SQL Server, I created a solution that converts XML-based label templates into ZPL (Zebra Programming Language) for seamless label printing. This package allows for predefined label designs to be efficiently translated into ZPL code, ensuring consistent and high-quality label outputs."
+    },
+    "techway": {
+      "company": "TechWay",
+      "title": "Software Engineer Internship",
+      "description": "Development of a REST API at TechWay. During my internship at TechWay, I developed and deployed a REST API using Node.js, Express.js, and MySQL to manage reservations, check-ins, and check-outs for the Hydra Hotel in Algiers. This solution, now in production, is actively used by the company."
+    }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "viewAll": "View All Projects",
+    "viewProject": "View Project",
+    "keyFeatures": "Key Features",
+    "technologies": "Technologies Used",
+    "links": "Links",
+    "sourceCode": "Source Code",
+    "liveDemo": "Live Demo",
+    "playStore": "Play Store",
+    "webApp": "Web App",
+    "mobileApp": "Mobile App"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's Start a Conversation",
+    "description": "Fill out the form below and I'll get back to you as soon as possible.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "message": "Your Message",
+      "messagePlaceholder": "Tell me about your project or just say hello...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "successDescription": "I'll get back to you within 24 hours. Promise! ✨",
+      "alternativeContact": "Prefer a different way to connect?",
+      "emailLink": "Email",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "blog": {
+    "title": "Latest Blog Posts",
+    "readingTime": "min read",
+    "readMore": "Read More",
+    "backToHome": "Back to Home",
+    "noPostsFound": "No blog posts found.",
+    "publishedOn": "Published on"
+  },
+  "common": {
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "view": "View",
+    "download": "Download",
+    "share": "Share",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "clear": "Clear",
+    "apply": "Apply",
+    "reset": "Reset"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved.",
+    "builtWith": "Built with",
+    "and": "and"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggleTheme": "Toggle theme"
+  },
+  "language": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "selectLanguage": "Select Language"
+  }
+}

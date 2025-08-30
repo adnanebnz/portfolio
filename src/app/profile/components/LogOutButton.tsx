@@ -10,7 +10,6 @@ const LogOutButton = () => {
     <Button
       variant="default"
       className="mb-4 md:mb-0"
-      formAction={() => supabase.auth.signOut()}
       onClick={() => {
         supabase.auth.signOut();
         router.push("/");

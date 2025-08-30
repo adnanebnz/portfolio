@@ -71,28 +71,16 @@ export const DATA = {
 
   work: [
     {
-      company: "Eurequat Algérie",
-      href: "https://www.eurequat-algerie.com/",
-      badges: [],
-      location: "Tlemcen, Algeria",
-      title: "Software Engineer Internship",
-      logoUrl: "/logo-eurequat.png",
-      start: "January 2024",
-      end: "Present",
-      description:
-        "Building a synchronisation module in dolibarr ERP to synchronize data of 4 applications(Track&Store, Track&Sale, ScanMe, MobiPOS).",
-    },
-    {
       company: "Tawsil Star",
       href: "https://www.tawsilstar.dz/",
       badges: [],
       location: "Tlemcen, Algeria",
-      title: "Software Engineer (Freenalcer)",
+      title: "Software Engineer",
       logoUrl: "/tawsil_star.jpg",
-      start: "January 2024",
+      start: "December 2024",
       end: "Present",
       description:
-        "Developed a module in the mobile application for Tawsil Star, a VTC (Vehicle for Hire) taxi booking app, enabling seamless ride booking, real-time tracking, and improved user experience. Implemented key features such as trip management, driver-rider communication, and payment integration to enhance the app's functionality and reliability.",
+        "Developed and maintained a cross-platform mobile app using Flutter, integrating food delivery, package courier, and VTC services. Contributed to backend development using Django, including API creation, user management, and database models. Implemented real-time features for live order tracking and ride request handling using WebSockets. Set up CI/CD pipelines to automate builds, testing, and deployment, ensuring faster and more reliable releases. Integrated Crashlytics for real-time crash reporting and monitoring, improving app stability and performance. Collaborated with the design and backend teams to deliver a smooth and responsive user experience across Android and iOS. Participated in debugging, performance optimization, and publishing updates to app stores.",
     },
     {
       company: "Eurequat Algérie",

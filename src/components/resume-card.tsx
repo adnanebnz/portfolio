@@ -1,15 +1,14 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { ExternalLink, Building2, MapPin } from "lucide-react";
 
-interface ResumeCardProps {
+interface Props {
   logoUrl: string;
   altText: string;
   title: string;
@@ -18,8 +17,10 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  className?: string;
 }
-export const ResumeCard = ({
+
+export function ResumeCard({
   logoUrl,
   altText,
   title,
@@ -28,86 +29,128 @@ export const ResumeCard = ({
   badges,
   period,
   description,
-}: ResumeCardProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (description) {
-      e.preventDefault();
-      setIsExpanded(!isExpanded);
-    }
-  };
-
+  className,
+}: Props) {
   return (
-    <Link
-      href={href || "#"}
-      className="block cursor-pointer"
-      onClick={handleClick}
+    <motion.div
+      className="group"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <Card className="flex items-center justify-center md:px-3 px-1.5 w-full">
-        <div className="flex-none">
-          <Avatar className="border md:h-16 md:w-16 h-14 w-14 p-1 bg-muted-background dark:bg-foreground">
-            <AvatarImage
-              src={logoUrl}
-              alt={altText}
-              className="object-contain rounded-full"
-            />
-            <AvatarFallback>{altText[0]}</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="flex-grow ml-0 items-center flex-col group">
-          <CardHeader>
-            <div className="flex items-center justify-between gap-x-2 text-base">
-              <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
-                {title}
-                {badges && (
-                  <span className="inline-flex gap-x-1">
-                    {badges.map((badge, index) => (
-                      <Badge
-                        variant="secondary"
-                        className="align-middle text-xs"
-                        key={index}
-                      >
-                        {badge}
-                      </Badge>
-                    ))}
-                  </span>
-                )}
-                <ChevronRightIcon
-                  className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                    isExpanded ? "rotate-90" : "rotate-0"
+      <Card
+        className={cn(
+          "flex flex-col border-0 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm hover:from-card/80 hover:to-card/60 transition-all duration-500 relative overflow-hidden",
+          "hover:shadow-2xl hover:shadow-primary/10",
+          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-500/5 before:to-pink-500/5 before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100",
+          className
+        )}
+      >
+        {/* Gradient Border Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
+        {/* Card Content */}
+        <div className="relative z-10">
+          <CardHeader className="pb-4">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center space-x-4">
+                {/* Company Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Avatar className="w-12 h-12 border-2 border-primary/20 shadow-lg">
+                    <AvatarImage
+                      src={logoUrl}
+                      alt={altText}
+                      className="object-contain"
+                    />
+                    <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold">
+                      {altText[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                </motion.div>
+
+                {/* Company & Role Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors duration-300">
+                      {href ? (
+                        <Link
+                          href={href}
+                          className="hover:underline flex items-center space-x-1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span>{title}</span>
+                          <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </Link>
+                      ) : (
+                        title
+                      )}
+                    </h3>
+                  </div>
+
+                  {subtitle && (
+                    <div className="flex items-center text-muted-foreground mt-1">
+                      <Building2 className="w-4 h-4 mr-2" />
+                      <p className="text-sm font-medium">{subtitle}</p>
+                    </div>
                   )}
-                />
-              </h3>
-              <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
-                {period}
+                </div>
+              </div>
+
+              {/* Period */}
+              <div className="text-right ml-4">
+                <motion.div
+                  className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {period}
+                </motion.div>
               </div>
             </div>
-            {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
           </CardHeader>
-          {description && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{
-                opacity: isExpanded ? 1 : 0,
 
-                height: isExpanded ? "auto" : 0,
-              }}
-              transition={{
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className={cn(
-                "mt-2 ml-6 text-xs sm:text-sm",
-                isExpanded ? "mb-4" : "mb-0"
-              )}
-            >
-              {description}
-            </motion.div>
-          )}
+          <CardContent className="pt-0">
+            {/* Description */}
+            {description && (
+              <motion.div
+                className="text-sm text-muted-foreground leading-relaxed mb-4"
+                initial={{ opacity: 0.8 }}
+                whileHover={{ opacity: 1 }}
+              >
+                {description}
+              </motion.div>
+            )}
+
+            {/* Technologies/Skills */}
+            {badges && badges.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {badges.map((badge, index) => (
+                  <motion.div
+                    key={badge}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <Badge
+                      variant="secondary"
+                      className="text-xs bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 transition-all duration-300 border border-purple-500/20 cursor-default"
+                    >
+                      {badge}
+                    </Badge>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </CardContent>
         </div>
+
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/5 to-transparent rounded-full -translate-y-16 translate-x-16 group-hover:scale-110 transition-transform duration-500" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/5 to-transparent rounded-full translate-y-12 -translate-x-12 group-hover:scale-110 transition-transform duration-500" />
       </Card>
-    </Link>
+    </motion.div>
   );
-};
+}

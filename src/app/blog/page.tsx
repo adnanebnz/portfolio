@@ -7,11 +7,6 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { useTranslations } from "@/hooks/use-translations";
 import { useEffect, useState } from "react";
 
-export const metadata = {
-  title: "Blog",
-  description: "My thoughts on software development, life, and more.",
-};
-
 const BLUR_FADE_DELAY = 0.04;
 
 export default function BlogPage() {

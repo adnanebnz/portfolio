@@ -3,6 +3,8 @@
     "home": "Accueil",
     "blog": "Blog",
     "projects": "Projets",
+    "reviews": "Livre d'Or",
+    "schedule": "Rendez-vous",
     "login": "Connexion",
     "dashboard": "Tableau de bord",
     "profile": "Profil"
@@ -11,10 +13,13 @@
     "greeting": "Salut, je suis",
     "name": "Adnane BENZERDJEB",
     "title": "Ingénieur Logiciel Passionné",
+    "tagline": "Création de solutions logicielles robustes & transformation d'idées en produits numériques évolutifs.",
     "description": "J'adore créer des choses et aider les gens.",
     "summary": "Je suis un ingénieur logiciel hautement motivé et compétent avec une passion pour le développement logiciel. Avec une forte addiction à la technologie, je me spécialise dans le développement web utilisant ReactJS et NodeJS et le développement mobile utilisant React Native et Flutter. Je suis aussi un grand fan de conception UI/UX et je suis autodidacte en design.",
     "location": "Tlemcen, Algérie",
     "downloadCV": "Télécharger CV",
+    "downloadCVEnglish": "CV (Anglais)",
+    "downloadCVFrench": "CV (Français)",
     "downloadResume": "Télécharger CV",
     "contact": "Contact",
     "letsConnect": "Connectons-nous",
@@ -37,6 +42,11 @@
   "work": {
     "current": "Présent",
     "professionalJourney": "Parcours Professionnel",
+    "rdsi": {
+      "company": "RDSI",
+      "title": "Ingénieur Logiciel",
+      "description": "Prise en charge à temps plein, des sujets de développement et de maintenance applicative legacy pour une entreprise cliente principale en France dans un schéma d'externalisation/nearshoring (corrections, évolutions, support critique, stabilité en production). Développement et maintenance d'une application métier pour une cliente basée en France (nouvelles fonctionnalités, optimisations, déploiement continu – stack : Django REST Framework, Flutter, PostgreSQL)."
+    },
     "tawsilStar": {
       "company": "Tawsil Star",
       "title": "Ingénieur Logiciel",
@@ -72,6 +82,7 @@
   },
   "skills": {
     "title": "Compétences",
+    "description": "Je travaille avec un ensemble diversifié de technologies pour donner vie aux idées. Du développement backend aux applications mobiles, j'adore explorer de nouveaux outils et frameworks pour construire des solutions robustes.",
     "technologiesAndTools": "Technologies et Outils"
   },
   "contact": {
@@ -86,8 +97,13 @@
       "namePlaceholder": "Entrez votre nom complet",
       "email": "Adresse Email",
       "emailPlaceholder": "Entrez votre adresse email",
+      "subject": "Sujet",
+      "subjectPlaceholder": "De quoi s'agit-il ?",
       "message": "Votre Message",
       "messagePlaceholder": "Parlez-moi de votre projet ou dites simplement bonjour...",
+      "scheduleCall": "Je souhaite programmer un appel",
+      "preferredDate": "Date Préférée",
+      "preferredTime": "Heure Préférée",
       "submit": "Envoyer le Message",
       "sending": "Envoi en cours...",
       "success": "Message envoyé avec succès !",
@@ -147,5 +163,61 @@
     "french": "Français",
     "arabic": "العربية",
     "selectLanguage": "Sélectionner la Langue"
+  },
+  "reviews": {
+    "title": "Livre d'Or",
+    "subtitle": "Découvrez ce que les autres disent de leur collaboration avec moi, ou laissez votre propre avis !",
+    "leaveReview": "Laisser un Avis",
+    "writeReview": "Écrire un Avis",
+    "reviewDescription": "Partagez votre expérience de collaboration avec moi. Votre avis sera visible après approbation.",
+    "thankYou": "Merci pour votre avis !",
+    "pendingApproval": "Il sera visible après approbation.",
+    "yourName": "Votre Nom",
+    "yourRole": "Votre Poste",
+    "company": "Entreprise",
+    "rating": "Note",
+    "yourReview": "Votre Avis",
+    "reviewPlaceholder": "Partagez votre expérience...",
+    "submitting": "Envoi en cours...",
+    "submitReview": "Envoyer l'Avis",
+    "noReviews": "Pas encore d'avis. Soyez le premier à en laisser un !"
+  },
+  "schedule": {
+    "title": "Planifier un Rendez-vous",
+    "subtitle": "Choisissez un créneau qui vous convient, et connectons-nous !",
+    "selectMeetingType": "Sélectionner le Type de Réunion",
+    "selectDate": "Sélectionner une Date",
+    "selectTime": "Sélectionner une Heure",
+    "timezone": "Tous les horaires sont dans votre fuseau horaire local",
+    "yourDetails": "Vos Informations",
+    "name": "Votre Nom",
+    "email": "Adresse Email",
+    "message": "De quoi aimeriez-vous discuter ?",
+    "messagePlaceholder": "Parlez-moi de votre projet...",
+    "back": "Retour",
+    "booking": "Réservation...",
+    "confirmBooking": "Confirmer la Réservation",
+    "bookingConfirmed": "Demande de Réunion Envoyée !",
+    "bookingConfirmedDescription": "Je confirmerai la réunion et vous enverrai une invitation calendrier bientôt.",
+    "bookingSuccess": "Demande de réunion envoyée !",
+    "bookingError": "Échec de l'envoi. Veuillez réessayer.",
+    "backToHome": "Retour à l'Accueil",
+    "preferEmail": "Vous préférez l'email ?",
+    "contactMe": "Contactez-moi directement",
+    "notConfigured": "La planification est actuellement désactivée. Veuillez me contacter par email.",
+    "meetingTypes": {
+      "discovery": "Appel de Découverte",
+      "discoveryDesc": "Discutons de votre projet et voyons comment je peux aider.",
+      "consultation": "Consultation Technique",
+      "consultationDesc": "Plongée approfondie dans les besoins techniques et l'architecture.",
+      "quickChat": "Discussion Rapide",
+      "quickChatDesc": "Questions rapides ou présentations."
+    },
+    "steps": {
+      "1": "Choisir le Type",
+      "2": "Choisir la Date",
+      "3": "Choisir l'Heure",
+      "4": "Vos Détails"
+    }
   }
 }

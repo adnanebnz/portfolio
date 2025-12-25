@@ -3,6 +3,8 @@
     "home": "Home",
     "blog": "Blog",
     "projects": "Projects",
+    "reviews": "Guest Book",
+    "schedule": "Schedule",
     "login": "Login",
     "dashboard": "Dashboard",
     "profile": "Profile"
@@ -11,10 +13,13 @@
     "greeting": "Hi, I'm",
     "name": "Adnane BENZERDJEB",
     "title": "Passionate Software Engineer",
+    "tagline": "Building robust software solutions & transforming ideas into scalable digital products.",
     "description": "I love building things and helping people.",
     "summary": "I am a highly motivated and skilled software engineer with a passion for software development. With a strong addiction to technology, I specialize in web development using ReactJS and NodeJS and mobile development using React Native and Flutter. I am also a big fan of UI/UX design and I am a self-taught designer.",
     "location": "Tlemcen, Algeria",
     "downloadCV": "Download CV",
+    "downloadCVEnglish": "CV (English)",
+    "downloadCVFrench": "CV (French)",
     "downloadResume": "Download Resume",
     "contact": "Contact",
     "letsConnect": "Let's Connect",
@@ -37,6 +42,11 @@
   "work": {
     "current": "Present",
     "professionalJourney": "Professional Journey",
+    "rdsi": {
+      "company": "RDSI",
+      "title": "Software Engineer",
+      "description": "Full-time responsibility for application development and legacy maintenance for a main client company in France in an outsourcing/nearshoring model (bug fixes, feature development, critical support, production stability). Development and maintenance of a business application for a France-based client (new features, optimizations, continuous deployment – stack: Django REST Framework, Flutter, PostgreSQL)."
+    },
     "tawsilStar": {
       "company": "Tawsil Star",
       "title": "Software Engineer",
@@ -82,8 +92,13 @@
       "namePlaceholder": "Enter your full name",
       "email": "Email Address",
       "emailPlaceholder": "Enter your email address",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
       "message": "Your Message",
       "messagePlaceholder": "Tell me about your project or just say hello...",
+      "scheduleCall": "I'd like to schedule a call",
+      "preferredDate": "Preferred Date",
+      "preferredTime": "Preferred Time",
       "submit": "Send Message",
       "sending": "Sending...",
       "success": "Message sent successfully!",
@@ -95,6 +110,7 @@
   },
   "skills": {
     "title": "Skills",
+    "description": "I work with a diverse set of technologies to bring ideas to life. From backend development to mobile apps, I love exploring new tools and frameworks to build robust solutions.",
     "technologiesAndTools": "Technologies & Tools"
   },
   "blog": {
@@ -147,5 +163,61 @@
     "french": "Français",
     "arabic": "العربية",
     "selectLanguage": "Select Language"
+  },
+  "reviews": {
+    "title": "Guest Book",
+    "subtitle": "Read what others say about working with me, or leave your own review!",
+    "leaveReview": "Leave a Review",
+    "writeReview": "Write a Review",
+    "reviewDescription": "Share your experience working with me. Your review will be visible after approval.",
+    "thankYou": "Thank you for your review!",
+    "pendingApproval": "It will be visible after approval.",
+    "yourName": "Your Name",
+    "yourRole": "Your Role",
+    "company": "Company",
+    "rating": "Rating",
+    "yourReview": "Your Review",
+    "reviewPlaceholder": "Share your experience...",
+    "submitting": "Submitting...",
+    "submitReview": "Submit Review",
+    "noReviews": "No reviews yet. Be the first to leave one!"
+  },
+  "schedule": {
+    "title": "Schedule a Meeting",
+    "subtitle": "Pick a time that works for you, and let's connect!",
+    "selectMeetingType": "Select Meeting Type",
+    "selectDate": "Select a Date",
+    "selectTime": "Select a Time",
+    "timezone": "All times are in your local timezone",
+    "yourDetails": "Your Details",
+    "name": "Your Name",
+    "email": "Email Address",
+    "message": "What would you like to discuss?",
+    "messagePlaceholder": "Tell me about your project...",
+    "back": "Back",
+    "booking": "Booking...",
+    "confirmBooking": "Confirm Booking",
+    "bookingConfirmed": "Meeting Request Sent!",
+    "bookingConfirmedDescription": "I'll confirm the meeting and send you a calendar invite soon.",
+    "bookingSuccess": "Meeting request sent!",
+    "bookingError": "Failed to send request. Please try again.",
+    "backToHome": "Back to Home",
+    "preferEmail": "Prefer email?",
+    "contactMe": "Contact me directly",
+    "notConfigured": "Scheduling is currently disabled. Please contact me via email.",
+    "meetingTypes": {
+      "discovery": "Discovery Call",
+      "discoveryDesc": "Let's discuss your project and see how I can help.",
+      "consultation": "Technical Consultation",
+      "consultationDesc": "Deep dive into technical requirements and architecture.",
+      "quickChat": "Quick Chat",
+      "quickChatDesc": "Quick questions or introductions."
+    },
+    "steps": {
+      "1": "Select Meeting Type",
+      "2": "Select Date",
+      "3": "Select Time",
+      "4": "Your Details"
+    }
   }
 }

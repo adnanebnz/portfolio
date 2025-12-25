@@ -1,66 +1,138 @@
-import { createClient } from "@/utils/supabase/server";
+import bcrypt from "bcryptjs";
+import { prisma } from "./prisma";
+import { signToken, verifyToken, type JWTPayload } from "./jwt";
 
-const supabase = createClient();
+const SALT_ROUNDS = 12;
 
-export const signUp = async (email: string, password: string) => {
-  try {
-    ("user server");
-    const { error, data } = await supabase.auth.signUp({ email, password });
-    return { error, data };
-  } catch (err) {
-    console.error("Error during sign up:", err);
-    return { error: err, data: null };
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, SALT_ROUNDS);
+}
+
+export async function verifyPassword(
+  password: string,
+  hashedPassword: string
+): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
+}
+
+export async function createUser(
+  email: string,
+  password: string,
+  name: string
+) {
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+
+  if (existingUser) {
+    throw new Error("User already exists");
   }
-};
 
-export const signIn = async (email: string, password: string) => {
-  try {
-    ("user server");
+  const hashedPassword = await hashPassword(password);
 
-    const { error, data } = await supabase.auth.signInWithPassword({
+  const user = await prisma.user.create({
+    data: {
       email,
-      password,
-    });
-    return { error, data };
-  } catch (err) {
-    console.error("Error during sign in:", err);
-    return { error: err, data: null };
-  }
-};
+      password: hashedPassword,
+      name,
+    },
+  });
 
-export const signInWithGoogle = async () => {
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+  };
+}
+
+export async function authenticateUser(email: string, password: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    throw new Error("Invalid credentials");
+  }
+
+  const isValid = await verifyPassword(password, user.password);
+
+  if (!isValid) {
+    throw new Error("Invalid credentials");
+  }
+
+  const token = signToken({
+    userId: user.id,
+    email: user.email,
+    role: user.role,
+  });
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      avatarUrl: user.avatarUrl,
+    },
+  };
+}
+
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      avatarUrl: true,
+    },
+  });
+
+  return user;
+}
+
+export async function updateUserPassword(userId: string, newPassword: string) {
+  const hashedPassword = await hashPassword(newPassword);
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { password: hashedPassword },
+  });
+}
+
+export async function updateUserProfile(
+  userId: string,
+  data: { name?: string; avatarUrl?: string }
+) {
+  return prisma.user.update({
+    where: { id: userId },
+    data,
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      avatarUrl: true,
+    },
+  });
+}
+
+export async function verifyAuth(): Promise<JWTPayload | null> {
+  // This function is meant to be called from server-side API routes
+  // It extracts and verifies the JWT token from cookies
+  const { cookies } = await import("next/headers");
+  const cookieStore = cookies();
+  const token = cookieStore.get("token")?.value;
+
+  if (!token) {
+    return null;
+  }
+
   try {
-    ("user server");
-
-    const { error, data } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-    return { error, data };
-  } catch (err) {
-    console.error("Error during sign in with Google:", err);
-    return { error: err, data: null };
+    const payload = verifyToken(token);
+    return payload;
+  } catch {
+    return null;
   }
-};
+}
 
-export const getUser = async () => {
-  try {
-    ("user server");
-
-    const user = await supabase.auth.getUser();
-    return user;
-  } catch (err) {
-    console.error("Error getting user:", err);
-    return { error: err, user: null };
-  }
-};
-
-export const signOut = async () => {
-  try {
-    ("user server");
-    const { error } = await supabase.auth.signOut();
-    return { error };
-  } catch (err) {
-    console.error("Error during sign out:", err);
-    return { error: err };
-  }
-};
+export { signToken, verifyToken, type JWTPayload };

@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -6,11 +5,12 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import GridPattern from "@/components/magicui/animated-grid-pattern";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { LocaleProvider } from "@/components/locale-provider";
 import { LanguageIndicator } from "@/components/language-indicator";
+import { QueryProvider } from "@/providers/query-provider";
+import { AuthProvider } from "@/providers/auth-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     default: DATA.name,
     template: `%s | ${DATA.name}`,
   },
-  description: DATA.description,
+  description: DATA.description.en,
   openGraph: {
     title: `${DATA.name}`,
-    description: DATA.description,
+    description: DATA.description.en,
     url: DATA.url,
     siteName: `${DATA.name}`,
     locale: "en_US",
@@ -71,22 +71,17 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="light">
-          <LocaleProvider>
-            <TooltipProvider delayDuration={0}>
-              <GridPattern
-                width={60}
-                height={60}
-                maxOpacity={0.05}
-                className={cn(
-                  "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
-                )}
-              />
-              {children}
-              <Analytics />
-              <Navbar />
-            </TooltipProvider>
-            <Toaster closeButton={true} />
-          </LocaleProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <LocaleProvider>
+                <TooltipProvider delayDuration={0}>
+                  {children}
+                  <Analytics />
+                </TooltipProvider>
+                <Toaster closeButton={true} />
+              </LocaleProvider>
+            </AuthProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

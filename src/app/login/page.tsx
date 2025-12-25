@@ -1,14 +1,11 @@
-import { createClient } from "@/utils/supabase/server";
+import { getSession } from "@/lib/jwt";
 import { redirect } from "next/navigation";
 import LoginForm from "./components/LoginForm";
 
 export default async function Login() {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await getSession();
 
-  if (user) {
+  if (session) {
     redirect("/profile");
   }
 
@@ -17,10 +14,10 @@ export default async function Login() {
       <div className="mx-auto max-w-md space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Welcome to my portfolio!
+            Admin Login
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Please sign in or create an account to continue.
+            Sign in to access the dashboard.
           </p>
         </div>
         <LoginForm />

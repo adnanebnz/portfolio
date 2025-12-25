@@ -1,0 +1,255 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Profile / Resume Data
+model Profile {
+  id           String  @id @default(cuid())
+  name         String
+  initials     String
+  url          String?
+  location     String
+  locationLink String?
+  avatarUrl    String?
+
+  // Translations
+  descriptionEn String @db.Text
+  descriptionFr String @db.Text
+  summaryEn     String @db.Text
+  summaryFr     String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contact   Contact?
+  skills    Skill[]
+  work      WorkExperience[]
+  education Education[]
+}
+
+model Contact {
+  id    String  @id @default(cuid())
+  email String
+  phone String?
+
+  profileId String  @unique
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  socials Social[]
+}
+
+model Social {
+  id        String  @id @default(cuid())
+  name      String
+  url       String
+  icon      String // Icon identifier (e.g., "github", "linkedin", "email")
+  showInNav Boolean @default(true)
+
+  contactId String
+  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String
+  category String? // e.g., "Frontend", "Backend", "Mobile", "Database"
+  order    Int     @default(0)
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model WorkExperience {
+  id       String  @id @default(cuid())
+  company  String
+  href     String?
+  logoUrl  String?
+  location String
+
+  // Translations
+  titleEn       String
+  titleFr       String
+  descriptionEn String @db.Text
+  descriptionFr String @db.Text
+
+  startDate String // Format: "Month Year" e.g., "December 2024"
+  endDate   String? // null means "Present"
+  isCurrent Boolean @default(false)
+  order     Int     @default(0)
+
+  badges String[] // Array of badge labels
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Education {
+  id      String  @id @default(cuid())
+  school  String
+  href    String?
+  logoUrl String?
+
+  // Translations
+  degreeEn      String
+  degreeFr      String
+  descriptionEn String? @db.Text
+  descriptionFr String? @db.Text
+
+  startDate String
+  endDate   String?
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Projects
+model Project {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  // Translations
+  titleEn       String
+  titleFr       String
+  subtitleEn    String?
+  subtitleFr    String?
+  descriptionEn String  @db.Text
+  descriptionFr String  @db.Text
+
+  // Key Features (JSON for flexibility)
+  keyFeaturesEn Json? // { "Feature1": "Description", ... }
+  keyFeaturesFr Json?
+
+  href     String?
+  dates    String?
+  active   Boolean @default(true)
+  featured Boolean @default(false)
+  order    Int     @default(0)
+
+  // Images
+  posterImage     String? // Main poster/cover image
+  mobileAppImages String[] // Array of mobile app screenshot URLs
+  webAppImages    String[] // Array of web app screenshot URLs
+
+  technologies String[] // Array of technology names
+
+  links ProjectLink[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectLink {
+  id   String @id @default(cuid())
+  type String // e.g., "Source Code", "Live Demo", "Play Store"
+  href String
+  icon String // Icon identifier
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// Blog Posts
+model BlogPost {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  // Translations
+  titleEn   String
+  titleFr   String
+  summaryEn String? @db.Text
+  summaryFr String? @db.Text
+  contentEn String  @db.Text
+  contentFr String  @db.Text
+
+  coverImage  String?
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+
+  tags String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// CV/Resume Files
+model CVFile {
+  id       String  @id @default(cuid())
+  language String // "en" or "fr"
+  fileName String
+  filePath String // Path or Cloudinary URL
+  version  String? // e.g., "2024-12"
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([language, isActive])
+}
+
+// User Authentication
+model User {
+  id        String  @id @default(cuid())
+  email     String  @unique
+  password  String // Hashed password
+  name      String
+  avatarUrl String?
+
+  role UserRole @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+// Reviews/Testimonials
+model Review {
+  id        String  @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  avatarUrl String?
+  content   String  @db.Text
+  rating    Int     @default(5)
+  featured  Boolean @default(false)
+  approved  Boolean @default(false) // Admin must approve visitor reviews
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Contact Messages from visitors
+model ContactMessage {
+  id      String  @id @default(cuid())
+  name    String
+  email   String
+  subject String?
+  message String  @db.Text
+  read    Boolean @default(false)
+  replied Boolean @default(false)
+
+  // Optional scheduling - REMOVED for Cal.com only strategy
+  // wantsCall     Boolean   @default(false)
+  // preferredDate DateTime?
+  // preferredTime String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

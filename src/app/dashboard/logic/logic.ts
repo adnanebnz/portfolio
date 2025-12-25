@@ -1,170 +1,109 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+
+import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/jwt";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 
 export async function getUserCount() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("roles").select("id");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data.length;
+  const count = await prisma.user.count();
+  return count;
 }
 
 export async function getPostsCount() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("posts").select("id");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data.length;
+  const count = await prisma.blogPost.count();
+  return count;
 }
 
-export async function getCommentsCount() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("comments").select("id");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data.length;
-}
 export async function getProjectsCount() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("projects").select("id");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data.length;
+  const count = await prisma.project.count();
+  return count;
 }
 
-export async function getReviewsCount() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("reviews").select("id");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data.length;
+export async function getWorkCount() {
+  const count = await prisma.workExperience.count();
+  return count;
 }
 
 export async function isUserAdmin() {
-  const supabase = createClient();
-  const { data, error } = await supabase.from("roles").select("isAdmin");
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data[0].isAdmin;
+  return await isAdmin();
 }
 
+// Add new project using Prisma
 export async function addNewProject(prevState: any, formData: FormData) {
-  const supabase = createClient();
-  const formDataSchema = z.object({
-    name: z.string().refine((val) => val.length > 0, {
-      message: "Name is required and cannot be empty",
-    }),
-    description: z
-      .string()
-      .optional()
-      .refine((val) => val === undefined || val.length > 0, {
-        message: "Description cannot be empty if provided",
-      }),
-    tools: z.array(z.string()).refine((val) => val.length > 0, {
-      message: "Tools array cannot be empty",
-    }),
-    dates: z
-      .string()
-      .optional()
-      .refine((val) => val === undefined || val.length > 0, {
-        message: "Dates cannot be empty if provided",
-      }),
-    ghlink: z.string().optional(),
-    demolink: z.string().optional(),
-    storelink: z.string().optional(),
-  });
-
-  const data = {
-    name: formData.get("name"),
-    description: formData.get("description"),
-    images: formData.getAll("images") as File[],
-    ghlink: formData.get("ghlink"),
-    demolink: formData.get("demolink"),
-    storelink: formData.get("storelink"),
-    tools: formData.getAll("tools") as string[],
-    dates: formData.get("dates"),
-  };
-
-  const result = formDataSchema.safeParse(data);
-
-  console.log(data);
-
-  if (!result.success) {
-    console.log(result.error.errors);
-    return { errors: result.error.errors };
+  const isAdminUser = await isAdmin();
+  if (!isAdminUser) {
+    return { errors: [{ message: "Unauthorized" }] };
   }
 
-  const uploadedImageUrls: string[] = [];
+  const name = formData.get("name") as string;
+  const description = formData.get("description") as string;
+  const tools = formData.getAll("tools") as string[];
+  const dates = formData.get("dates") as string;
+  const ghlink = formData.get("ghlink") as string;
+  const demolink = formData.get("demolink") as string;
+  const storelink = formData.get("storelink") as string;
 
-  if (data.images.length !== 0) {
-    console.log(data.images.length);
-    for (const image of data.images) {
-      console.log(image.name);
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("main-storage")
-        .upload(`images/${image.name}${Date.now()}`, image);
-
-      if (uploadError) {
-        console.error("Error uploading image:", uploadError.message);
-        return { errors: [{ message: uploadError.message }] };
-      }
-
-      const imageUrl = supabase.storage
-        .from("main-storage")
-        .getPublicUrl(uploadData.path).data;
-
-      uploadedImageUrls.push(imageUrl.publicUrl);
-    }
+  if (!name) {
+    return { errors: [{ message: "Name is required" }] };
   }
 
-  const mergedData = {
-    ...result.data,
-    images: uploadedImageUrls,
-    slug: createSlug(result.data.name),
-  };
+  const slug = name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
 
-  const { error } = await supabase.from("projects").insert([mergedData]);
+  try {
+    await prisma.project.create({
+      data: {
+        slug,
+        titleEn: name,
+        titleFr: name,
+        descriptionEn: description || "",
+        descriptionFr: description || "",
+        technologies: tools.filter((t) => t),
+        dates: dates || null,
+        href: demolink || null,
+        links: {
+          create: [
+            ...(ghlink
+              ? [{ type: "Source Code", href: ghlink, icon: "github" }]
+              : []),
+            ...(demolink
+              ? [{ type: "Live Demo", href: demolink, icon: "globe" }]
+              : []),
+            ...(storelink
+              ? [{ type: "Store", href: storelink, icon: "store" }]
+              : []),
+          ],
+        },
+      },
+    });
 
-  if (error) {
-    return {
-      errors: [{ message: error.message }],
-    };
+    revalidatePath("/dashboard", "layout");
+    redirect("/dashboard");
+  } catch (error) {
+    console.error("Error adding project:", error);
+    return { errors: [{ message: "Failed to add project" }] };
   }
-
-  revalidatePath("/dashboard", "layout");
-  redirect("/dashboard");
 }
 
-function createSlug(text: string): string {
-  return text
-    .toLowerCase() // Convert to lowercase
-    .replace(/[^a-z0-9\s]/g, "") // Remove non-alphanumeric characters except spaces
-    .trim() // Remove leading and trailing spaces
-    .replace(/\s+/g, "-"); // Replace spaces with hyphens
-}
-
+// Delete project using Prisma
 export async function deleteProject(slug: string) {
-  const supabase = createClient();
-  const { error } = await supabase.from("projects").delete().match({ slug });
-  if (error) {
-    console.error("Error deleting project:", error.message);
-    return error;
+  const isAdminUser = await isAdmin();
+  if (!isAdminUser) {
+    return { error: "Unauthorized" };
   }
-  revalidatePath("/dashboard", "layout");
-  redirect("/dashboard");
+
+  try {
+    await prisma.project.delete({
+      where: { slug },
+    });
+    revalidatePath("/dashboard", "layout");
+    redirect("/dashboard");
+  } catch (error) {
+    console.error("Error deleting project:", error);
+    return { error: "Failed to delete project" };
+  }
 }

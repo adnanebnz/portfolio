@@ -40,9 +40,6 @@ interface ContactMessage {
   email: string;
   subject: string;
   message: string;
-  wantsCall: boolean;
-  preferredDate: string | null;
-  preferredTime: string | null;
   read: boolean;
   replied: boolean;
   createdAt: string;
@@ -75,15 +72,6 @@ function MessageCard({
                   New
                 </Badge>
               )}
-              {message.wantsCall && (
-                <Badge
-                  variant="secondary"
-                  className="text-xs flex items-center gap-1"
-                >
-                  <Phone className="w-3 h-3" />
-                  Wants Call
-                </Badge>
-              )}
             </CardTitle>
             <p className="text-sm text-muted-foreground flex items-center gap-2">
               <Mail className="w-4 h-4" />
@@ -104,26 +92,6 @@ function MessageCard({
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm whitespace-pre-wrap">{message.message}</p>
-
-        {message.wantsCall &&
-          (message.preferredDate || message.preferredTime) && (
-            <div className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
-              <AlertCircle className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">Preferred Call Time:</span>
-              {message.preferredDate && (
-                <span className="text-sm flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {new Date(message.preferredDate).toLocaleDateString()}
-                </span>
-              )}
-              {message.preferredTime && (
-                <span className="text-sm flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  {message.preferredTime}
-                </span>
-              )}
-            </div>
-          )}
 
         <div className="flex items-center gap-2 pt-2 border-t">
           <Button
@@ -268,7 +236,6 @@ export default function MessagesPage() {
   const unreadMessages = messages.filter((m) => !m.read);
   const readMessages = messages.filter((m) => m.read && !m.replied);
   const repliedMessages = messages.filter((m) => m.replied);
-  const callRequests = messages.filter((m) => m.wantsCall && !m.replied);
 
   if (isLoading) {
     return <SkeletonPage type="reviews" />;
@@ -290,20 +257,11 @@ export default function MessagesPage() {
           <Badge variant="outline" className="text-lg py-1 px-3">
             {unreadMessages.length} Unread
           </Badge>
-          {callRequests.length > 0 && (
-            <Badge
-              variant="destructive"
-              className="text-lg py-1 px-3 flex items-center gap-1"
-            >
-              <Phone className="w-4 h-4" />
-              {callRequests.length} Call Requests
-            </Badge>
-          )}
         </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="unread" className="flex items-center gap-2">
             Unread
             {unreadMessages.length > 0 && (
@@ -325,15 +283,6 @@ export default function MessagesPage() {
             {repliedMessages.length > 0 && (
               <Badge variant="secondary" className="ml-1">
                 {repliedMessages.length}
-              </Badge>
-            )}
-          </TabsTrigger>
-          <TabsTrigger value="calls" className="flex items-center gap-2">
-            <Phone className="w-4 h-4" />
-            Call Requests
-            {callRequests.length > 0 && (
-              <Badge variant="destructive" className="ml-1">
-                {callRequests.length}
               </Badge>
             )}
           </TabsTrigger>
@@ -398,30 +347,6 @@ export default function MessagesPage() {
             </Card>
           ) : (
             repliedMessages.map((message) => (
-              <MessageCard
-                key={message.id}
-                message={message}
-                onToggleRead={toggleRead}
-                onToggleReplied={toggleReplied}
-                onDelete={deleteMessage}
-              />
-            ))
-          )}
-        </TabsContent>
-
-        <TabsContent value="calls" className="mt-6">
-          {callRequests.length === 0 ? (
-            <Card>
-              <CardContent className="flex flex-col items-center justify-center py-12">
-                <Phone className="w-12 h-12 text-muted-foreground mb-4" />
-                <p className="text-lg font-medium">No pending call requests</p>
-                <p className="text-muted-foreground">
-                  Call requests will appear here
-                </p>
-              </CardContent>
-            </Card>
-          ) : (
-            callRequests.map((message) => (
               <MessageCard
                 key={message.id}
                 message={message}

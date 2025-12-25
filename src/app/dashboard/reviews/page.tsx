@@ -184,6 +184,7 @@ export default function ReviewsPage() {
       <CardHeader className="flex flex-row items-start justify-between space-y-0">
         <div className="flex gap-4">
           {item.avatarUrl ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={item.avatarUrl}
               alt={item.name}

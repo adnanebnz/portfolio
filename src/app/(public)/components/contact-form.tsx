@@ -53,9 +53,6 @@ export default function ContactFormComponent() {
     email: "",
     subject: "",
     message: "",
-    wantsCall: false,
-    preferredDate: "",
-    preferredTime: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState<boolean>(false);
@@ -83,9 +80,6 @@ export default function ContactFormComponent() {
           email: formData.email,
           subject: formData.subject || "Contact Form Submission",
           message: formData.message,
-          wantsCall: formData.wantsCall,
-          preferredDate: formData.preferredDate || null,
-          preferredTime: formData.preferredTime || null,
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -97,9 +91,6 @@ export default function ContactFormComponent() {
           email: "",
           subject: "",
           message: "",
-          wantsCall: false,
-          preferredDate: "",
-          preferredTime: "",
         });
       } else {
         const data = await response.json();
@@ -245,77 +236,6 @@ export default function ContactFormComponent() {
               </motion.div>
 
               {/* Schedule a Call Option */}
-              <motion.div variants={itemVariants} className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Checkbox
-                    id="wantsCall"
-                    checked={formData.wantsCall}
-                    onCheckedChange={(checked) =>
-                      setFormData({
-                        ...formData,
-                        wantsCall: checked as boolean,
-                      })
-                    }
-                    className="border-border/40"
-                  />
-                  <Label
-                    htmlFor="wantsCall"
-                    className="flex items-center space-x-2 text-sm font-medium cursor-pointer"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>
-                      {t("form.scheduleCall") || "I'd like to schedule a call"}
-                    </span>
-                  </Label>
-                </div>
-
-                {formData.wantsCall && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-6"
-                  >
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="preferredDate"
-                        className="flex items-center space-x-2 text-sm font-medium"
-                      >
-                        <Calendar className="w-4 h-4" />
-                        <span>
-                          {t("form.preferredDate") || "Preferred Date"}
-                        </span>
-                      </Label>
-                      <Input
-                        id="preferredDate"
-                        type="date"
-                        value={formData.preferredDate}
-                        onChange={handleChange}
-                        min={new Date().toISOString().split("T")[0]}
-                        className="h-10 bg-background/50 border-border/40 focus:border-primary/50 transition-all duration-300"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label
-                        htmlFor="preferredTime"
-                        className="flex items-center space-x-2 text-sm font-medium"
-                      >
-                        <Clock className="w-4 h-4" />
-                        <span>
-                          {t("form.preferredTime") || "Preferred Time"}
-                        </span>
-                      </Label>
-                      <Input
-                        id="preferredTime"
-                        type="time"
-                        value={formData.preferredTime}
-                        onChange={handleChange}
-                        className="h-10 bg-background/50 border-border/40 focus:border-primary/50 transition-all duration-300"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-              </motion.div>
 
               {/* Error Message */}
               {error && (

@@ -24,15 +24,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const {
-      name,
-      email,
-      subject,
-      message,
-      wantsCall,
-      preferredDate,
-      preferredTime,
-    } = body;
+    const { name, email, subject, message } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -47,9 +39,6 @@ export async function POST(request: Request) {
         email,
         subject: subject || "Contact Form Submission",
         message,
-        wantsCall: wantsCall || false,
-        preferredDate: preferredDate || null,
-        preferredTime: preferredTime || null,
       },
     });
 

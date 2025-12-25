@@ -322,6 +322,7 @@ export default function ReviewsPage() {
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4 mb-4">
                         {review.avatarUrl ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
                           <img
                             src={review.avatarUrl}
                             alt={review.name}

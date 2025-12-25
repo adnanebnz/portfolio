@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.15.4",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "esbuild",
+      "prisma"
+    ]
+  },
   "engines": {
     "node": "20.x"
   },
@@ -12,6 +19,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
+    "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",

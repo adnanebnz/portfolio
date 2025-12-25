@@ -34,7 +34,9 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
     technologies: project.technologies,
     dates: project.dates,
     keyFeatures:
-      (locale === "fr" ? project.keyFeaturesFr : project.keyFeaturesEn) || {},
+      ((locale === "fr"
+        ? project.keyFeaturesFr
+        : project.keyFeaturesEn) as Record<string, string>) || {},
     links: project.links.map((link) => ({
       type: link.type,
       href: link.href,

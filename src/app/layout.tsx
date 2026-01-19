@@ -64,6 +64,9 @@ export default function RootLayout({
       suppressHydrationWarning
       style={{ scrollBehavior: "smooth" }}
     >
+      <head>
+     <script defer src="https://umami.adnane-benzerdjeb.com/script.js" data-website-id="d859215f-5e40-4351-91e8-03b3051018e1"></script>
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased mx-auto",

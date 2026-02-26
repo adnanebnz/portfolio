@@ -21,4 +21,4 @@ services:
 
 networks:
   npm-network:
-    driver: bridge
+    external: true

@@ -5,9 +5,9 @@
     "projects": "Projets",
     "reviews": "Livre d'Or",
     "schedule": "Rendez-vous",
-    "login": "Connexion",
     "dashboard": "Tableau de bord",
-    "profile": "Profil"
+    "profile": "Profil",
+    "logout": "Déconnexion"
   },
   "hero": {
     "greeting": "Salut, je suis",

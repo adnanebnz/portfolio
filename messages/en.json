@@ -5,9 +5,9 @@
     "projects": "Projects",
     "reviews": "Guest Book",
     "schedule": "Schedule",
-    "login": "Login",
     "dashboard": "Dashboard",
-    "profile": "Profile"
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "hero": {
     "greeting": "Hi, I'm",

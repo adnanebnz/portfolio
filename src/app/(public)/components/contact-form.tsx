@@ -264,7 +264,7 @@ export default function ContactFormComponent() {
                 >
                   <Shield className="w-4 h-4" />
                   <span>
-                    {t("form.captcha") || `What is ${captchaA} + ${captchaB}?`}
+                    {t("form.captcha", { a: captchaA, b: captchaB })}
                   </span>
                 </Label>
                 <div className="flex gap-2">
@@ -276,7 +276,7 @@ export default function ContactFormComponent() {
                     <Input
                       id="captchaSum"
                       type="number"
-                      placeholder={t("form.captchaPlaceholder") || "Enter sum"}
+                      placeholder={t("form.captchaPlaceholder")}
                       value={formData.captchaSum}
                       onChange={handleChange}
                       required

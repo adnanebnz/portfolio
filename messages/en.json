@@ -27,7 +27,7 @@
   },
   "about": {
     "title": "About Me",
-    "experience": "Work Experience", 
+    "experience": "Work Experience",
     "skills": "Skills & Technologies",
     "education": "Education",
     "craftingDigitalExperiences": "Crafting Digital Experiences",
@@ -35,7 +35,7 @@
     "experienceYears": "Experience",
     "experienceValue": "2+ Years",
     "projectsCount": "Projects",
-    "technologiesCount": "Technologies", 
+    "technologiesCount": "Technologies",
     "coffeeCups": "Coffee Cups",
     "coffeeCupsValue": "∞"
   },
@@ -54,7 +54,7 @@
     },
     "eurequat": {
       "company": "Eurequat Algérie",
-      "title": "Software Engineer Internship", 
+      "title": "Software Engineer Internship",
       "description": "During my internship at Eurequat Algérie, I developed a robust XML to ZPL conversion package integrated into their WinForms project. Utilizing C# and Microsoft SQL Server, I created a solution that converts XML-based label templates into ZPL (Zebra Programming Language) for seamless label printing. This package allows for predefined label designs to be efficiently translated into ZPL code, ensuring consistent and high-quality label outputs."
     },
     "techway": {
@@ -77,7 +77,7 @@
     "webApp": "Web App",
     "mobileApp": "Mobile App",
     "featuredWork": "Featured Work",
-    "myLatestProjects": "My Latest Projects", 
+    "myLatestProjects": "My Latest Projects",
     "projectsDescription": "I've worked on a variety of projects, from simple websites to complex applications. Here are some of my favorites that showcase my skills and passion for development."
   },
   "contact": {
@@ -85,7 +85,7 @@
     "subtitle": "Let's Start a Conversation",
     "description": "Fill out the form below and I'll get back to you as soon as possible.",
     "getInTouch": "Get in Touch",
-    "letsConnect": "Let's Connect", 
+    "letsConnect": "Let's Connect",
     "contactDescription": "Have a project in mind or just want to chat? I'd love to hear from you. Let's create something amazing together!",
     "form": {
       "name": "Full Name",
@@ -105,7 +105,9 @@
       "successDescription": "I'll get back to you within 24 hours. Promise! ✨",
       "alternativeContact": "Prefer a different way to connect?",
       "emailLink": "Email",
-      "linkedin": "LinkedIn"
+      "linkedin": "LinkedIn",
+      "captcha": "What is {a} + {b}?",
+      "captchaPlaceholder": "Enter sum"
     }
   },
   "skills": {

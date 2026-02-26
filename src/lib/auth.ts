@@ -125,8 +125,8 @@ export async function verifyAuth(): Promise<JWTPayload | null> {
   // This function is meant to be called from server-side API routes
   // It extracts and verifies the JWT token from cookies
   const { cookies } = await import("next/headers");
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth-token")?.value;
 
   if (!token) {
     return null;

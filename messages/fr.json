@@ -110,7 +110,9 @@
       "successDescription": "Je vous répondrai dans les 24 heures. Promis ! ✨",
       "alternativeContact": "Préférez-vous une autre façon de vous connecter ?",
       "emailLink": "Email",
-      "linkedin": "LinkedIn"
+      "linkedin": "LinkedIn",
+      "captcha": "Combien font {a} + {b} ?",
+      "captchaPlaceholder": "Entrez la somme"
     }
   },
   "blog": {

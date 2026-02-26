@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import {
   Send,
@@ -18,6 +17,8 @@ import {
   Calendar,
   Clock,
   Phone,
+  Shield,
+  RefreshCw,
 } from "lucide-react";
 import Modal from "./modal";
 import { useTranslations } from "@/hooks/use-translations";
@@ -53,6 +54,16 @@ export default function ContactFormComponent() {
     email: "",
     subject: "",
     message: "",
+    captchaSum: "",
+  });
+  const [captchaA, setCaptchaA] = useState(0);
+  const [captchaB, setCaptchaB] = useState(0);
+  const [captchaAnswerError, setCaptchaAnswerError] = useState(false);
+
+  // Initialize Captcha
+  useState(() => {
+    setCaptchaA(Math.floor(Math.random() * 10) + 1);
+    setCaptchaB(Math.floor(Math.random() * 10) + 1);
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState<boolean>(false);
@@ -68,6 +79,14 @@ export default function ContactFormComponent() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (parseInt(formData.captchaSum) !== captchaA + captchaB) {
+      setCaptchaAnswerError(true);
+      setError("Incorrect captcha answer.");
+      return;
+    }
+
+    setCaptchaAnswerError(false);
     setIsSubmitting(true);
     setError(null);
 
@@ -91,6 +110,7 @@ export default function ContactFormComponent() {
           email: "",
           subject: "",
           message: "",
+          captchaSum: "",
         });
       } else {
         const data = await response.json();
@@ -235,8 +255,51 @@ export default function ContactFormComponent() {
                 </motion.div>
               </motion.div>
 
-              {/* Schedule a Call Option */}
-
+              {/* Captcha Field */}
+              <motion.div variants={itemVariants} className="space-y-3">
+                <Label
+                  htmlFor="captchaSum"
+                  className={`flex items-center space-x-2 text-sm font-medium ${captchaAnswerError ? "text-red-500" : ""
+                    }`}
+                >
+                  <Shield className="w-4 h-4" />
+                  <span>
+                    {t("form.captcha") || `What is ${captchaA} + ${captchaB}?`}
+                  </span>
+                </Label>
+                <div className="flex gap-2">
+                  <motion.div
+                    whileFocus={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="flex-1"
+                  >
+                    <Input
+                      id="captchaSum"
+                      type="number"
+                      placeholder={t("form.captchaPlaceholder") || "Enter sum"}
+                      value={formData.captchaSum}
+                      onChange={handleChange}
+                      required
+                      className={`h-12 bg-background/50 border-border/40 focus:border-primary/50 transition-all duration-300 ${captchaAnswerError ? "border-red-500 focus:border-red-500" : ""
+                        }`}
+                    />
+                  </motion.div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="h-12 px-3"
+                    onClick={() => {
+                      setCaptchaA(Math.floor(Math.random() * 10) + 1);
+                      setCaptchaB(Math.floor(Math.random() * 10) + 1);
+                      setFormData((prev) => ({ ...prev, captchaSum: "" }));
+                      setCaptchaAnswerError(false);
+                    }}
+                    title="Refresh Math Question"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                  </Button>
+                </div>
+              </motion.div>
               {/* Error Message */}
               {error && (
                 <motion.div

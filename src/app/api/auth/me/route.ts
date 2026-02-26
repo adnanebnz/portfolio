@@ -1,26 +1,27 @@
 import { NextResponse } from "next/server";
-import { getSession } from "@/lib/jwt";
-import { getUserById } from "@/lib/auth";
+import prisma from "@/lib/prisma";
+import { verifyAuth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
-// GET /api/auth/me - Get current user
 export async function GET() {
   try {
-    const session = await getSession();
-
-    if (!session) {
-      return NextResponse.json({ user: null }, { status: 401 });
+    const auth = await verifyAuth();
+    if (!auth) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = await getUserById(session.userId);
+    const user = await prisma.user.findUnique({
+      where: { id: auth.userId },
+      select: { email: true },
+    });
 
     if (!user) {
-      return NextResponse.json({ user: null }, { status: 401 });
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ user });
+    return NextResponse.json({ email: user.email });
   } catch (error) {
-    return NextResponse.json({ user: null }, { status: 401 });
+    return NextResponse.json({ error: "Failed to fetch user" }, { status: 500 });
   }
 }

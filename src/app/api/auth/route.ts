@@ -23,19 +23,28 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password } = result.data;
-    const { token, user } = await authenticateUser(email, password);
+    const { token, refreshToken, user } = await authenticateUser(email, password);
 
     const response = NextResponse.json({
       message: "Login successful",
       user,
     });
 
-    // Set HTTP-only cookie
+    // Set HTTP-only cookie for access token
     response.cookies.set("auth-token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: "/",
+    });
+
+    // Set HTTP-only cookie for refresh token
+    response.cookies.set("refresh-token", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 365, // 365 days (1 year)
       path: "/",
     });
 

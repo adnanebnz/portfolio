@@ -1,6 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  ReactFlow,
+  Background,
+  BackgroundVariant,
+  Handle,
+  Position,
+  type NodeProps,
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 import {
   Smartphone,
   Globe,
@@ -16,268 +24,533 @@ import {
   Building2,
   UserCog,
   HardHat,
-  ChevronDown,
 } from "lucide-react";
 
 interface ArchitectureDiagramProps {
   projectSlug: string;
 }
 
-const fade = (delay = 0) => ({
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut", delay },
-  },
-});
+// ─── Custom node types ───────────────────────────────────────────────────────
 
-function Connector() {
+function RoleNode({ data }: NodeProps) {
+  const d = data as {
+    label: string;
+    icon: React.ReactNode;
+    color: string;
+  };
   return (
-    <div className="flex justify-center my-1">
-      <ChevronDown className="w-5 h-5 text-border" />
+    <div
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border
+        bg-${d.color}-500/10 border-${d.color}-500/30 text-${d.color}-600 dark:text-${d.color}-400`}
+    >
+      {d.icon}
+      {d.label}
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent !border-0"
+      />
     </div>
   );
 }
 
+function AppNode({ data }: NodeProps) {
+  const d = data as {
+    label: string;
+    sub: string;
+    icon: React.ReactNode;
+    color: string;
+  };
+  return (
+    <div
+      className={`flex flex-col items-center gap-2 rounded-xl p-4 w-[120px]
+        bg-${d.color}-500/5 border border-${d.color}-500/20 shadow-sm`}
+    >
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent !border-0"
+      />
+      <div className={`p-2.5 rounded-xl bg-${d.color}-500/10`}>{d.icon}</div>
+      <span className="text-xs font-semibold text-foreground text-center leading-tight">
+        {d.label}
+      </span>
+      <span className="text-[10px] text-muted-foreground text-center">
+        {d.sub}
+      </span>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent !border-0"
+      />
+    </div>
+  );
+}
+
+function ProxyNode({ data }: NodeProps) {
+  const d = data as { label: string; sub: string; icon: React.ReactNode };
+  return (
+    <div className="flex items-center gap-3 px-6 py-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/25 shadow-sm w-[380px]">
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent !border-0"
+      />
+      {d.icon}
+      <div>
+        <p className="text-sm font-semibold text-foreground">{d.label}</p>
+        <p className="text-[10px] text-muted-foreground">{d.sub}</p>
+      </div>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent !border-0"
+      />
+    </div>
+  );
+}
+
+function BackendNode({ data }: NodeProps) {
+  const d = data as { apis: string[]; icon: React.ReactNode };
+  return (
+    <div className="rounded-xl bg-red-500/5 border border-red-500/25 p-5 shadow-sm w-[380px]">
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent !border-0"
+      />
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 rounded-lg bg-red-500/10">{d.icon}</div>
+        <div>
+          <p className="text-sm font-bold text-foreground">
+            Django REST Framework
+          </p>
+          <p className="text-[10px] text-muted-foreground">Backend API</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        {d.apis.map((api: string) => (
+          <div
+            key={api}
+            className="px-2 py-1.5 bg-background rounded-lg text-center text-[10px] font-medium border border-border/50"
+          >
+            {api}
+          </div>
+        ))}
+      </div>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent !border-0"
+      />
+    </div>
+  );
+}
+
+function ServiceNode({ data }: NodeProps) {
+  const d = data as {
+    label: string;
+    sub: string;
+    icon: React.ReactNode;
+    color: string;
+  };
+  return (
+    <div
+      className={`flex flex-col items-center gap-2 rounded-xl p-4 w-[120px] bg-${d.color}-500/5 border border-${d.color}-500/20 shadow-sm`}
+    >
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent !border-0"
+      />
+      <div className={`p-2.5 rounded-xl bg-${d.color}-500/10`}>{d.icon}</div>
+      <span className="text-xs font-semibold text-foreground text-center">
+        {d.label}
+      </span>
+      <span className="text-[10px] text-muted-foreground text-center leading-tight">
+        {d.sub}
+      </span>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        className="!bg-transparent !border-0"
+      />
+    </div>
+  );
+}
+
+function DevOpsNode({ data }: NodeProps) {
+  const d = data as {
+    tools: { label: string; icon: React.ReactNode; color: string }[];
+  };
+  return (
+    <div className="rounded-xl bg-violet-500/5 border border-violet-500/20 px-6 py-4 shadow-sm w-[500px]">
+      <Handle
+        type="target"
+        position={Position.Top}
+        className="!bg-transparent !border-0"
+      />
+      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider text-center mb-4">
+        DevOps &amp; Monitoring
+      </p>
+      <div className="flex flex-wrap justify-center gap-5">
+        {d.tools.map(
+          ({
+            label,
+            icon,
+            color,
+          }: {
+            label: string;
+            icon: React.ReactNode;
+            color: string;
+          }) => (
+            <div key={label} className="flex flex-col items-center gap-1.5">
+              <div className={`text-${color}-400`}>{icon}</div>
+              <span className="text-[10px] text-muted-foreground whitespace-nowrap">
+                {label}
+              </span>
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  );
+}
+
+const nodeTypes = {
+  role: RoleNode,
+  app: AppNode,
+  proxy: ProxyNode,
+  backend: BackendNode,
+  service: ServiceNode,
+  devops: DevOpsNode,
+};
+
+// ─── Nodes & Edges ────────────────────────────────────────────────────────────
+
+const nodes = [
+  // Row 0 – roles
+  {
+    id: "r-admin",
+    type: "role",
+    position: { x: 30, y: 0 },
+    data: {
+      label: "Admin",
+      color: "blue",
+      icon: <Shield className="w-3 h-3" />,
+    },
+  },
+  {
+    id: "r-client",
+    type: "role",
+    position: { x: 165, y: 0 },
+    data: {
+      label: "Client",
+      color: "green",
+      icon: <Building2 className="w-3 h-3" />,
+    },
+  },
+  {
+    id: "r-manager",
+    type: "role",
+    position: { x: 300, y: 0 },
+    data: {
+      label: "Sector Manager",
+      color: "orange",
+      icon: <UserCog className="w-3 h-3" />,
+    },
+  },
+  {
+    id: "r-agent",
+    type: "role",
+    position: { x: 460, y: 0 },
+    data: {
+      label: "Agent",
+      color: "purple",
+      icon: <HardHat className="w-3 h-3" />,
+    },
+  },
+
+  // Row 1 – apps
+  {
+    id: "app-web",
+    type: "app",
+    position: { x: 0, y: 80 },
+    data: {
+      label: "Web Admin",
+      sub: "Flutter Web",
+      color: "blue",
+      icon: <Globe className="w-7 h-7 text-blue-500" />,
+    },
+  },
+  {
+    id: "app-client",
+    type: "app",
+    position: { x: 140, y: 80 },
+    data: {
+      label: "Client App",
+      sub: "iOS/Android",
+      color: "green",
+      icon: <Smartphone className="w-7 h-7 text-green-500" />,
+    },
+  },
+  {
+    id: "app-manager",
+    type: "app",
+    position: { x: 280, y: 80 },
+    data: {
+      label: "Manager App",
+      sub: "iOS/Android",
+      color: "orange",
+      icon: <Smartphone className="w-7 h-7 text-orange-500" />,
+    },
+  },
+  {
+    id: "app-agent",
+    type: "app",
+    position: { x: 420, y: 80 },
+    data: {
+      label: "Agent App",
+      sub: "iOS/Android",
+      color: "purple",
+      icon: <Smartphone className="w-7 h-7 text-purple-500" />,
+    },
+  },
+
+  // Row 2 – nginx
+  {
+    id: "nginx",
+    type: "proxy",
+    position: { x: 70, y: 280 },
+    data: {
+      label: "Nginx Proxy Manager",
+      sub: "SSL · Load Balancing · Reverse Proxy",
+      icon: <Cloud className="w-5 h-5 text-cyan-500 shrink-0" />,
+    },
+  },
+
+  // Row 3 – backend
+  {
+    id: "backend",
+    type: "backend",
+    position: { x: 70, y: 410 },
+    data: {
+      icon: <Server className="w-6 h-6 text-red-500" />,
+      apis: [
+        "Users API",
+        "Jobs API",
+        "Timeclock API",
+        "Contracts API",
+        "Reports API",
+        "Auth API",
+      ],
+    },
+  },
+
+  // Row 4 – services
+  {
+    id: "svc-pg",
+    type: "service",
+    position: { x: 70, y: 620 },
+    data: {
+      label: "PostgreSQL",
+      sub: "Database",
+      color: "indigo",
+      icon: <Database className="w-6 h-6 text-indigo-500" />,
+    },
+  },
+  {
+    id: "svc-fcm",
+    type: "service",
+    position: { x: 210, y: 620 },
+    data: {
+      label: "FCM",
+      sub: "Push Notifications",
+      color: "amber",
+      icon: <Bell className="w-6 h-6 text-amber-500" />,
+    },
+  },
+  {
+    id: "svc-adminer",
+    type: "service",
+    position: { x: 350, y: 620 },
+    data: {
+      label: "Adminer",
+      sub: "DB Management",
+      color: "slate",
+      icon: <Database className="w-6 h-6 text-slate-500" />,
+    },
+  },
+
+  // Row 5 – devops
+  {
+    id: "devops",
+    type: "devops",
+    position: { x: 70, y: 800 },
+    data: {
+      tools: [
+        {
+          label: "Docker",
+          color: "sky",
+          icon: <Container className="w-5 h-5" />,
+        },
+        {
+          label: "GitHub Actions",
+          color: "green",
+          icon: <GitBranch className="w-5 h-5" />,
+        },
+        { label: "Azure", color: "cyan", icon: <Cloud className="w-5 h-5" /> },
+        {
+          label: "Grafana",
+          color: "orange",
+          icon: <BarChart3 className="w-5 h-5" />,
+        },
+        {
+          label: "Prometheus",
+          color: "red",
+          icon: <BarChart3 className="w-5 h-5" />,
+        },
+        {
+          label: "Sentry",
+          color: "purple",
+          icon: <AlertTriangle className="w-5 h-5" />,
+        },
+      ],
+    },
+  },
+];
+
+const edgeStyle = { stroke: "#94a3b8", strokeWidth: 1.5 };
+const edges = [
+  // roles → apps
+  {
+    id: "e-r-admin-app",
+    source: "r-admin",
+    target: "app-web",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-r-client-app",
+    source: "r-client",
+    target: "app-client",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-r-manager-app",
+    source: "r-manager",
+    target: "app-manager",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-r-agent-app",
+    source: "r-agent",
+    target: "app-agent",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  // apps → nginx
+  {
+    id: "e-web-nginx",
+    source: "app-web",
+    target: "nginx",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-client-nginx",
+    source: "app-client",
+    target: "nginx",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-manager-nginx",
+    source: "app-manager",
+    target: "nginx",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-agent-nginx",
+    source: "app-agent",
+    target: "nginx",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  // nginx → backend
+  {
+    id: "e-nginx-be",
+    source: "nginx",
+    target: "backend",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  // backend → services
+  {
+    id: "e-be-pg",
+    source: "backend",
+    target: "svc-pg",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-be-fcm",
+    source: "backend",
+    target: "svc-fcm",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  {
+    id: "e-be-adminer",
+    source: "backend",
+    target: "svc-adminer",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+  // services → devops
+  {
+    id: "e-svc-devops",
+    source: "svc-fcm",
+    target: "devops",
+    style: edgeStyle,
+    type: "smoothstep",
+  },
+];
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export function SmartCleanArchitectureDiagram() {
   return (
-    <motion.div
-      className="w-full rounded-2xl border border-border/60 bg-card p-6 md:p-10 flex flex-col items-center gap-0"
-      initial="hidden"
-      animate="visible"
+    <div
+      className="w-full rounded-2xl border border-border/60 bg-background overflow-hidden"
+      style={{ height: 960 }}
     >
-      {/* Title */}
-      <motion.h3
-        className="text-lg md:text-xl font-bold mb-8 text-foreground"
-        variants={fade(0)}
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        fitView
+        fitViewOptions={{ padding: 0.12 }}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
+        panOnDrag={false}
+        zoomOnScroll={false}
+        zoomOnPinch={false}
+        zoomOnDoubleClick={false}
+        proOptions={{ hideAttribution: true }}
       >
-        SmartClean System Architecture
-      </motion.h3>
-
-      {/* ── Row 1: User Role Pills ── */}
-      <motion.div
-        className="flex flex-wrap justify-center gap-2 mb-6"
-        variants={fade(0.05)}
-      >
-        {[
-          { label: "Admin", color: "blue", Icon: Shield },
-          { label: "Client", color: "green", Icon: Building2 },
-          { label: "Sector Manager", color: "orange", Icon: UserCog },
-          { label: "Agent", color: "purple", Icon: HardHat },
-        ].map(({ label, color, Icon }) => (
-          <span
-            key={label}
-            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-              bg-${color}-500/10 border border-${color}-500/30 text-${color}-600 dark:text-${color}-400`}
-          >
-            <Icon className="w-3 h-3" />
-            {label}
-          </span>
-        ))}
-      </motion.div>
-
-      {/* ── Row 2: Client Apps ── */}
-      <motion.div
-        className="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-3"
-        variants={fade(0.1)}
-      >
-        {[
-          {
-            label: "Web Admin",
-            sub: "Flutter Web",
-            Icon: Globe,
-            color: "blue",
-          },
-          {
-            label: "Client App",
-            sub: "iOS / Android",
-            Icon: Smartphone,
-            color: "green",
-          },
-          {
-            label: "Manager App",
-            sub: "iOS / Android",
-            Icon: Smartphone,
-            color: "orange",
-          },
-          {
-            label: "Agent App",
-            sub: "iOS / Android",
-            Icon: Smartphone,
-            color: "purple",
-          },
-        ].map(({ label, sub, Icon, color }) => (
-          <div
-            key={label}
-            className={`flex flex-col items-center gap-2 rounded-xl p-4
-              bg-${color}-500/5 border border-${color}-500/20`}
-          >
-            <div className={`p-2.5 rounded-xl bg-${color}-500/10`}>
-              <Icon className={`w-7 h-7 text-${color}-500`} />
-            </div>
-            <span className="text-xs font-semibold text-foreground">
-              {label}
-            </span>
-            <span className="text-[10px] text-muted-foreground">{sub}</span>
-          </div>
-        ))}
-      </motion.div>
-
-      <Connector />
-
-      {/* ── Row 3: Nginx ── */}
-      <motion.div className="w-full max-w-2xl" variants={fade(0.15)}>
-        <div className="flex items-center justify-center gap-3 px-5 py-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/25">
-          <Cloud className="w-5 h-5 text-cyan-500 shrink-0" />
-          <div>
-            <p className="text-sm font-semibold text-foreground">
-              Nginx Proxy Manager
-            </p>
-            <p className="text-[10px] text-muted-foreground">
-              SSL · Load Balancing · Reverse Proxy
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      <Connector />
-
-      {/* ── Row 4: Django Backend ── */}
-      <motion.div className="w-full max-w-2xl" variants={fade(0.2)}>
-        <div className="rounded-xl bg-red-500/5 border border-red-500/25 p-5">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-lg bg-red-500/10">
-              <Server className="w-6 h-6 text-red-500" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-foreground">
-                Django REST Framework
-              </p>
-              <p className="text-[10px] text-muted-foreground">Backend API</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {[
-              "Users API",
-              "Jobs API",
-              "Timeclock API",
-              "Contracts API",
-              "Reports API",
-              "Auth API",
-            ].map((api) => (
-              <div
-                key={api}
-                className="px-2 py-1.5 bg-background rounded-lg text-center text-[10px] font-medium border border-border/50"
-              >
-                {api}
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      <Connector />
-
-      {/* ── Row 5: Data / Services ── */}
-      <motion.div
-        className="w-full max-w-2xl grid grid-cols-3 gap-3"
-        variants={fade(0.25)}
-      >
-        {[
-          {
-            label: "PostgreSQL",
-            sub: "Database",
-            Icon: Database,
-            color: "indigo",
-          },
-          {
-            label: "FCM",
-            sub: "Push Notifications",
-            Icon: Bell,
-            color: "amber",
-          },
-          {
-            label: "Adminer",
-            sub: "DB Management",
-            Icon: Database,
-            color: "slate",
-          },
-        ].map(({ label, sub, Icon, color }) => (
-          <div
-            key={label}
-            className={`flex flex-col items-center gap-2 rounded-xl p-4
-              bg-${color}-500/5 border border-${color}-500/20`}
-          >
-            <div className={`p-2.5 rounded-xl bg-${color}-500/10`}>
-              <Icon className={`w-6 h-6 text-${color}-500`} />
-            </div>
-            <span className="text-xs font-semibold text-foreground">
-              {label}
-            </span>
-            <span className="text-[10px] text-muted-foreground text-center">
-              {sub}
-            </span>
-          </div>
-        ))}
-      </motion.div>
-
-      <Connector />
-
-      {/* ── Row 6: DevOps / Monitoring ── */}
-      <motion.div className="w-full max-w-2xl" variants={fade(0.3)}>
-        <div className="rounded-xl bg-violet-500/5 border border-violet-500/20 px-5 py-4">
-          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider text-center mb-4">
-            DevOps &amp; Monitoring
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { label: "Docker", Icon: Container, color: "blue" },
-              { label: "GitHub Actions", Icon: GitBranch, color: "green" },
-              { label: "Azure", Icon: Cloud, color: "cyan" },
-              { label: "Grafana", Icon: BarChart3, color: "orange" },
-              { label: "Prometheus", Icon: BarChart3, color: "red" },
-              { label: "Sentry", Icon: AlertTriangle, color: "purple" },
-            ].map(({ label, Icon, color }) => (
-              <div key={label} className="flex flex-col items-center gap-1.5">
-                <Icon className={`w-5 h-5 text-${color}-400`} />
-                <span className="text-[10px] text-muted-foreground whitespace-nowrap">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── Legend ── */}
-      <motion.div
-        className="flex flex-wrap justify-center gap-4 mt-8 pt-5 border-t border-border/30 w-full"
-        variants={fade(0.35)}
-      >
-        {[
-          {
-            dot: "from-blue-500 to-green-500",
-            label: "Client Applications (Flutter)",
-          },
-          { dot: "from-red-500 to-orange-500", label: "Backend (Django DRF)" },
-          {
-            dot: "from-violet-500 to-purple-500",
-            label: "DevOps & Monitoring",
-          },
-        ].map(({ dot, label }) => (
-          <div
-            key={label}
-            className="flex items-center gap-2 text-[11px] text-muted-foreground"
-          >
-            <div
-              className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${dot}`}
-            />
-            {label}
-          </div>
-        ))}
-      </motion.div>
-    </motion.div>
+        <Background
+          variant={BackgroundVariant.Dots}
+          gap={20}
+          size={1}
+          color="#94a3b840"
+        />
+      </ReactFlow>
+    </div>
   );
 }
 

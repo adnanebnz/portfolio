@@ -84,6 +84,8 @@ export default function Navbar() {
     { href: "/", icon: DATA.navbar[0].icon, label: t("home") },
     { href: "/blog", icon: DATA.navbar[1].icon, label: t("blog") },
     { href: "/projects", icon: DATA.navbar[2].icon, label: t("projects") },
+    { href: "/reviews", icon: DATA.navbar[3].icon, label: t("reviews") },
+    { href: "/schedule", icon: DATA.navbar[4].icon, label: t("schedule") },
   ];
 
   return (

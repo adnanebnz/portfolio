@@ -108,6 +108,22 @@ const config = {
             transform: "translateZ(0) rotate(360deg)",
           },
         },
+        shimmer: {
+          "0%": {
+            backgroundPosition: "-200% 0",
+          },
+          "100%": {
+            backgroundPosition: "200% 0",
+          },
+        },
+        pulse: {
+          "0%, 100%": {
+            opacity: "1",
+          },
+          "50%": {
+            opacity: "0.5",
+          },
+        },
       },
       animation: {
         orbit: "orbit calc(var(--duration)*1s) linear infinite",
@@ -116,6 +132,8 @@ const config = {
         "shimmer-slide":
           "shimmer-slide var(--speed) ease-in-out infinite alternate",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
+        shimmer: "shimmer 2s linear infinite",
+        "pulse-slow": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },

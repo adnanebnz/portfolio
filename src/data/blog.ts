@@ -1,29 +1,39 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { prisma } from "@/lib/prisma";
 
-type Metadata = {
+export type BlogPostMetadata = {
   title: string;
   publishedAt: string;
   summary: string;
-  image?: string;
+  image?: string | null;
 };
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
+export type BlogPost = {
+  source: string;
+  metadata: BlogPostMetadata;
+  slug: string;
+  // Full DB post for localization
+  dbPost?: {
+    titleEn: string;
+    titleFr: string;
+    summaryEn: string | null;
+    summaryFr: string | null;
+    contentEn: string;
+    contentFr: string;
+    coverImage: string | null;
+    tags: string[];
+  };
+};
 
 export async function markdownToHTML(markdown: string) {
   const p = await unified()
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypePrettyCode, {
-      // https://rehype-pretty.pages.dev/#usage
       theme: {
         light: "min-light",
         dark: "min-dark",
@@ -36,33 +46,95 @@ export async function markdownToHTML(markdown: string) {
   return p.toString();
 }
 
-export async function getPost(slug: string) {
-  const filePath = path.join("content", `${slug}.mdx`);
-  let source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data: metadata } = matter(source);
-  const content = await markdownToHTML(rawContent);
-  return {
-    source: content,
-    metadata,
-    slug,
-  };
+export async function getPost(
+  slug: string,
+  locale: string = "en"
+): Promise<BlogPost | null> {
+  try {
+    const dbPost = await prisma.blogPost.findUnique({
+      where: { slug },
+    });
+
+    if (!dbPost || !dbPost.published) {
+      return null;
+    }
+
+    // Select content based on locale
+    const content = locale === "fr" ? dbPost.contentFr : dbPost.contentEn;
+    const title = locale === "fr" ? dbPost.titleFr : dbPost.titleEn;
+    const summary = locale === "fr" ? dbPost.summaryFr : dbPost.summaryEn;
+
+    const htmlContent = await markdownToHTML(content);
+
+    return {
+      source: htmlContent,
+      metadata: {
+        title,
+        publishedAt:
+          dbPost.publishedAt?.toISOString() || dbPost.createdAt.toISOString(),
+        summary: summary || "",
+        image: dbPost.coverImage,
+      },
+      slug: dbPost.slug,
+      dbPost: {
+        titleEn: dbPost.titleEn,
+        titleFr: dbPost.titleFr,
+        summaryEn: dbPost.summaryEn,
+        summaryFr: dbPost.summaryFr,
+        contentEn: dbPost.contentEn,
+        contentFr: dbPost.contentFr,
+        coverImage: dbPost.coverImage,
+        tags: dbPost.tags,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching blog post:", error);
+    return null;
+  }
 }
 
-async function getAllPosts(dir: string) {
-  let mdxFiles = getMDXFiles(dir);
-  return Promise.all(
-    mdxFiles.map(async (file) => {
-      let slug = path.basename(file, path.extname(file));
-      let { metadata, source } = await getPost(slug);
-      return {
-        metadata,
-        slug,
-        source,
-      };
-    })
-  );
-}
+export async function getBlogPosts(locale: string = "en"): Promise<BlogPost[]> {
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: { publishedAt: "desc" },
+    });
 
-export async function getBlogPosts() {
-  return getAllPosts(path.join(process.cwd(), "content"));
+    const blogPosts = await Promise.all(
+      posts.map(async (post) => {
+        const content = locale === "fr" ? post.contentFr : post.contentEn;
+        const title = locale === "fr" ? post.titleFr : post.titleEn;
+        const summary = locale === "fr" ? post.summaryFr : post.summaryEn;
+
+        const htmlContent = await markdownToHTML(content);
+
+        return {
+          source: htmlContent,
+          metadata: {
+            title,
+            publishedAt:
+              post.publishedAt?.toISOString() || post.createdAt.toISOString(),
+            summary: summary || "",
+            image: post.coverImage,
+          },
+          slug: post.slug,
+          dbPost: {
+            titleEn: post.titleEn,
+            titleFr: post.titleFr,
+            summaryEn: post.summaryEn,
+            summaryFr: post.summaryFr,
+            contentEn: post.contentEn,
+            contentFr: post.contentFr,
+            coverImage: post.coverImage,
+            tags: post.tags,
+          },
+        };
+      })
+    );
+
+    return blogPosts;
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
 }

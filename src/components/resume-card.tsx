@@ -58,7 +58,7 @@ export function ResumeCard({
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Avatar className="w-12 h-12 border-2 border-primary/20 shadow-lg">
+                  <Avatar className="w-16 h-16 border-2 border-primary/20 shadow-lg bg-white">
                     <AvatarImage
                       src={logoUrl}
                       alt={altText}

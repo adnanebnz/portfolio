@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,16 +17,59 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { getAllProjects } from "@/app/projects/logic/logic";
 import AddNewProjectButton from "./AddNewButton";
 import DeleteProjectButton from "./DeleteProjectButton";
 import { StoreIcon } from "lucide-react";
 
-export default async function ProjectsView() {
-  const projects = await getAllProjects();
+interface Project {
+  name: string;
+  slug: string;
+  description: string;
+  ghlink?: string;
+  storelink?: string;
+  demolink?: string;
+  images?: string[];
+  created_at?: string;
+}
+
+export default function ProjectsView() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const res = await fetch("/api/projects-db");
+        const data = await res.json();
+        // Transform the data to match the expected format
+        const transformed = data.map((p: any) => ({
+          name: p.titleEn || p.title,
+          slug: p.slug,
+          description: p.descriptionEn || p.description || "",
+          ghlink: p.links?.find((l: any) => l.icon === "github")?.href,
+          demolink:
+            p.links?.find((l: any) => l.icon === "globe")?.href || p.href,
+          storelink: p.links?.find((l: any) => l.icon === "store")?.href,
+          images: p.mobileAppImages || p.webAppImages || [],
+          created_at: p.createdAt
+            ? new Date(p.createdAt).toLocaleDateString()
+            : "",
+        }));
+        setProjects(transformed);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProjects();
+  }, []);
+
+  if (loading) {
+    return <div className="p-4">Loading projects...</div>;
+  }
 
   return (
     <div className="flex min-h-screen w-full">
@@ -34,7 +80,7 @@ export default async function ProjectsView() {
               <AddNewProjectButton />
             </div>
           </div>
-          <Card x-chunk="dashboard-06-chunk-2">
+          <Card>
             <CardHeader>
               <CardTitle>Projects</CardTitle>
               <CardDescription>
@@ -44,9 +90,9 @@ export default async function ProjectsView() {
             <CardContent>
               <div className="grid gap-6">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {projects?.data?.map((project, index) => (
+                  {projects?.map((project, index) => (
                     <div
-                      key={index}
+                      key={project.slug || index}
                       className="rounded-lg border bg-background p-4"
                     >
                       <div className="mb-4 flex items-center justify-between">
@@ -69,7 +115,7 @@ export default async function ProjectsView() {
                             <DropdownMenuItem>View</DropdownMenuItem>
                             <DropdownMenuItem>Edit</DropdownMenuItem>
                             <DropdownMenuItem>
-                              <DeleteProjectButton project={project} />
+                              <DeleteProjectButton project={project as any} />
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -79,17 +125,8 @@ export default async function ProjectsView() {
                           placeholder="Project description"
                           className="h-24 resize-none"
                           value={project.description}
+                          readOnly
                         />
-                      </div>
-                      <div className="mb-4">
-                        <div className="mb-2 text-sm font-medium">Tools</div>
-                        {/* <div className="flex flex-wrap gap-2">
-                          {project.tools?.map((tool: string, index: number) => (
-                            <Badge key={index} variant="outline">
-                              {tool}
-                            </Badge>
-                          ))}
-                        </div> */}
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -97,62 +134,45 @@ export default async function ProjectsView() {
                           <div className="space-y-2">
                             {project.ghlink && (
                               <Link
-                                key={index}
+                                key={`gh-${index}`}
                                 href={project.ghlink}
                                 className="flex items-center gap-2 text-sm"
                                 prefetch={false}
                               >
                                 <GithubIcon className="h-4 w-4" />
-                                {project.ghlink}
+                                GitHub
                               </Link>
                             )}
                             {project.storelink && (
                               <Link
-                                key={index}
+                                key={`store-${index}`}
                                 href={project.storelink}
                                 className="flex items-center gap-2 text-sm"
                                 prefetch={false}
                               >
                                 <StoreIcon className="h-4 w-4" />
-                                {project.storelink}
+                                Store
                               </Link>
                             )}
                             {project.demolink && (
                               <Link
-                                key={index}
+                                key={`demo-${index}`}
                                 href={project.demolink}
                                 className="flex items-center gap-2 text-sm"
                                 prefetch={false}
                               >
                                 <GlobeIcon className="h-4 w-4" />
-                                {project.demolink}
+                                Demo
                               </Link>
                             )}
                           </div>
                         </div>
-                        <div>
-                          <div className="mb-2 text-sm font-medium">Images</div>
-                          <div className="grid grid-cols-2 gap-2">
-                            {project.images?.map((image, index) => (
-                              <img
-                                key={index}
-                                src={image}
-                                width={80}
-                                height={80}
-                                alt={`Project Image ${index + 1}`}
-                                className="rounded-md"
-                                style={{
-                                  aspectRatio: "80/80",
-                                  objectFit: "cover",
-                                }}
-                              />
-                            ))}
-                          </div>
+                      </div>
+                      {project.created_at && (
+                        <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                          <div>Created: {project.created_at}</div>
                         </div>
-                      </div>
-                      <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-                        <div>Created: {project.created_at}</div>
-                      </div>
+                      )}
                     </div>
                   ))}
                 </div>

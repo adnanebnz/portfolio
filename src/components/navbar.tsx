@@ -11,6 +11,7 @@ import { useTranslations } from "@/hooks/use-translations";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import { Menu, X, Sparkles } from "lucide-react";
+import { UserNav } from "@/components/user-nav";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -84,11 +85,10 @@ export default function Navbar() {
         variants={navVariants}
         initial="hidden"
         animate="visible"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "glass-card backdrop-blur-xl bg-background/80 border-b border-border/40 shadow-lg"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "glass-card backdrop-blur-xl bg-background/80 border-b border-border/40 shadow-lg"
+          : "bg-transparent"
+          }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -164,42 +164,45 @@ export default function Navbar() {
                   ))}
               </div>
 
-              {/* Language Switcher & Theme Toggle */}
+              {/* Language Switcher, Theme Toggle, User Nav */}
               <div className="hidden md:flex items-center space-x-2">
                 <LanguageSwitcher />
                 <ModeToggle />
+                <UserNav />
               </div>
 
-              {/* Mobile Menu Button */}
-              <motion.button
-                className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-300"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                whileTap={{ scale: 0.95 }}
-              >
-                <AnimatePresence mode="wait">
-                  {mobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="w-6 h-6" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="w-6 h-6" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+              <div className="flex md:hidden items-center space-x-2">
+                <UserNav />
+                <motion.button
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-300"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <AnimatePresence mode="wait">
+                    {mobileMenuOpen ? (
+                      <motion.div
+                        key="close"
+                        initial={{ rotate: -90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: 90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <X className="w-6 h-6" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="menu"
+                        initial={{ rotate: 90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: -90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Menu className="w-6 h-6" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+              </div>
             </motion.div>
           </div>
         </div>

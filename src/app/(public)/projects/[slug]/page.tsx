@@ -42,6 +42,7 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
       href: link.href,
       icon: link.icon,
     })),
+    architectureDiagram: project.architectureDiagram,
   };
 
   return <ProjectView project={transformedProject} />;

@@ -138,6 +138,9 @@ model Project {
   featured Boolean @default(false)
   order    Int     @default(0)
 
+  // Architecture diagram flag
+  architectureDiagram Boolean @default(false)
+
   // Images
   posterImage     String? // Main poster/cover image
   mobileAppImages String[] // Array of mobile app screenshot URLs
@@ -252,4 +255,3 @@ model ContactMessage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-

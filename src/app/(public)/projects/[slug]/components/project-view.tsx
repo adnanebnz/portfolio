@@ -20,8 +20,10 @@ import {
   Calendar,
   Code2,
   ZoomIn,
+  Network,
 } from "lucide-react";
 import { ImageLightbox } from "./image-lightbox";
+import { ArchitectureDiagram } from "@/components/architecture-diagram";
 
 interface ProjectLink {
   type: string;
@@ -42,6 +44,7 @@ interface ProjectViewProps {
     dates?: string | null;
     keyFeatures: Record<string, string>;
     links?: ProjectLink[];
+    architectureDiagram?: boolean;
   };
 }
 
@@ -357,6 +360,30 @@ export default function ProjectView({ project }: ProjectViewProps) {
                     )
                   )}
                 </div>
+              </div>
+            </section>
+          </BlurFade>
+        )}
+
+        {/* Architecture Diagram Section */}
+        {project.architectureDiagram && (
+          <BlurFade delay={BLUR_FADE_DELAY * 6.5}>
+            <section className="w-full py-16">
+              <div className="container max-w-6xl mx-auto px-4">
+                <div className="text-center mb-12">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 text-violet-500 text-sm font-medium mb-4">
+                    <Network className="h-4 w-4" />
+                    System Architecture
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    Technical Architecture
+                  </h2>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    A visual overview of the system components and how they
+                    interact.
+                  </p>
+                </div>
+                <ArchitectureDiagram projectSlug={project.slug} />
               </div>
             </section>
           </BlurFade>

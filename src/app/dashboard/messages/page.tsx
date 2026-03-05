@@ -156,10 +156,9 @@ export default function MessagesPage() {
   const [activeTab, setActiveTab] = useState("unread");
 
   useEffect(() => {
-    if (user) {
-      fetchMessages();
-    }
-  }, [user]);
+    // Fetch messages regardless of user state - the API handles auth
+    fetchMessages();
+  }, []);
 
   const fetchMessages = async () => {
     try {

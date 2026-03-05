@@ -13,404 +13,270 @@ import {
   Container,
   GitBranch,
   AlertTriangle,
-  Users,
   Building2,
   UserCog,
   HardHat,
+  ChevronDown,
 } from "lucide-react";
 
 interface ArchitectureDiagramProps {
   projectSlug: string;
 }
 
+const fade = (delay = 0) => ({
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut", delay },
+  },
+});
+
+function Connector() {
+  return (
+    <div className="flex justify-center my-1">
+      <ChevronDown className="w-5 h-5 text-border" />
+    </div>
+  );
+}
+
 export function SmartCleanArchitectureDiagram() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 100 },
-    },
-  };
-
-  const lineVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-      transition: { duration: 1, ease: "easeInOut" },
-    },
-  };
-
   return (
     <motion.div
-      className="w-full p-6 bg-gradient-to-br from-background via-background to-muted/20 rounded-xl border border-border/50 overflow-x-auto"
-      variants={containerVariants}
+      className="w-full rounded-2xl border border-border/60 bg-card p-6 md:p-10 flex flex-col items-center gap-0"
       initial="hidden"
       animate="visible"
     >
-      <h3 className="text-xl font-bold mb-6 text-center bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+      {/* Title */}
+      <motion.h3
+        className="text-lg md:text-xl font-bold mb-8 text-foreground"
+        variants={fade(0)}
+      >
         SmartClean System Architecture
-      </h3>
+      </motion.h3>
 
-      <div className="min-w-[900px] relative">
-        {/* SVG for connection lines */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ zIndex: 0 }}
-        >
-          <defs>
-            <marker
-              id="arrowhead"
-              markerWidth="10"
-              markerHeight="7"
-              refX="9"
-              refY="3.5"
-              orient="auto"
-            >
-              <polygon
-                points="0 0, 10 3.5, 0 7"
-                fill="currentColor"
-                className="text-primary/40"
-              />
-            </marker>
-          </defs>
+      {/* ── Row 1: User Role Pills ── */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-2 mb-6"
+        variants={fade(0.05)}
+      >
+        {[
+          { label: "Admin", color: "blue", Icon: Shield },
+          { label: "Client", color: "green", Icon: Building2 },
+          { label: "Sector Manager", color: "orange", Icon: UserCog },
+          { label: "Agent", color: "purple", Icon: HardHat },
+        ].map(({ label, color, Icon }) => (
+          <span
+            key={label}
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+              bg-${color}-500/10 border border-${color}-500/30 text-${color}-600 dark:text-${color}-400`}
+          >
+            <Icon className="w-3 h-3" />
+            {label}
+          </span>
+        ))}
+      </motion.div>
 
-          {/* Client Apps to API Gateway */}
-          <motion.line
-            x1="200"
-            y1="120"
-            x2="450"
-            y2="180"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="350"
-            y1="120"
-            x2="450"
-            y2="180"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="500"
-            y1="120"
-            x2="500"
-            y2="170"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="650"
-            y1="120"
-            x2="550"
-            y2="180"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="800"
-            y1="120"
-            x2="550"
-            y2="180"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-
-          {/* API Gateway to Backend */}
-          <motion.line
-            x1="500"
-            y1="230"
-            x2="500"
-            y2="280"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-
-          {/* Backend to Services */}
-          <motion.line
-            x1="450"
-            y1="380"
-            x2="300"
-            y2="430"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="500"
-            y1="380"
-            x2="500"
-            y2="430"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-          <motion.line
-            x1="550"
-            y1="380"
-            x2="700"
-            y2="430"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary/30"
-            markerEnd="url(#arrowhead)"
-            variants={lineVariants}
-          />
-        </svg>
-
-        {/* User Roles Row */}
-        <motion.div
-          className="flex justify-center gap-4 mb-4"
-          variants={itemVariants}
-        >
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs">
-            <Shield className="w-3 h-3 text-blue-500" />
-            <span>Admin</span>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-full text-xs">
-            <Building2 className="w-3 h-3 text-green-500" />
-            <span>Client</span>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-full text-xs">
-            <UserCog className="w-3 h-3 text-orange-500" />
-            <span>Sector Manager</span>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-full text-xs">
-            <HardHat className="w-3 h-3 text-purple-500" />
-            <span>Agent</span>
-          </div>
-        </motion.div>
-
-        {/* Client Applications Row */}
-        <motion.div
-          className="flex justify-center gap-6 mb-8"
-          variants={itemVariants}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl">
-              <Globe className="w-8 h-8 text-blue-500" />
+      {/* ── Row 2: Client Apps ── */}
+      <motion.div
+        className="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-3"
+        variants={fade(0.1)}
+      >
+        {[
+          {
+            label: "Web Admin",
+            sub: "Flutter Web",
+            Icon: Globe,
+            color: "blue",
+          },
+          {
+            label: "Client App",
+            sub: "iOS / Android",
+            Icon: Smartphone,
+            color: "green",
+          },
+          {
+            label: "Manager App",
+            sub: "iOS / Android",
+            Icon: Smartphone,
+            color: "orange",
+          },
+          {
+            label: "Agent App",
+            sub: "iOS / Android",
+            Icon: Smartphone,
+            color: "purple",
+          },
+        ].map(({ label, sub, Icon, color }) => (
+          <div
+            key={label}
+            className={`flex flex-col items-center gap-2 rounded-xl p-4
+              bg-${color}-500/5 border border-${color}-500/20`}
+          >
+            <div className={`p-2.5 rounded-xl bg-${color}-500/10`}>
+              <Icon className={`w-7 h-7 text-${color}-500`} />
             </div>
-            <span className="text-xs font-medium">Web Admin</span>
-            <span className="text-[10px] text-muted-foreground">
-              Flutter Web
+            <span className="text-xs font-semibold text-foreground">
+              {label}
             </span>
+            <span className="text-[10px] text-muted-foreground">{sub}</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-xl">
-              <Smartphone className="w-8 h-8 text-green-500" />
-            </div>
-            <span className="text-xs font-medium">Client App</span>
-            <span className="text-[10px] text-muted-foreground">
-              iOS/Android
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 rounded-xl">
-              <Smartphone className="w-8 h-8 text-orange-500" />
-            </div>
-            <span className="text-xs font-medium">Manager App</span>
-            <span className="text-[10px] text-muted-foreground">
-              iOS/Android
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-xl">
-              <Smartphone className="w-8 h-8 text-purple-500" />
-            </div>
-            <span className="text-xs font-medium">Agent App</span>
-            <span className="text-[10px] text-muted-foreground">
-              iOS/Android
-            </span>
-          </div>
-        </motion.div>
+        ))}
+      </motion.div>
 
-        {/* API Gateway */}
-        <motion.div
-          className="flex justify-center mb-8"
-          variants={itemVariants}
-        >
-          <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-teal-500/10 border border-cyan-500/30 rounded-xl">
-            <Cloud className="w-6 h-6 text-cyan-500" />
-            <div className="text-center">
-              <span className="text-sm font-semibold">Nginx Proxy Manager</span>
-              <p className="text-[10px] text-muted-foreground">
-                SSL • Load Balancing • Reverse Proxy
+      <Connector />
+
+      {/* ── Row 3: Nginx ── */}
+      <motion.div className="w-full max-w-2xl" variants={fade(0.15)}>
+        <div className="flex items-center justify-center gap-3 px-5 py-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/25">
+          <Cloud className="w-5 h-5 text-cyan-500 shrink-0" />
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Nginx Proxy Manager
+            </p>
+            <p className="text-[10px] text-muted-foreground">
+              SSL · Load Balancing · Reverse Proxy
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      <Connector />
+
+      {/* ── Row 4: Django Backend ── */}
+      <motion.div className="w-full max-w-2xl" variants={fade(0.2)}>
+        <div className="rounded-xl bg-red-500/5 border border-red-500/25 p-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-lg bg-red-500/10">
+              <Server className="w-6 h-6 text-red-500" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-foreground">
+                Django REST Framework
               </p>
+              <p className="text-[10px] text-muted-foreground">Backend API</p>
             </div>
           </div>
-        </motion.div>
-
-        {/* Backend Services */}
-        <motion.div
-          className="flex justify-center mb-8"
-          variants={itemVariants}
-        >
-          <div className="p-6 bg-gradient-to-br from-red-500/20 to-orange-500/10 border border-red-500/30 rounded-xl max-w-md">
-            <div className="flex items-center gap-3 mb-3">
-              <Server className="w-8 h-8 text-red-500" />
-              <div>
-                <span className="text-lg font-bold">Django REST Framework</span>
-                <p className="text-xs text-muted-foreground">Backend API</p>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              "Users API",
+              "Jobs API",
+              "Timeclock API",
+              "Contracts API",
+              "Reports API",
+              "Auth API",
+            ].map((api) => (
+              <div
+                key={api}
+                className="px-2 py-1.5 bg-background rounded-lg text-center text-[10px] font-medium border border-border/50"
+              >
+                {api}
               </div>
-            </div>
-            <div className="grid grid-cols-3 gap-2 text-[10px]">
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Users API
-              </div>
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Jobs API
-              </div>
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Timeclock API
-              </div>
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Contracts API
-              </div>
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Reports API
-              </div>
-              <div className="px-2 py-1 bg-background/50 rounded text-center">
-                Auth API
-              </div>
-            </div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Infrastructure Layer */}
-        <motion.div
-          className="flex justify-center gap-6 mb-8"
-          variants={itemVariants}
-        >
-          {/* Database */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-blue-600/20 to-indigo-600/10 border border-blue-600/30 rounded-xl">
-              <Database className="w-8 h-8 text-blue-600" />
-            </div>
-            <span className="text-xs font-medium">PostgreSQL</span>
-            <span className="text-[10px] text-muted-foreground">Database</span>
-          </div>
+      <Connector />
 
-          {/* Push Notifications */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-amber-500/20 to-yellow-500/10 border border-amber-500/30 rounded-xl">
-              <Bell className="w-8 h-8 text-amber-500" />
+      {/* ── Row 5: Data / Services ── */}
+      <motion.div
+        className="w-full max-w-2xl grid grid-cols-3 gap-3"
+        variants={fade(0.25)}
+      >
+        {[
+          {
+            label: "PostgreSQL",
+            sub: "Database",
+            Icon: Database,
+            color: "indigo",
+          },
+          {
+            label: "FCM",
+            sub: "Push Notifications",
+            Icon: Bell,
+            color: "amber",
+          },
+          {
+            label: "Adminer",
+            sub: "DB Management",
+            Icon: Database,
+            color: "slate",
+          },
+        ].map(({ label, sub, Icon, color }) => (
+          <div
+            key={label}
+            className={`flex flex-col items-center gap-2 rounded-xl p-4
+              bg-${color}-500/5 border border-${color}-500/20`}
+          >
+            <div className={`p-2.5 rounded-xl bg-${color}-500/10`}>
+              <Icon className={`w-6 h-6 text-${color}-500`} />
             </div>
-            <span className="text-xs font-medium">FCM</span>
-            <span className="text-[10px] text-muted-foreground">
-              Push Notifications
+            <span className="text-xs font-semibold text-foreground">
+              {label}
+            </span>
+            <span className="text-[10px] text-muted-foreground text-center">
+              {sub}
             </span>
           </div>
+        ))}
+      </motion.div>
 
-          {/* Adminer */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="p-4 bg-gradient-to-br from-slate-500/20 to-gray-500/10 border border-slate-500/30 rounded-xl">
-              <Database className="w-8 h-8 text-slate-500" />
-            </div>
-            <span className="text-xs font-medium">Adminer</span>
-            <span className="text-[10px] text-muted-foreground">
-              DB Management
-            </span>
+      <Connector />
+
+      {/* ── Row 6: DevOps / Monitoring ── */}
+      <motion.div className="w-full max-w-2xl" variants={fade(0.3)}>
+        <div className="rounded-xl bg-violet-500/5 border border-violet-500/20 px-5 py-4">
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider text-center mb-4">
+            DevOps &amp; Monitoring
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              { label: "Docker", Icon: Container, color: "blue" },
+              { label: "GitHub Actions", Icon: GitBranch, color: "green" },
+              { label: "Azure", Icon: Cloud, color: "cyan" },
+              { label: "Grafana", Icon: BarChart3, color: "orange" },
+              { label: "Prometheus", Icon: BarChart3, color: "red" },
+              { label: "Sentry", Icon: AlertTriangle, color: "purple" },
+            ].map(({ label, Icon, color }) => (
+              <div key={label} className="flex flex-col items-center gap-1.5">
+                <Icon className={`w-5 h-5 text-${color}-400`} />
+                <span className="text-[10px] text-muted-foreground whitespace-nowrap">
+                  {label}
+                </span>
+              </div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* DevOps & Monitoring Row */}
-        <motion.div
-          className="flex justify-center gap-4"
-          variants={itemVariants}
-        >
-          <div className="flex items-center gap-4 px-6 py-4 bg-gradient-to-r from-violet-500/10 via-purple-500/10 to-fuchsia-500/10 border border-violet-500/20 rounded-xl">
-            {/* Docker */}
-            <div className="flex flex-col items-center gap-1">
-              <Container className="w-6 h-6 text-blue-400" />
-              <span className="text-[10px]">Docker</span>
-            </div>
-
-            {/* CI/CD */}
-            <div className="flex flex-col items-center gap-1">
-              <GitBranch className="w-6 h-6 text-green-400" />
-              <span className="text-[10px]">GitHub Actions</span>
-            </div>
-
-            {/* Azure */}
-            <div className="flex flex-col items-center gap-1">
-              <Cloud className="w-6 h-6 text-cyan-400" />
-              <span className="text-[10px]">Azure</span>
-            </div>
-
-            {/* Grafana */}
-            <div className="flex flex-col items-center gap-1">
-              <BarChart3 className="w-6 h-6 text-orange-400" />
-              <span className="text-[10px]">Grafana</span>
-            </div>
-
-            {/* Prometheus */}
-            <div className="flex flex-col items-center gap-1">
-              <BarChart3 className="w-6 h-6 text-red-400" />
-              <span className="text-[10px]">Prometheus</span>
-            </div>
-
-            {/* Sentry */}
-            <div className="flex flex-col items-center gap-1">
-              <AlertTriangle className="w-6 h-6 text-purple-400" />
-              <span className="text-[10px]">Sentry</span>
-            </div>
+      {/* ── Legend ── */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-4 mt-8 pt-5 border-t border-border/30 w-full"
+        variants={fade(0.35)}
+      >
+        {[
+          {
+            dot: "from-blue-500 to-green-500",
+            label: "Client Applications (Flutter)",
+          },
+          { dot: "from-red-500 to-orange-500", label: "Backend (Django DRF)" },
+          {
+            dot: "from-violet-500 to-purple-500",
+            label: "DevOps & Monitoring",
+          },
+        ].map(({ dot, label }) => (
+          <div
+            key={label}
+            className="flex items-center gap-2 text-[11px] text-muted-foreground"
+          >
+            <div
+              className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${dot}`}
+            />
+            {label}
           </div>
-        </motion.div>
-
-        {/* Legend */}
-        <motion.div
-          className="flex justify-center gap-6 mt-6 pt-4 border-t border-border/30"
-          variants={itemVariants}
-        >
-          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-            <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-green-500 rounded-full" />
-            <span>Client Applications (Flutter)</span>
-          </div>
-          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-            <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
-            <span>Backend (Django DRF)</span>
-          </div>
-          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-            <div className="w-3 h-3 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full" />
-            <span>DevOps & Monitoring</span>
-          </div>
-        </motion.div>
-      </div>
+        ))}
+      </motion.div>
     </motion.div>
   );
 }

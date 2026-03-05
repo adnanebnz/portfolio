@@ -242,6 +242,7 @@ async function main() {
       active: true,
       featured: true,
       order: 0,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1739485318/tawsil-star-vtc/poster.png",
       mobileAppImages: [
@@ -291,6 +292,7 @@ async function main() {
       active: true,
       featured: true,
       order: 1,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1739485318/tawsil-star-vtc/poster.png",
       mobileAppImages: [],
@@ -380,6 +382,7 @@ async function main() {
       active: true,
       featured: true,
       order: 3,
+      architectureDiagram: true,
       posterImage: null,
       mobileAppImages: [],
       webAppImages: [],
@@ -413,6 +416,7 @@ async function main() {
       active: true,
       featured: true,
       order: 4,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891211/algeria-eats/poster.png",
       mobileAppImages: [
@@ -486,6 +490,7 @@ async function main() {
       active: true,
       featured: true,
       order: 5,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723897373/wamidh/poster.png",
       mobileAppImages: [
@@ -529,6 +534,7 @@ async function main() {
       active: true,
       featured: true,
       order: 6,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891394/waffir/poster.png",
       mobileAppImages: [
@@ -570,6 +576,7 @@ async function main() {
       active: true,
       featured: true,
       order: 7,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891474/dzhikers/poster.jpg",
       mobileAppImages: [
@@ -614,6 +621,7 @@ async function main() {
       active: true,
       featured: true,
       order: 8,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723892712/movies-app/poster.png",
       mobileAppImages: [

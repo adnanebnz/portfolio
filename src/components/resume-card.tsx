@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ExternalLink, Building2, MapPin } from "lucide-react";
+import Markdown from "react-markdown";
 
 interface Props {
   logoUrl: string;
@@ -114,13 +115,11 @@ export function ResumeCard({
           <CardContent className="pt-0">
             {/* Description */}
             {description && (
-              <motion.div
-                className="text-sm text-muted-foreground leading-relaxed mb-4"
-                initial={{ opacity: 0.8 }}
-                whileHover={{ opacity: 1 }}
-              >
-                {description}
-              </motion.div>
+              <div className="text-sm text-muted-foreground leading-relaxed mb-4">
+                <Markdown className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground">
+                  {description}
+                </Markdown>
+              </div>
             )}
 
             {/* Technologies/Skills */}

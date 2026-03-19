@@ -17,6 +17,7 @@ import { Plus, Pencil, Trash2, Building2 } from "lucide-react";
 import { toast } from "sonner";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { SkeletonPage } from "@/components/ui/skeleton";
+import Markdown from "react-markdown";
 
 interface WorkExperience {
   id: string;
@@ -396,9 +397,11 @@ export default function WorkPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                  {item.descriptionEn}
-                </p>
+                <div className="text-sm text-muted-foreground">
+                  <Markdown className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground">
+                    {item.descriptionEn}
+                  </Markdown>
+                </div>
               </CardContent>
             </Card>
           ))

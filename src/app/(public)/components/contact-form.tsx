@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Modal from "./modal";
 import { useTranslations } from "@/hooks/use-translations";
+import { graphqlRequest } from "@/lib/graphql-client";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -72,30 +73,28 @@ export default function ContactFormComponent() {
     setError(null);
 
     try {
-      // Save to database
-      const response = await fetch("/api/messages", {
-        method: "POST",
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || "Contact Form Submission",
-          message: formData.message,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
+      // Save to database via GraphQL
+      await graphqlRequest(
+        `mutation SendMessage($input: SendMessageInput!) {
+          sendMessage(input: $input) { id }
+        }`,
+        {
+          input: {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || "Contact Form Submission",
+            message: formData.message,
+          },
+        }
+      );
 
-      if (response.ok) {
-        setIsConfirmationOpen(true);
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        const data = await response.json();
-        setError(data.error || "Failed to send message");
-      }
+      setIsConfirmationOpen(true);
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       setError("Failed to send message. Please try again.");

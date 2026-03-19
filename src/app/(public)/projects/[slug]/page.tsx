@@ -1,14 +1,24 @@
-import { prisma } from "@/lib/prisma";
+import { graphqlServerRequest } from "@/lib/graphql-client";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import ProjectView from "./components/project-view";
 
 async function getProject(slug: string) {
-  const project = await prisma.project.findUnique({
-    where: { slug },
-    include: { links: true },
-  });
-  return project;
+  try {
+    const data = await graphqlServerRequest<{ projectBySlug: any }>(`
+      query GetProject($slug: String!) {
+        projectBySlug(slug: $slug) {
+          id slug titleEn titleFr descriptionEn descriptionFr
+          posterImage mobileAppImages webAppImages technologies
+          dates keyFeaturesEn keyFeaturesFr active
+          links { id type href icon }
+        }
+      }
+    `, { slug });
+    return data.projectBySlug;
+  } catch {
+    return null;
+  }
 }
 
 const ProjectPage = async ({ params }: { params: { slug: string } }) => {

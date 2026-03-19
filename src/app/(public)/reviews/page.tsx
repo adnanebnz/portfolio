@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,22 +19,15 @@ import { Star, Quote, PenLine, Send, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslations } from "@/hooks/use-translations";
 import BlurFade from "@/components/magicui/blur-fade";
-
-interface Review {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  avatarUrl: string | null;
-  content: string;
-  rating: number;
-  featured: boolean;
-  createdAt: string;
-}
+import {
+  useApprovedReviews,
+  useSubmitReview,
+  type Review,
+} from "@/hooks/use-api";
 
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: reviews = [], isLoading: loading } = useApprovedReviews();
+  const submitReview = useSubmitReview();
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -48,34 +41,12 @@ export default function ReviewsPage() {
     rating: 5,
   });
 
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  async function fetchReviews() {
-    try {
-      const res = await fetch("/api/reviews/public");
-      const data = await res.json();
-      setReviews(data);
-    } catch (error) {
-      console.error("Failed to fetch reviews");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      const res = await fetch("/api/reviews/public", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) throw new Error();
+      await submitReview.mutateAsync(formData);
 
       setSubmitted(true);
       setFormData({ name: "", role: "", company: "", content: "", rating: 5 });
@@ -114,11 +85,10 @@ export default function ReviewsPage() {
           }
         >
           <Star
-            className={`h-5 w-5 transition-colors ${
-              i < rating
+            className={`h-5 w-5 transition-colors ${i < rating
                 ? "fill-yellow-400 text-yellow-400"
                 : "text-gray-300 dark:text-gray-600"
-            }`}
+              }`}
           />
         </button>
       ))}
@@ -315,9 +285,8 @@ export default function ReviewsPage() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <Card
-                    className={`h-full ${
-                      review.featured ? "border-primary/50 bg-primary/5" : ""
-                    }`}
+                    className={`h-full ${review.featured ? "border-primary/50 bg-primary/5" : ""
+                      }`}
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4 mb-4">

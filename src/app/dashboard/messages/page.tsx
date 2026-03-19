@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,8 +18,13 @@ import {
   Reply,
   AlertCircle,
 } from "lucide-react";
-import { useAuth } from "@/providers/auth-provider";
 import { SkeletonPage } from "@/components/ui/skeleton";
+import {
+  useMessages,
+  useUpdateMessage,
+  useDeleteMessage,
+  type ContactMessage,
+} from "@/hooks/use-api";
 
 // Format date helper function
 const formatTimeAgo = (dateString: string): string => {
@@ -34,17 +39,6 @@ const formatTimeAgo = (dateString: string): string => {
   return date.toLocaleDateString();
 };
 
-interface ContactMessage {
-  id: string;
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  read: boolean;
-  replied: boolean;
-  createdAt: string;
-}
-
 function MessageCard({
   message,
   onToggleRead,
@@ -58,9 +52,8 @@ function MessageCard({
 }) {
   return (
     <Card
-      className={`mb-4 ${
-        !message.read ? "border-primary/50 bg-primary/5" : ""
-      }`}
+      className={`mb-4 ${!message.read ? "border-primary/50 bg-primary/5" : ""
+        }`}
     >
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between">
@@ -150,48 +143,14 @@ function MessageCard({
 }
 
 export default function MessagesPage() {
-  const { user } = useAuth();
-  const [messages, setMessages] = useState<ContactMessage[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: messages = [], isLoading } = useMessages();
+  const updateMessage = useUpdateMessage();
+  const deleteMessageMutation = useDeleteMessage();
   const [activeTab, setActiveTab] = useState("unread");
-
-  useEffect(() => {
-    if (user) {
-      fetchMessages();
-    }
-  }, [user]);
-
-  const fetchMessages = async () => {
-    try {
-      const response = await fetch("/api/messages", {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setMessages(data);
-      }
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const toggleRead = async (id: string, read: boolean) => {
     try {
-      const response = await fetch("/api/messages", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ id, read }),
-      });
-      if (response.ok) {
-        setMessages((prev) =>
-          prev.map((m) => (m.id === id ? { ...m, read } : m))
-        );
-      }
+      await updateMessage.mutateAsync({ id, read });
     } catch (error) {
       console.error("Error updating message:", error);
     }
@@ -199,19 +158,7 @@ export default function MessagesPage() {
 
   const toggleReplied = async (id: string, replied: boolean) => {
     try {
-      const response = await fetch("/api/messages", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ id, replied }),
-      });
-      if (response.ok) {
-        setMessages((prev) =>
-          prev.map((m) => (m.id === id ? { ...m, replied } : m))
-        );
-      }
+      await updateMessage.mutateAsync({ id, replied });
     } catch (error) {
       console.error("Error updating message:", error);
     }
@@ -221,13 +168,7 @@ export default function MessagesPage() {
     if (!confirm("Are you sure you want to delete this message?")) return;
 
     try {
-      const response = await fetch(`/api/messages?id=${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      if (response.ok) {
-        setMessages((prev) => prev.filter((m) => m.id !== id));
-      }
+      await deleteMessageMutation.mutateAsync(id);
     } catch (error) {
       console.error("Error deleting message:", error);
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,12 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { ImageUpload, MultiImageUpload } from "@/components/ui/image-upload";
 import { SkeletonPage } from "@/components/ui/skeleton";
+import {
+  useProjects,
+  useCreateProject,
+  useUpdateProject,
+  useDeleteProject,
+} from "@/hooks/use-api";
 
 interface KeyFeature {
   title: string;
@@ -92,27 +98,13 @@ const initialFormData: FormData = {
 };
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: projects = [], isLoading: loading } = useProjects();
+  const createProject = useCreateProject();
+  const updateProject = useUpdateProject();
+  const deleteProjectMutation = useDeleteProject();
   const [isOpen, setIsOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  async function fetchProjects() {
-    try {
-      const res = await fetch("/api/projects-db");
-      const data = await res.json();
-      setProjects(data);
-    } catch (error) {
-      toast.error("Failed to fetch projects");
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function objectToFeatureArray(
     obj: Record<string, string> | null
@@ -226,22 +218,14 @@ export default function ProjectsPage() {
     };
 
     try {
-      const url = editingProject
-        ? `/api/projects-db/${editingProject.id}`
-        : "/api/projects-db";
-      const method = editingProject ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error();
+      if (editingProject) {
+        await updateProject.mutateAsync({ id: editingProject.id, ...payload });
+      } else {
+        await createProject.mutateAsync(payload);
+      }
 
       toast.success(editingProject ? "Project updated" : "Project added");
       setIsOpen(false);
-      fetchProjects();
     } catch {
       toast.error("Failed to save project");
     }
@@ -251,10 +235,8 @@ export default function ProjectsPage() {
     if (!confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      const res = await fetch(`/api/projects-db/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
+      await deleteProjectMutation.mutateAsync(id);
       toast.success("Project deleted");
-      fetchProjects();
     } catch {
       toast.error("Failed to delete project");
     }

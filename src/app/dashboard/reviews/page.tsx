@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,23 +26,19 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { SkeletonPage } from "@/components/ui/skeleton";
-
-interface Review {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  avatarUrl: string | null;
-  content: string;
-  rating: number;
-  featured: boolean;
-  approved: boolean;
-  createdAt: string;
-}
+import {
+  useReviews,
+  useCreateReview,
+  useUpdateReview,
+  useDeleteReview,
+  type Review,
+} from "@/hooks/use-api";
 
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: reviews = [], isLoading: loading } = useReviews();
+  const createReview = useCreateReview();
+  const updateReview = useUpdateReview();
+  const deleteReview = useDeleteReview();
   const [isOpen, setIsOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Review | null>(null);
   const [formData, setFormData] = useState({
@@ -54,22 +50,6 @@ export default function ReviewsPage() {
     rating: 5,
     featured: false,
   });
-
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  async function fetchReviews() {
-    try {
-      const res = await fetch("/api/reviews");
-      const data = await res.json();
-      setReviews(data);
-    } catch (error) {
-      toast.error("Failed to fetch reviews");
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function openAddDialog() {
     setEditingItem(null);
@@ -108,22 +88,14 @@ export default function ReviewsPage() {
     };
 
     try {
-      const url = editingItem
-        ? `/api/reviews/${editingItem.id}`
-        : "/api/reviews";
-      const method = editingItem ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error();
+      if (editingItem) {
+        await updateReview.mutateAsync({ id: editingItem.id, ...payload });
+      } else {
+        await createReview.mutateAsync(payload);
+      }
 
       toast.success(editingItem ? "Review updated" : "Review added");
       setIsOpen(false);
-      fetchReviews();
     } catch {
       toast.error("Failed to save review");
     }
@@ -133,10 +105,8 @@ export default function ReviewsPage() {
     if (!confirm("Are you sure you want to delete this review?")) return;
 
     try {
-      const res = await fetch(`/api/reviews/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
+      await deleteReview.mutateAsync(id);
       toast.success("Review deleted");
-      fetchReviews();
     } catch {
       toast.error("Failed to delete review");
     }
@@ -144,14 +114,8 @@ export default function ReviewsPage() {
 
   async function toggleFeatured(review: Review) {
     try {
-      const res = await fetch(`/api/reviews/${review.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...review, featured: !review.featured }),
-      });
-      if (!res.ok) throw new Error();
+      await updateReview.mutateAsync({ id: review.id, featured: !review.featured });
       toast.success(review.featured ? "Review unfeatured" : "Review featured");
-      fetchReviews();
     } catch {
       toast.error("Failed to update review");
     }
@@ -159,14 +123,8 @@ export default function ReviewsPage() {
 
   async function toggleApproved(review: Review) {
     try {
-      const res = await fetch(`/api/reviews/${review.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...review, approved: !review.approved }),
-      });
-      if (!res.ok) throw new Error();
+      await updateReview.mutateAsync({ id: review.id, approved: !review.approved });
       toast.success(review.approved ? "Review unapproved" : "Review approved");
-      fetchReviews();
     } catch {
       toast.error("Failed to update review");
     }
@@ -218,11 +176,10 @@ export default function ReviewsPage() {
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-4 w-4 ${
-                    i < item.rating
+                  className={`h-4 w-4 ${i < item.rating
                       ? "fill-yellow-400 text-yellow-400"
                       : "text-gray-300"
-                  }`}
+                    }`}
                 />
               ))}
             </div>

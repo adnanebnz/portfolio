@@ -6,7 +6,7 @@ import LogOutButton from "./components/LogOutButton";
 import { redirect } from "next/navigation";
 import AdminDashboardButton from "./components/AdminDashboardButton";
 import { getSession, isAdmin as checkIsAdmin } from "@/lib/jwt";
-import { getUserById } from "@/lib/auth";
+import { graphqlServerRequest } from "@/lib/graphql-client";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +17,23 @@ export default async function Profile() {
     redirect("/login");
   }
 
-  const user = await getUserById(session.userId);
+  let user;
+  try {
+    const data = await graphqlServerRequest<{ me: any }>(`
+      query { me { id email username displayName role avatarUrl } }
+    `);
+    user = data.me;
+  } catch {
+    user = null;
+  }
+
   const isAdmin = await checkIsAdmin();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  const displayName = user.displayName || user.username || user.email;
 
   if (!user) {
     redirect("/login");
@@ -30,14 +45,14 @@ export default async function Profile() {
         <div className="bg-primary py-8 px-6">
           <div className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarImage src={user.avatarUrl || undefined} alt={user.name} />
+              <AvatarImage src={user.avatarUrl || undefined} alt={displayName} />
               <AvatarFallback>
-                {user.name.slice(0, 2).toUpperCase()}
+                {displayName.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div>
               <h2 className="text-2xl font-bold text-primary-foreground">
-                {user.name}
+                {displayName}
               </h2>
               <p className="text-primary-foreground/80">{user.email}</p>
             </div>
@@ -58,7 +73,7 @@ export default async function Profile() {
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
             <div className="flex items-center gap-2">
-              <Input id="name" defaultValue={user.name} disabled />
+              <Input id="name" defaultValue={displayName} disabled />
             </div>
           </div>
           <div className="grid gap-2">

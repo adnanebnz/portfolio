@@ -8,11 +8,13 @@ import {
   ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
+import { graphqlRequest } from "@/lib/graphql-client";
 
 interface User {
   id: string;
   email: string;
-  name: string;
+  username: string;
+  displayName: string | null;
   role: string;
   avatarUrl?: string | null;
 }
@@ -27,6 +29,16 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function setAuthCookie(token: string) {
+  // Set cookie with 7-day expiry, accessible by middleware
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `auth-token=${encodeURIComponent(token)}; path=/; expires=${expires}; SameSite=Lax`;
+}
+
+function clearAuthCookie() {
+  document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,9 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const refreshUser = async () => {
     try {
-      const res = await fetch("/api/auth/me");
-      const data = await res.json();
-      setUser(data.user || null);
+      const data = await graphqlRequest<{ me: User | null }>(
+        `query { me { id email username displayName role avatarUrl } }`
+      );
+      setUser(data.me);
     } catch {
       setUser(null);
     }
@@ -48,36 +61,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await fetch("/api/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const data = await graphqlRequest<{
+        login: { token: string; user: User };
+      }>(
+        `mutation Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+            token
+            user { id email username displayName role avatarUrl }
+          }
+        }`,
+        { email, password }
+      );
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        return { error: data.error || "Login failed" };
-      }
-
-      setUser(data.user);
+      setAuthCookie(data.login.token);
+      setUser(data.login.user);
       router.refresh();
       return {};
-    } catch {
-      return { error: "Login failed" };
+    } catch (err) {
+      return {
+        error: err instanceof Error ? err.message : "Login failed",
+      };
     }
   };
 
   const logout = async () => {
-    try {
-      await fetch("/api/auth", { method: "DELETE" });
-      setUser(null);
-      router.push("/");
-      router.refresh();
-    } catch {
-      // Still clear local state on error
-      setUser(null);
-    }
+    clearAuthCookie();
+    setUser(null);
+    router.push("/");
+    router.refresh();
   };
 
   return (

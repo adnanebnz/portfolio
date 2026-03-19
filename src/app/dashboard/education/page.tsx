@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,23 +17,19 @@ import { Plus, Pencil, Trash2, GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { SkeletonPage } from "@/components/ui/skeleton";
-
-interface Education {
-  id: string;
-  school: string;
-  href: string | null;
-  degreeEn: string;
-  degreeFr: string;
-  logoUrl: string | null;
-  startDate: string;
-  endDate: string | null;
-  descriptionEn: string | null;
-  descriptionFr: string | null;
-}
+import {
+  useEducations,
+  useCreateEducation,
+  useUpdateEducation,
+  useDeleteEducation,
+  type Education,
+} from "@/hooks/use-api";
 
 export default function EducationPage() {
-  const [education, setEducation] = useState<Education[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: education = [], isLoading: loading } = useEducations();
+  const createEducation = useCreateEducation();
+  const updateEducation = useUpdateEducation();
+  const deleteEducation = useDeleteEducation();
   const [isOpen, setIsOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Education | null>(null);
   const [formData, setFormData] = useState({
@@ -47,22 +43,6 @@ export default function EducationPage() {
     descriptionEn: "",
     descriptionFr: "",
   });
-
-  useEffect(() => {
-    fetchEducation();
-  }, []);
-
-  async function fetchEducation() {
-    try {
-      const res = await fetch("/api/education");
-      const data = await res.json();
-      setEducation(data);
-    } catch (error) {
-      toast.error("Failed to fetch education");
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function openAddDialog() {
     setEditingItem(null);
@@ -112,22 +92,14 @@ export default function EducationPage() {
     };
 
     try {
-      const url = editingItem
-        ? `/api/education/${editingItem.id}`
-        : "/api/education";
-      const method = editingItem ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error();
+      if (editingItem) {
+        await updateEducation.mutateAsync({ id: editingItem.id, ...payload });
+      } else {
+        await createEducation.mutateAsync(payload);
+      }
 
       toast.success(editingItem ? "Education updated" : "Education added");
       setIsOpen(false);
-      fetchEducation();
     } catch {
       toast.error("Failed to save education");
     }
@@ -138,10 +110,8 @@ export default function EducationPage() {
       return;
 
     try {
-      const res = await fetch(`/api/education/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
+      await deleteEducation.mutateAsync(id);
       toast.success("Education deleted");
-      fetchEducation();
     } catch {
       toast.error("Failed to delete education");
     }

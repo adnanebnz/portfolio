@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,25 +17,19 @@ import { Plus, Pencil, Trash2, Building2 } from "lucide-react";
 import { toast } from "sonner";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { SkeletonPage } from "@/components/ui/skeleton";
-
-interface WorkExperience {
-  id: string;
-  company: string;
-  href: string | null;
-  badges: string[];
-  location: string;
-  titleEn: string;
-  titleFr: string;
-  logoUrl: string | null;
-  startDate: string;
-  endDate: string | null;
-  descriptionEn: string;
-  descriptionFr: string;
-}
+import {
+  useWorkExperiences,
+  useCreateWorkExperience,
+  useUpdateWorkExperience,
+  useDeleteWorkExperience,
+  type WorkExperience,
+} from "@/hooks/use-api";
 
 export default function WorkPage() {
-  const [work, setWork] = useState<WorkExperience[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: work = [], isLoading: loading } = useWorkExperiences();
+  const createWork = useCreateWorkExperience();
+  const updateWork = useUpdateWorkExperience();
+  const deleteWork = useDeleteWorkExperience();
   const [isOpen, setIsOpen] = useState(false);
   const [editingWork, setEditingWork] = useState<WorkExperience | null>(null);
   const [formData, setFormData] = useState({
@@ -51,22 +45,6 @@ export default function WorkPage() {
     descriptionEn: "",
     descriptionFr: "",
   });
-
-  useEffect(() => {
-    fetchWork();
-  }, []);
-
-  async function fetchWork() {
-    try {
-      const res = await fetch("/api/work");
-      const data = await res.json();
-      setWork(data);
-    } catch (error) {
-      toast.error("Failed to fetch work experiences");
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function openAddDialog() {
     setEditingWork(null);
@@ -125,22 +103,16 @@ export default function WorkPage() {
     };
 
     try {
-      const url = editingWork ? `/api/work/${editingWork.id}` : "/api/work";
-      const method = editingWork ? "PUT" : "POST";
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error();
+      if (editingWork) {
+        await updateWork.mutateAsync({ id: editingWork.id, ...payload });
+      } else {
+        await createWork.mutateAsync(payload);
+      }
 
       toast.success(
         editingWork ? "Work experience updated" : "Work experience added"
       );
       setIsOpen(false);
-      fetchWork();
     } catch {
       toast.error("Failed to save work experience");
     }
@@ -151,10 +123,8 @@ export default function WorkPage() {
       return;
 
     try {
-      const res = await fetch(`/api/work/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
+      await deleteWork.mutateAsync(id);
       toast.success("Work experience deleted");
-      fetchWork();
     } catch {
       toast.error("Failed to delete work experience");
     }

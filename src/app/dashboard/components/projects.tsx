@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,6 +22,7 @@ import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import AddNewProjectButton from "./AddNewButton";
 import DeleteProjectButton from "./DeleteProjectButton";
 import { StoreIcon } from "lucide-react";
+import { useProjects } from "@/hooks/use-api";
 
 interface Project {
   name: string;
@@ -35,37 +36,21 @@ interface Project {
 }
 
 export default function ProjectsView() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: rawProjects = [], isLoading: loading } = useProjects();
 
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const res = await fetch("/api/projects-db");
-        const data = await res.json();
-        // Transform the data to match the expected format
-        const transformed = data.map((p: any) => ({
-          name: p.titleEn || p.title,
-          slug: p.slug,
-          description: p.descriptionEn || p.description || "",
-          ghlink: p.links?.find((l: any) => l.icon === "github")?.href,
-          demolink:
-            p.links?.find((l: any) => l.icon === "globe")?.href || p.href,
-          storelink: p.links?.find((l: any) => l.icon === "store")?.href,
-          images: p.mobileAppImages || p.webAppImages || [],
-          created_at: p.createdAt
-            ? new Date(p.createdAt).toLocaleDateString()
-            : "",
-        }));
-        setProjects(transformed);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProjects();
-  }, []);
+  const projects: Project[] = rawProjects.map((p: any) => ({
+    name: p.titleEn || p.title,
+    slug: p.slug,
+    description: p.descriptionEn || p.description || "",
+    ghlink: p.links?.find((l: any) => l.icon === "github")?.href,
+    demolink:
+      p.links?.find((l: any) => l.icon === "globe")?.href || p.href,
+    storelink: p.links?.find((l: any) => l.icon === "store")?.href,
+    images: p.mobileAppImages || p.webAppImages || [],
+    created_at: p.createdAt
+      ? new Date(p.createdAt).toLocaleDateString()
+      : "",
+  }));
 
   if (loading) {
     return <div className="p-4">Loading projects...</div>;

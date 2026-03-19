@@ -1,35 +1,51 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import { graphqlServerRequest } from "@/lib/graphql-client";
 import { isAdmin } from "@/lib/jwt";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+interface DashboardStats {
+  userCount: number;
+  postCount: number;
+  projectCount: number;
+  workCount: number;
+  messageCount: number;
+  reviewCount: number;
+}
+
+async function getStats(): Promise<DashboardStats> {
+  const data = await graphqlServerRequest<{ dashboardStats: DashboardStats }>(
+    `query { dashboardStats { userCount postCount projectCount workCount messageCount reviewCount } }`
+  );
+  return data.dashboardStats;
+}
+
 export async function getUserCount() {
-  const count = await prisma.user.count();
-  return count;
+  const stats = await getStats();
+  return stats.userCount;
 }
 
 export async function getPostsCount() {
-  const count = await prisma.blogPost.count();
-  return count;
+  const stats = await getStats();
+  return stats.postCount;
 }
 
 export async function getProjectsCount() {
-  const count = await prisma.project.count();
-  return count;
+  const stats = await getStats();
+  return stats.projectCount;
 }
 
 export async function getWorkCount() {
-  const count = await prisma.workExperience.count();
-  return count;
+  const stats = await getStats();
+  return stats.workCount;
 }
 
 export async function isUserAdmin() {
   return await isAdmin();
 }
 
-// Add new project using Prisma
+// Add new project via GraphQL
 export async function addNewProject(prevState: any, formData: FormData) {
   const isAdminUser = await isAdmin();
   if (!isAdminUser) {
@@ -54,32 +70,32 @@ export async function addNewProject(prevState: any, formData: FormData) {
     .trim()
     .replace(/\s+/g, "-");
 
+  const links = [
+    ...(ghlink ? [{ type: "Source Code", href: ghlink, icon: "github" }] : []),
+    ...(demolink ? [{ type: "Live Demo", href: demolink, icon: "globe" }] : []),
+    ...(storelink ? [{ type: "Store", href: storelink, icon: "store" }] : []),
+  ];
+
   try {
-    await prisma.project.create({
-      data: {
-        slug,
-        titleEn: name,
-        titleFr: name,
-        descriptionEn: description || "",
-        descriptionFr: description || "",
-        technologies: tools.filter((t) => t),
-        dates: dates || null,
-        href: demolink || null,
-        links: {
-          create: [
-            ...(ghlink
-              ? [{ type: "Source Code", href: ghlink, icon: "github" }]
-              : []),
-            ...(demolink
-              ? [{ type: "Live Demo", href: demolink, icon: "globe" }]
-              : []),
-            ...(storelink
-              ? [{ type: "Store", href: storelink, icon: "store" }]
-              : []),
-          ],
+    await graphqlServerRequest(
+      `mutation CreateProject($input: CreateProjectInput!) {
+        createProject(input: $input) { id }
+      }`,
+      {
+        input: {
+          slug,
+          titleEn: name,
+          titleFr: name,
+          descriptionEn: description || "",
+          descriptionFr: description || "",
+          technologies: tools.filter((t) => t),
+          dates: dates || null,
+          href: demolink || null,
+          links,
+          ownerId: "1",
         },
-      },
-    });
+      }
+    );
 
     revalidatePath("/dashboard", "layout");
     redirect("/dashboard");
@@ -89,7 +105,7 @@ export async function addNewProject(prevState: any, formData: FormData) {
   }
 }
 
-// Delete project using Prisma
+// Delete project via GraphQL
 export async function deleteProject(slug: string) {
   const isAdminUser = await isAdmin();
   if (!isAdminUser) {
@@ -97,9 +113,23 @@ export async function deleteProject(slug: string) {
   }
 
   try {
-    await prisma.project.delete({
-      where: { slug },
-    });
+    // First find the project by slug to get its id
+    const data = await graphqlServerRequest<{
+      projectBySlug: { id: string } | null;
+    }>(
+      `query ProjectBySlug($slug: String!) { projectBySlug(slug: $slug) { id } }`,
+      { slug }
+    );
+
+    if (!data.projectBySlug) {
+      return { error: "Project not found" };
+    }
+
+    await graphqlServerRequest(
+      `mutation DeleteProject($id: ID!) { deleteProject(id: $id) }`,
+      { id: data.projectBySlug.id }
+    );
+
     revalidatePath("/dashboard", "layout");
     redirect("/dashboard");
   } catch (error) {

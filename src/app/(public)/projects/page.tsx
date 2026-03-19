@@ -1,16 +1,20 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import React from "react";
-import { prisma } from "@/lib/prisma";
+import { graphqlServerRequest } from "@/lib/graphql-client";
 import { cookies } from "next/headers";
 
 async function getProjects() {
-  const projects = await prisma.project.findMany({
-    where: { active: true },
-    include: { links: true },
-    orderBy: [{ featured: "desc" }, { order: "asc" }],
-  });
-  return projects;
+  const data = await graphqlServerRequest<{ projects: any[] }>(`
+    query {
+      projects(activeOnly: true) {
+        id slug titleEn titleFr descriptionEn descriptionFr
+        dates technologies posterImage featured order active
+        links { id type href icon }
+      }
+    }
+  `);
+  return data.projects;
 }
 
 const ProjectsPage = async () => {

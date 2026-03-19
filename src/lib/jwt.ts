@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
+// MUST match the Spring Boot backend's jwt.secret property
 const JWT_SECRET =
   process.env.JWT_SECRET || "your-super-secret-jwt-key-change-in-production";
-const JWT_EXPIRES_IN = "7d";
 
 export interface JWTPayload {
   userId: string;
@@ -12,12 +12,18 @@ export interface JWTPayload {
 }
 
 export function signToken(payload: JWTPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 }
 
 export function verifyToken(token: string): JWTPayload | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as JWTPayload;
+    const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+    // Spring Boot uses 'sub' for userId, 'email' and 'role' as claims
+    return {
+      userId: decoded.sub as string,
+      email: decoded.email as string,
+      role: decoded.role as string,
+    };
   } catch {
     return null;
   }

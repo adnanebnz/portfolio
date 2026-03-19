@@ -15,32 +15,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Save, User, Globe, FileText, Shield } from "lucide-react";
-
-interface Profile {
-  id: string;
-  name: string;
-  initials: string;
-  url: string | null;
-  location: string;
-  locationLink: string | null;
-  avatarUrl: string | null;
-  descriptionEn: string;
-  descriptionFr: string;
-  summaryEn: string;
-  summaryFr: string;
-}
-
-interface Contact {
-  id: string;
-  email: string;
-  phone: string | null;
-}
+import {
+  useProfile,
+  useUpdateProfile,
+  useContact,
+  useUpdateContact,
+  useChangePassword,
+  type Profile,
+  type Contact,
+} from "@/hooks/use-api";
 
 export default function SettingsPage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [contact, setContact] = useState<Contact | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: contact, isLoading: contactLoading } = useContact();
+  const updateProfileMutation = useUpdateProfile();
+  const updateContactMutation = useUpdateContact();
+  const changePasswordMutation = useChangePassword();
   const [saving, setSaving] = useState(false);
+
+  const loading = profileLoading || contactLoading;
 
   const [profileForm, setProfileForm] = useState({
     name: "",
@@ -67,60 +60,34 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  async function fetchSettings() {
-    try {
-      const [profileRes, contactRes] = await Promise.all([
-        fetch("/api/profile"),
-        fetch("/api/contact"),
-      ]);
-
-      if (profileRes.ok) {
-        const profileData = await profileRes.json();
-        setProfile(profileData);
-        setProfileForm({
-          name: profileData.name || "",
-          initials: profileData.initials || "",
-          url: profileData.url || "",
-          location: profileData.location || "",
-          locationLink: profileData.locationLink || "",
-          avatarUrl: profileData.avatarUrl || "",
-          descriptionEn: profileData.descriptionEn || "",
-          descriptionFr: profileData.descriptionFr || "",
-          summaryEn: profileData.summaryEn || "",
-          summaryFr: profileData.summaryFr || "",
-        });
-      }
-
-      if (contactRes.ok) {
-        const contactData = await contactRes.json();
-        setContact(contactData);
-        setContactForm({
-          email: contactData.email || "",
-          phone: contactData.phone || "",
-        });
-      }
-    } catch (error) {
-      toast.error("Failed to fetch settings");
-    } finally {
-      setLoading(false);
+    if (profile) {
+      setProfileForm({
+        name: profile.name || "",
+        initials: profile.initials || "",
+        url: profile.url || "",
+        location: profile.location || "",
+        locationLink: profile.locationLink || "",
+        avatarUrl: profile.avatarUrl || "",
+        descriptionEn: profile.descriptionEn || "",
+        descriptionFr: profile.descriptionFr || "",
+        summaryEn: profile.summaryEn || "",
+        summaryFr: profile.summaryFr || "",
+      });
     }
-  }
+    if (contact) {
+      setContactForm({
+        email: contact.email || "",
+        phone: contact.phone || "",
+      });
+    }
+  }, [profile, contact]);
 
   async function handleProfileSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
 
     try {
-      const res = await fetch("/api/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(profileForm),
-      });
-
-      if (!res.ok) throw new Error();
+      await updateProfileMutation.mutateAsync(profileForm);
       toast.success("Profile updated successfully");
     } catch {
       toast.error("Failed to update profile");
@@ -134,13 +101,7 @@ export default function SettingsPage() {
     setSaving(true);
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm),
-      });
-
-      if (!res.ok) throw new Error();
+      await updateContactMutation.mutateAsync(contactForm);
       toast.success("Contact info updated successfully");
     } catch {
       toast.error("Failed to update contact info");
@@ -165,19 +126,10 @@ export default function SettingsPage() {
     setSaving(true);
 
     try {
-      const res = await fetch("/api/auth/change-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          currentPassword: passwordForm.currentPassword,
-          newPassword: passwordForm.newPassword,
-        }),
+      await changePasswordMutation.mutateAsync({
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword,
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to change password");
-      }
 
       toast.success("Password changed successfully");
       setPasswordForm({

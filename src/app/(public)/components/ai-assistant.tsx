@@ -22,6 +22,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useTranslations } from "@/hooks/use-translations";
+import { graphqlRequest } from "@/lib/graphql-client";
 
 interface Message {
   id: string;
@@ -361,38 +362,33 @@ export default function AIAssistant() {
     }
 
     try {
-      // Save to database via the messages API
-      const response = await fetch("/api/messages", {
-        method: "POST",
-        body: JSON.stringify({
-          name: scheduleData.name,
-          email: scheduleData.email,
-          subject: `AI Scheduled Call: ${
-            scheduleData.topic || "General Inquiry"
-          }`,
-          message: `Scheduled via AI Assistant\n\nTopic: ${
-            scheduleData.topic || "General Inquiry"
-          }\nPreferred Date: ${scheduleData.date}\nPreferred Time: ${
-            scheduleData.time
-          }`,
-          wantsCall: true,
-          preferredDate: scheduleData.date,
-          preferredTime: scheduleData.time,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.ok) {
-        setShowScheduler(false);
-        addMessage(tr.schedulingSuccess, "assistant", [
-          {
-            label: tr.askQuestion,
-            value: "question",
-            icon: <HelpCircle className="w-4 h-4" />,
+      // Save to database via GraphQL
+      await graphqlRequest(
+        `mutation SendMessage($input: SendMessageInput!) {
+          sendMessage(input: $input) { id }
+        }`,
+        {
+          input: {
+            name: scheduleData.name,
+            email: scheduleData.email,
+            subject: `AI Scheduled Call: ${scheduleData.topic || "General Inquiry"
+              }`,
+            message: `Scheduled via AI Assistant\n\nTopic: ${scheduleData.topic || "General Inquiry"
+              }\nPreferred Date: ${scheduleData.date}\nPreferred Time: ${scheduleData.time
+              }`,
           },
-        ]);
-        setScheduleData({ name: "", email: "", date: "", time: "", topic: "" });
-      }
+        }
+      );
+
+      setShowScheduler(false);
+      addMessage(tr.schedulingSuccess, "assistant", [
+        {
+          label: tr.askQuestion,
+          value: "question",
+          icon: <HelpCircle className="w-4 h-4" />,
+        },
+      ]);
+      setScheduleData({ name: "", email: "", date: "", time: "", topic: "" });
     } catch (error) {
       console.error("Error scheduling call:", error);
     }
@@ -409,11 +405,10 @@ export default function AIAssistant() {
         className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4`}
       >
         <div
-          className={`max-w-[85%] ${
-            isUser
+          className={`max-w-[85%] ${isUser
               ? "bg-primary text-primary-foreground rounded-2xl rounded-br-md"
               : "bg-muted rounded-2xl rounded-bl-md"
-          } px-4 py-3`}
+            } px-4 py-3`}
         >
           <p className="text-sm whitespace-pre-wrap">{message.content}</p>
           {message.options && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Plus,
@@ -30,6 +30,16 @@ import {
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import {
+  useWorkExperiences,
+  useCreateWorkExperience,
+  useUpdateWorkExperience,
+  useDeleteWorkExperience,
+  useProjects,
+  useCreateProject,
+  useUpdateProject,
+  useDeleteProject,
+} from "@/hooks/use-api";
 
 interface WorkExperience {
   id: string;
@@ -68,9 +78,15 @@ interface Project {
 }
 
 export default function ResumeManagerPage() {
-  const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: workExperiences = [], isLoading: workLoading } = useWorkExperiences();
+  const { data: projects = [], isLoading: projectsLoading } = useProjects();
+  const createWork = useCreateWorkExperience();
+  const updateWork = useUpdateWorkExperience();
+  const deleteWork = useDeleteWorkExperience();
+  const createProjectMutation = useCreateProject();
+  const updateProjectMutation = useUpdateProject();
+  const deleteProjectMutation = useDeleteProject();
+  const loading = workLoading || projectsLoading;
   const [saving, setSaving] = useState(false);
 
   // Work Experience Form State
@@ -108,62 +124,27 @@ export default function ResumeManagerPage() {
     technologies: "",
   });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const [workRes, projectsRes] = await Promise.all([
-        fetch("/api/work"),
-        fetch("/api/projects-db"),
-      ]);
-
-      if (workRes.ok) {
-        const workData = await workRes.json();
-        setWorkExperiences(workData);
-      }
-
-      if (projectsRes.ok) {
-        const projectsData = await projectsRes.json();
-        setProjects(projectsData);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      toast.error("Failed to load data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Work Experience CRUD
   const handleWorkSubmit = async () => {
     try {
       setSaving(true);
-      const method = editingWork ? "PUT" : "POST";
-      const url = editingWork ? `/api/work/${editingWork.id}` : "/api/work";
+      const payload = {
+        ...workForm,
+        endDate: workForm.isCurrent ? null : workForm.endDate || null,
+      };
 
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...workForm,
-          endDate: workForm.isCurrent ? null : workForm.endDate || null,
-        }),
-      });
-
-      if (response.ok) {
-        toast.success(
-          editingWork ? "Work experience updated!" : "Work experience created!"
-        );
-        setWorkFormOpen(false);
-        setEditingWork(null);
-        resetWorkForm();
-        fetchData();
+      if (editingWork) {
+        await updateWork.mutateAsync({ id: editingWork.id, ...payload });
       } else {
-        toast.error("Failed to save work experience");
+        await createWork.mutateAsync(payload);
       }
+
+      toast.success(
+        editingWork ? "Work experience updated!" : "Work experience created!"
+      );
+      setWorkFormOpen(false);
+      setEditingWork(null);
+      resetWorkForm();
     } catch (error) {
       console.error("Error saving work experience:", error);
       toast.error("Failed to save work experience");
@@ -178,13 +159,8 @@ export default function ResumeManagerPage() {
     }
 
     try {
-      const response = await fetch(`/api/work/${id}`, { method: "DELETE" });
-      if (response.ok) {
-        toast.success("Work experience deleted!");
-        fetchData();
-      } else {
-        toast.error("Failed to delete work experience");
-      }
+      await deleteWork.mutateAsync(id);
+      toast.success("Work experience deleted!");
     } catch (error) {
       console.error("Error deleting work experience:", error);
       toast.error("Failed to delete work experience");
@@ -229,32 +205,24 @@ export default function ResumeManagerPage() {
   const handleProjectSubmit = async () => {
     try {
       setSaving(true);
-      const method = editingProject ? "PUT" : "POST";
-      const url = editingProject
-        ? `/api/projects-db/${editingProject.id}`
-        : "/api/projects-db";
+      const payload = {
+        ...projectForm,
+        technologies: projectForm.technologies
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+      };
 
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...projectForm,
-          technologies: projectForm.technologies
-            .split(",")
-            .map((t) => t.trim())
-            .filter(Boolean),
-        }),
-      });
-
-      if (response.ok) {
-        toast.success(editingProject ? "Project updated!" : "Project created!");
-        setProjectFormOpen(false);
-        setEditingProject(null);
-        resetProjectForm();
-        fetchData();
+      if (editingProject) {
+        await updateProjectMutation.mutateAsync({ id: editingProject.id, ...payload });
       } else {
-        toast.error("Failed to save project");
+        await createProjectMutation.mutateAsync(payload);
       }
+
+      toast.success(editingProject ? "Project updated!" : "Project created!");
+      setProjectFormOpen(false);
+      setEditingProject(null);
+      resetProjectForm();
     } catch (error) {
       console.error("Error saving project:", error);
       toast.error("Failed to save project");
@@ -269,15 +237,8 @@ export default function ResumeManagerPage() {
     }
 
     try {
-      const response = await fetch(`/api/projects-db/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        toast.success("Project deleted!");
-        fetchData();
-      } else {
-        toast.error("Failed to delete project");
-      }
+      await deleteProjectMutation.mutateAsync(id);
+      toast.success("Project deleted!");
     } catch (error) {
       console.error("Error deleting project:", error);
       toast.error("Failed to delete project");

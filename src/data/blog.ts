@@ -3,7 +3,7 @@ import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-import { prisma } from "@/lib/prisma";
+import { graphqlServerRequest } from "@/lib/graphql-client";
 
 export type BlogPostMetadata = {
   title: string;
@@ -51,10 +51,16 @@ export async function getPost(
   locale: string = "en"
 ): Promise<BlogPost | null> {
   try {
-    const dbPost = await prisma.blogPost.findUnique({
-      where: { slug },
-    });
+    const data = await graphqlServerRequest<{ blogBySlug: any }>(`
+      query BlogBySlug($slug: String!) {
+        blogBySlug(slug: $slug) {
+          id titleEn titleFr summaryEn summaryFr contentEn contentFr
+          slug coverImage published publishedAt tags createdAt
+        }
+      }
+    `, { slug });
 
+    const dbPost = data.blogBySlug;
     if (!dbPost || !dbPost.published) {
       return null;
     }
@@ -70,8 +76,7 @@ export async function getPost(
       source: htmlContent,
       metadata: {
         title,
-        publishedAt:
-          dbPost.publishedAt?.toISOString() || dbPost.createdAt.toISOString(),
+        publishedAt: dbPost.publishedAt || dbPost.createdAt,
         summary: summary || "",
         image: dbPost.coverImage,
       },
@@ -84,7 +89,7 @@ export async function getPost(
         contentEn: dbPost.contentEn,
         contentFr: dbPost.contentFr,
         coverImage: dbPost.coverImage,
-        tags: dbPost.tags,
+        tags: dbPost.tags || [],
       },
     };
   } catch (error) {
@@ -95,13 +100,19 @@ export async function getPost(
 
 export async function getBlogPosts(locale: string = "en"): Promise<BlogPost[]> {
   try {
-    const posts = await prisma.blogPost.findMany({
-      where: { published: true },
-      orderBy: { publishedAt: "desc" },
-    });
+    const data = await graphqlServerRequest<{ blogs: any[] }>(`
+      query Blogs {
+        blogs(publishedOnly: true) {
+          id titleEn titleFr summaryEn summaryFr contentEn contentFr
+          slug coverImage published publishedAt tags createdAt
+        }
+      }
+    `);
+
+    const posts = data.blogs;
 
     const blogPosts = await Promise.all(
-      posts.map(async (post) => {
+      posts.map(async (post: any) => {
         const content = locale === "fr" ? post.contentFr : post.contentEn;
         const title = locale === "fr" ? post.titleFr : post.titleEn;
         const summary = locale === "fr" ? post.summaryFr : post.summaryEn;
@@ -112,8 +123,7 @@ export async function getBlogPosts(locale: string = "en"): Promise<BlogPost[]> {
           source: htmlContent,
           metadata: {
             title,
-            publishedAt:
-              post.publishedAt?.toISOString() || post.createdAt.toISOString(),
+            publishedAt: post.publishedAt || post.createdAt,
             summary: summary || "",
             image: post.coverImage,
           },
@@ -126,7 +136,7 @@ export async function getBlogPosts(locale: string = "en"): Promise<BlogPost[]> {
             contentEn: post.contentEn,
             contentFr: post.contentFr,
             coverImage: post.coverImage,
-            tags: post.tags,
+            tags: post.tags || [],
           },
         };
       })

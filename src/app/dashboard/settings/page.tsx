@@ -66,6 +66,10 @@ export default function SettingsPage() {
     confirmPassword: "",
   });
 
+  const [emailForm, setEmailForm] = useState({
+    newEmail: "",
+  });
+
   useEffect(() => {
     fetchSettings();
   }, []);
@@ -101,6 +105,12 @@ export default function SettingsPage() {
           email: contactData.email || "",
           phone: contactData.phone || "",
         });
+      }
+
+      const authRes = await fetch("/api/auth/me");
+      if (authRes.ok) {
+        const authData = await authRes.json();
+        setEmailForm({ newEmail: authData.email || "" });
       }
     } catch (error) {
       toast.error("Failed to fetch settings");
@@ -188,6 +198,32 @@ export default function SettingsPage() {
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Failed to change password"
+      );
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function handleEmailSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+
+    try {
+      const res = await fetch("/api/auth/change-email", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(emailForm),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to change login email");
+      }
+
+      toast.success("Login email changed successfully");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to change login email"
       );
     } finally {
       setSaving(false);
@@ -453,7 +489,37 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="security">
+        <TabsContent value="security" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Change Login Email</CardTitle>
+              <CardDescription>Update your admin login email</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="newEmail">Admin Login Email</Label>
+                  <Input
+                    id="newEmail"
+                    type="email"
+                    value={emailForm.newEmail}
+                    onChange={(e) =>
+                      setEmailForm({
+                        ...emailForm,
+                        newEmail: e.target.value,
+                      })
+                    }
+                    required
+                  />
+                </div>
+                <Button type="submit" disabled={saving}>
+                  <Save className="mr-2 h-4 w-4" />
+                  {saving ? "Saving..." : "Change Login Email"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Change Password</CardTitle>

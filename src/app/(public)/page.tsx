@@ -90,7 +90,7 @@ export default function Page() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen overflow-x-hidden">
       {/* Subtle Gradient Orbs */}
       <GradientOrb className="w-96 h-96 bg-purple-500 top-20 -left-48" />
       <GradientOrb className="w-96 h-96 bg-blue-500 top-96 -right-48" />
@@ -325,9 +325,8 @@ export default function Page() {
                       )}
                       href={workItem.href}
                       badges={workItem.badges}
-                      period={`${workItem.start} - ${
-                        workItem.end ?? tWork("current")
-                      }`}
+                      period={`${workItem.start} - ${workItem.end ?? tWork("current")
+                        }`}
                       description={getTranslatedText(
                         workItem.description,
                         locale as Locale

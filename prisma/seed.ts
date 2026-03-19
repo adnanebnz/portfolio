@@ -242,6 +242,7 @@ async function main() {
       active: true,
       featured: true,
       order: 0,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1739485318/tawsil-star-vtc/poster.png",
       mobileAppImages: [
@@ -291,6 +292,7 @@ async function main() {
       active: true,
       featured: true,
       order: 1,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1739485318/tawsil-star-vtc/poster.png",
       mobileAppImages: [],
@@ -301,33 +303,58 @@ async function main() {
       slug: "smartclean",
       titleEn: "SmartClean",
       titleFr: "SmartClean",
-      subtitleEn: "Smart cleaning services booking platform",
+      subtitleEn:
+        "Enterprise cleaning services management platform with multi-platform support",
       subtitleFr:
-        "Plateforme de réservation de services de nettoyage intelligente",
+        "Plateforme de gestion de services de nettoyage d'entreprise avec support multi-plateforme",
       descriptionEn:
-        "SmartClean is a comprehensive platform for booking professional cleaning services. The application connects customers with verified cleaning professionals, offering features like service scheduling, real-time tracking, secure payments, and quality ratings. Built with a focus on user experience and reliability.",
+        "SmartClean is a comprehensive B2B cleaning services management platform developed for a France-based client. The system includes a web admin panel, mobile apps for Android/iOS (agents and sector managers), and a robust Django REST Framework backend. Key features include: GPS-based time clock with photo proof, recurring/one-time job scheduling, contract management, financial KPIs dashboard, FCM push notifications, and real-time alerts. Implemented full CI/CD pipeline with Docker Registry deploying to Azure, integrated Grafana & Prometheus for monitoring, and Sentry for error tracking. Wrote comprehensive documentation including release notes and user guides. The platform manages cleaning agents, sector managers, clients, and administrators with role-based access control.",
       descriptionFr:
-        "SmartClean est une plateforme complète pour réserver des services de nettoyage professionnels. L'application connecte les clients avec des professionnels du nettoyage vérifiés, offrant des fonctionnalités comme la planification de services, le suivi en temps réel, les paiements sécurisés et les évaluations de qualité. Construite avec un accent sur l'expérience utilisateur et la fiabilité.",
+        "SmartClean est une plateforme complète de gestion de services de nettoyage B2B développée pour un client basé en France. Le système comprend un panneau d'administration web, des applications mobiles pour Android/iOS (agents et responsables de secteur), et un backend robuste Django REST Framework. Les fonctionnalités clés incluent : pointage GPS avec preuve photo, planification de tâches récurrentes/ponctuelles, gestion des contrats, tableau de bord KPIs financiers, notifications push FCM, et alertes en temps réel. Implémenté un pipeline CI/CD complet avec Docker Registry déployant sur Azure, intégré Grafana et Prometheus pour la surveillance, et Sentry pour le suivi des erreurs. Rédigé une documentation complète incluant les notes de version et les guides utilisateur. La plateforme gère les agents de nettoyage, les responsables de secteur, les clients et les administrateurs avec contrôle d'accès basé sur les rôles.",
       keyFeaturesEn: {
-        Booking: "Easy service booking system",
-        Tracking: "Real-time cleaner tracking",
-        Payments: "Secure payment integration",
-        Ratings: "Quality rating and review system",
+        MultiPlatform: "Web, Android & iOS applications with Flutter",
+        RealTimeTracking:
+          "GPS-based agent tracking and time clock with photo proof",
+        SmartScheduling:
+          "Recurring and one-time job scheduling with agent assignment",
+        AdminDashboard:
+          "Complete admin panel with KPIs, contracts, and user management",
+        CICD: "Docker-based CI/CD pipeline deployed to Azure",
+        Monitoring: "Grafana, Prometheus & Sentry for alerts and monitoring",
       },
       keyFeaturesFr: {
-        Réservation: "Système de réservation de services facile",
-        Suivi: "Suivi du nettoyeur en temps réel",
-        Paiements: "Intégration de paiement sécurisée",
-        Évaluations: "Système d'évaluation et d'avis de qualité",
+        MultiPlateforme: "Applications Web, Android et iOS avec Flutter",
+        SuiviTempsReel: "Suivi GPS des agents et pointage avec preuve photo",
+        PlanificationIntelligente:
+          "Planification de tâches récurrentes et ponctuelles avec affectation d'agents",
+        TableauBordAdmin:
+          "Panneau d'administration complet avec KPIs, contrats et gestion des utilisateurs",
+        CICD: "Pipeline CI/CD basé sur Docker déployé sur Azure",
+        Surveillance:
+          "Grafana, Prometheus et Sentry pour les alertes et la surveillance",
       },
-      dates: "2024",
+      dates: "Sep 2025 - Present",
       active: true,
       featured: true,
       order: 2,
+      architectureDiagram: true,
       posterImage: null,
       mobileAppImages: [],
       webAppImages: [],
-      technologies: ["Flutter", "Firebase", "Node.js", "Express"],
+      technologies: [
+        "Django REST Framework",
+        "Flutter",
+        "PostgreSQL",
+        "Docker",
+        "Azure",
+        "Grafana",
+        "Prometheus",
+        "Sentry",
+        "FCM",
+        "Nginx Proxy Manager",
+        "Adminer",
+        "GitHub Actions",
+      ],
     },
     {
       slug: "da-mall",
@@ -355,6 +382,7 @@ async function main() {
       active: true,
       featured: true,
       order: 3,
+      architectureDiagram: true,
       posterImage: null,
       mobileAppImages: [],
       webAppImages: [],
@@ -388,6 +416,7 @@ async function main() {
       active: true,
       featured: true,
       order: 4,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891211/algeria-eats/poster.png",
       mobileAppImages: [
@@ -461,6 +490,7 @@ async function main() {
       active: true,
       featured: true,
       order: 5,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723897373/wamidh/poster.png",
       mobileAppImages: [
@@ -504,6 +534,7 @@ async function main() {
       active: true,
       featured: true,
       order: 6,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891394/waffir/poster.png",
       mobileAppImages: [
@@ -545,6 +576,7 @@ async function main() {
       active: true,
       featured: true,
       order: 7,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723891474/dzhikers/poster.jpg",
       mobileAppImages: [
@@ -589,6 +621,7 @@ async function main() {
       active: true,
       featured: true,
       order: 8,
+      architectureDiagram: true,
       posterImage:
         "https://res.cloudinary.com/drajcqail/image/upload/v1723892712/movies-app/poster.png",
       mobileAppImages: [

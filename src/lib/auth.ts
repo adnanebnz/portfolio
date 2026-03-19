@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
-import { signToken, verifyToken, type JWTPayload } from "./jwt";
+import { signToken, verifyToken, signRefreshToken, type JWTPayload } from "./jwt";
 
 const SALT_ROUNDS = 12;
 
@@ -63,8 +63,13 @@ export async function authenticateUser(email: string, password: string) {
     role: user.role,
   });
 
+  const refreshToken = signRefreshToken({
+    userId: user.id,
+  });
+
   return {
     token,
+    refreshToken,
     user: {
       id: user.id,
       email: user.email,
@@ -120,8 +125,8 @@ export async function verifyAuth(): Promise<JWTPayload | null> {
   // This function is meant to be called from server-side API routes
   // It extracts and verifies the JWT token from cookies
   const { cookies } = await import("next/headers");
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth-token")?.value;
 
   if (!token) {
     return null;
@@ -135,4 +140,4 @@ export async function verifyAuth(): Promise<JWTPayload | null> {
   }
 }
 
-export { signToken, verifyToken, type JWTPayload };
+export { signToken, verifyToken, signRefreshToken, type JWTPayload };

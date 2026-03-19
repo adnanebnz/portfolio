@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+.env
+.npm
+.pnpm-store
+
+# Keep necessary files for Prisma and build but exclude the rest

@@ -5,9 +5,9 @@
     "projects": "Projets",
     "reviews": "Livre d'Or",
     "schedule": "Rendez-vous",
-    "login": "Connexion",
     "dashboard": "Tableau de bord",
-    "profile": "Profil"
+    "profile": "Profil",
+    "logout": "Déconnexion"
   },
   "hero": {
     "greeting": "Salut, je suis",
@@ -110,7 +110,9 @@
       "successDescription": "Je vous répondrai dans les 24 heures. Promis ! ✨",
       "alternativeContact": "Préférez-vous une autre façon de vous connecter ?",
       "emailLink": "Email",
-      "linkedin": "LinkedIn"
+      "linkedin": "LinkedIn",
+      "captcha": "Combien font {a} + {b} ?",
+      "captchaPlaceholder": "Entrez la somme"
     }
   },
   "blog": {
